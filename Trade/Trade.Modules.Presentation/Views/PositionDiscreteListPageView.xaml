@@ -1,0 +1,210 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.PositionDiscreteListPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:res="clr-namespace:XueQiaoFoundation.BusinessResources.Resources;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300"
+             d:DataContext="{x:Type vm:PositionDiscreteListPageViewModel}"
+             x:Name="ViewRoot">
+    <UserControl.Resources>
+        <uiconvert:CloneValuesConverter x:Key="CloneValuesConverter"/>
+        <convert:XqTargetMarketValueFormatConverter x:Key="XqTargetMarketValueFormatConverter"/>
+        <uiconvert:DoubleCompareConverter x:Key="DoubleCompareConverter"/>
+
+        <sys:Double x:Key="Double0">0.0</sys:Double>
+        
+        <Style TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource FlatContentButtonPrimary3}"
+               x:Key="PositionItemButtonInCell">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsXqTargetExpired}" Value="True">
+                    <Setter Property="Command" Value="{x:Null}"/>
+                    <Setter Property="CommandParameter" Value="{x:Null}"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <DataGrid ItemsSource="{Binding PositionCollectionView}"
+              IsSynchronizedWithCurrentItem="True"
+              SelectionMode="Extended"
+              x:Name="PositionItemsDG">
+
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="SelectionChanged">
+                <i:InvokeCommandAction 
+                    Command="{Binding ListItemsSelectionChangedCmd}" 
+                    CommandParameter="{Binding SelectedItems, ElementName=PositionItemsDG}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+
+        <DataGrid.Columns>
+            <DataGridTemplateColumn 
+                Header="名称" 
+                MinWidth="80"
+                CanUserSort="False">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button HorizontalAlignment="Left"
+                                Content="{Binding ContractDetailContainer.CnDisplayName}"
+                                Command="{Binding ElementName=ViewRoot, Path=DataContext.ClickItemTargetKeyRelatedColumnCmd}"
+                                CommandParameter="{Binding}"
+                                Style="{StaticResource PositionItemButtonInCell}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="上日持仓" MinWidth="40"
+                                Binding="{Binding PrevPosition, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+            <DataGridTextColumn Header="买入量&#x0a;(今日)" MinWidth="40"
+                                Binding="{Binding LongPosition, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+            <DataGridTextColumn Header="卖出量&#x0a;(今日)" MinWidth="40"
+                                Binding="{Binding ShortPosition, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+            <DataGridTextColumn Header="净仓" MinWidth="40"
+                                Binding="{Binding NetPosition, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+            <DataGridTextColumn Header="持仓均价" MinWidth="60"
+                                Binding="{Binding PositionAvgPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+            <DataGridTextColumn Header="最新价" MinWidth="60"
+                                Binding="{Binding CalculatePrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+            
+            <DataGridTemplateColumn
+                Header="持仓盈亏&#x0a;(按最新价)"
+                MinWidth="60">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding PositionProfit, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00}}"
+                                   Style="{StaticResource RiseOrFallRelatedText}"
+                                   res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                                   res:QuotationAttachPropertiesProvider.IsInteractive="False">
+                            <res:QuotationAttachPropertiesProvider.CompareResult1>
+                                <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                    <Binding Path="PositionProfit"/>
+                                    <Binding Source="{StaticResource Double0}"/>
+                                </MultiBinding>
+                            </res:QuotationAttachPropertiesProvider.CompareResult1>
+                        </TextBlock>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn
+                Header="平仓盈亏"
+                MinWidth="60">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding CloseProfit, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00}}"
+                                   Style="{StaticResource RiseOrFallRelatedText}"
+                                   res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                                   res:QuotationAttachPropertiesProvider.IsInteractive="False">
+                            <res:QuotationAttachPropertiesProvider.CompareResult1>
+                                <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                    <Binding Path="CloseProfit"/>
+                                    <Binding Source="{StaticResource Double0}"/>
+                                </MultiBinding>
+                            </res:QuotationAttachPropertiesProvider.CompareResult1>
+                        </TextBlock>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn
+                Header="总盈亏"
+                MinWidth="60">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding TotalProfit, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00}}"
+                                   Style="{StaticResource RiseOrFallRelatedText}"
+                                   res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                                   res:QuotationAttachPropertiesProvider.IsInteractive="False">
+                            <res:QuotationAttachPropertiesProvider.CompareResult1>
+                                <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                    <Binding Path="TotalProfit"/>
+                                    <Binding Source="{StaticResource Double0}"/>
+                                </MultiBinding>
+                            </res:QuotationAttachPropertiesProvider.CompareResult1>
+                        </TextBlock>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Header="止损止盈"  MinWidth="80"
+                                    CanUserSort="False">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button 
+                            HorizontalAlignment="Left"
+                            Content="止损止盈"
+                            Command="{Binding ElementName=ViewRoot, Path=DataContext.ToStopLostOrProfitCmd}"
+                            Style="{StaticResource PositionItemButtonInCell}"
+                            x:Name="ToStopLostOrProfitTriggerElement">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource CloneValuesConverter}" Mode="OneWay">
+                                    <Binding/>
+                                    <Binding ElementName="ToStopLostOrProfitTriggerElement"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="持仓保证金" MinWidth="60"
+                                Binding="{Binding UseMargin, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00}}" />
+            <DataGridTextColumn Header="冻结保证金" MinWidth="60"
+                                Binding="{Binding FrozenMargin, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00}}" />
+            <DataGridTextColumn Header="持仓市值" MinWidth="60"
+                                Binding="{Binding GoodsValue, Converter={StaticResource XqTargetMarketValueFormatConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+            <DataGridTextColumn Header="杠杆" MinWidth="60"
+                                Binding="{Binding Leverage, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00%}}" />
+
+            <DataGridTemplateColumn Header="持仓明细"  MinWidth="80"
+                                    CanUserSort="False">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Style="{StaticResource FlatContentButtonPrimary3}"
+                                Content="查看"
+                                Command="{Binding DataContext.ToShowPositionDetailCmd, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                CommandParameter="{Binding}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTextColumn Header="已扣手续费" MinWidth="60"
+                                Binding="{Binding UseCommission, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00}}" />
+            <DataGridTextColumn Header="冻结手续费" MinWidth="60"
+                                Binding="{Binding FrozenCommission, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00}}" />
+            <DataGridTextColumn Header="币种" MinWidth="60"
+                                Binding="{Binding Currency, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+
+        </DataGrid.Columns>
+
+        <DataGrid.ItemContainerStyle>
+            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource DataGridRowDefault}">
+                <Setter Property="Tag" Value="{Binding DataContext, ElementName=ViewRoot}"/>
+                <Setter Property="ContextMenu">
+                    <Setter.Value>
+                        <ContextMenu>
+                            <MenuItem 
+                                Header="订阅行情" 
+                                Command="{Binding PlacementTarget.Tag.SelectedItemsSubscribeQuotationCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                            <MenuItem 
+                                Header="删除过期项"
+                                Command="{Binding PlacementTarget.Tag.SelectedItemsDeleteExpiredCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                        </ContextMenu>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="{DynamicResource ContentBrush1}"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsXqTargetExpired}" Value="True">
+                        <Setter Property="Foreground" Value="{DynamicResource ContentBrush4}"/>
+                        <Setter Property="ToolTip" Value="该项已过期"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </DataGrid.ItemContainerStyle>
+    </DataGrid>
+</UserControl>

@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{367BE265-1B67-409E-955B-C4A04470C69B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ContainerShell.Applications</RootNamespace>
+    <AssemblyName>ContainerShell.Applications</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ParallelExtensionsExtras, Version=1.2.3.0, Culture=neutral, PublicKeyToken=665f4d61f853b5a9, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ParallelExtensionsExtras.1.2.0.0\lib\net40\ParallelExtensionsExtras.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ToastNotifications, Version=2.5.0.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ToastNotifications.2.5.0\lib\net40\ToastNotifications.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AppStatusBarViewController.cs" />
+    <Compile Include="Controllers\ContainerShellController.cs" />
+    <Compile Include="Controllers\ContractPreviewSelectPopupController.cs" />
+    <Compile Include="Controllers\ContractQuickSearchPopupController.cs" />
+    <Compile Include="Controllers\DraggableComponentPanelContextCtrl.cs" />
+    <Compile Include="Controllers\ExceptionOrderPanelWindowCtrl.cs" />
+    <Compile Include="Controllers\FeedbackDialogCtrl.cs" />
+    <Compile Include="Controllers\MorePopupCtrl.cs" />
+    <Compile Include="Controllers\TradeNotificationCtrl.cs" />
+    <Compile Include="Controllers\UserMessagePanelWindowCtrl.cs" />
+    <Compile Include="Controllers\WorkspaceEditDialogController.cs" />
+    <Compile Include="Controllers\WorkspaceInterTabClient.cs" />
+    <Compile Include="Controllers\WorkspaceInterTabWindowCtrl.cs" />
+    <Compile Include="Controllers\WorkspaceTabControlViewCtrl.cs" />
+    <Compile Include="Controllers\XqPreferenceSettingDialogCtrl.cs" />
+    <Compile Include="DataModels\SelectFileSoundType.cs" />
+    <Compile Include="Domain\EditWorkspace.cs" />
+    <Compile Include="IContainerShellModuleServiceCtrl.cs" />
+    <Compile Include="ServiceControllers\UserMessageServiceCtrl.cs" />
+    <Compile Include="Services\UserMessageService.cs" />
+    <Compile Include="ViewModels\AppStatusBarVM.cs" />
+    <Compile Include="ViewModels\FeedbackVM.cs" />
+    <Compile Include="ViewModels\OrderCancelledNDPVM.cs" />
+    <Compile Include="ViewModels\TradeLameNDPVM.cs" />
+    <Compile Include="ViewModels\ExceptionOrderPanelVM.cs" />
+    <Compile Include="ViewModels\OrderAmbiguousNDPVM.cs" />
+    <Compile Include="ViewModels\OrderTradedNDPVM.cs" />
+    <Compile Include="ViewModels\OrderTriggeredNDPVM.cs" />
+    <Compile Include="Helper\ContractQuickSearchHelper.cs" />
+    <Compile Include="DataModels\ContractQuickSearchTree.cs" />
+    <Compile Include="DataModels\ContractSelectTree.cs" />
+    <Compile Include="ModuleController.cs" />
+    <Compile Include="DataModels\ContainerShellTabNodeItem.cs" />
+    <Compile Include="DataModels\InitializeItem.cs" />
+    <Compile Include="DataModels\ContainerShellTabNodeType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\ContainerShellViewModel.cs" />
+    <Compile Include="ViewModels\ContractPreviewSelectPopupViewModel.cs" />
+    <Compile Include="ViewModels\ContractQuickSearchPopupViewModel.cs" />
+    <Compile Include="ViewModels\MorePopupVM.cs" />
+    <Compile Include="ViewModels\OrderOccurExceptionNDPVM.cs" />
+    <Compile Include="ViewModels\UserMessageContentVM.cs" />
+    <Compile Include="ViewModels\UserMessagePanelVM.cs" />
+    <Compile Include="ViewModels\WorkspaceEditDialogContentVM.cs" />
+    <Compile Include="ViewModels\WorkspaceInterTabWindowVM.cs" />
+    <Compile Include="ViewModels\WorkspaceTabablzControlVM.cs" />
+    <Compile Include="ViewModels\XqPreferenceSettingVM.cs" />
+    <Compile Include="Views\IAppStatusBarView.cs" />
+    <Compile Include="Views\IFeedbackView.cs" />
+    <Compile Include="Views\IOrderCancelledNDP.cs" />
+    <Compile Include="Views\ITradeLameNDP.cs" />
+    <Compile Include="Views\IContainerShellView.cs" />
+    <Compile Include="Views\IContractPreviewSelectPopupView.cs" />
+    <Compile Include="Views\IContractQuickSearchPopupView.cs" />
+    <Compile Include="Views\IExceptionOrderPanelView.cs" />
+    <Compile Include="Views\IMorePopupView.cs" />
+    <Compile Include="Views\IOrderAmbiguousNDP.cs" />
+    <Compile Include="Views\IOrderOccurExceptionNDP.cs" />
+    <Compile Include="Views\IOrderTradedNDP.cs" />
+    <Compile Include="Views\IOrderTriggeredNDP.cs" />
+    <Compile Include="Views\IUserMessageContentView.cs" />
+    <Compile Include="Views\IUserMessagePanelView.cs" />
+    <Compile Include="Views\IWorkspaceEditDialogContentView.cs" />
+    <Compile Include="Views\IWorkspaceInterTabWindow.cs" />
+    <Compile Include="Views\IWorkspaceTabablzControl.cs" />
+    <Compile Include="Views\IXqPreferenceSettingView.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppAssembler\AppAssembler.Interfaces\AppAssembler.Interfaces.csproj">
+      <Project>{4903FB80-2DC0-4319-B0ED-93DF17503AA9}</Project>
+      <Name>AppAssembler.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\NativeModel\NativeModel.csproj">
+      <Project>{017D3C55-D3AF-4F0F-91D9-249AB6A15371}</Project>
+      <Name>NativeModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.BusinessResources\XueQiaoFoundation.BusinessResources.csproj">
+      <Project>{7C429834-FD64-4CBA-A742-C798ECC5A58B}</Project>
+      <Name>XueQiaoFoundation.BusinessResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.Interfaces\XueQiaoFoundation.Interfaces.csproj">
+      <Project>{B31A5E02-2467-4119-A690-7D542965E2BB}</Project>
+      <Name>XueQiaoFoundation.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LoginUserManage\LoginUserManage.Interfaces\LoginUserManage.Interfaces.csproj">
+      <Project>{1B1A96A8-D556-4404-9712-50794D5F2D12}</Project>
+      <Name>LoginUserManage.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Manage\Manage.Interfaces\Manage.Interfaces.csproj">
+      <Project>{00B242B1-64F2-4AF7-A283-C4E19FADF84E}</Project>
+      <Name>Manage.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Research\Research.Interface\Research.Interface.csproj">
+      <Project>{456e7806-641b-4a48-9516-9cbdf315cd3b}</Project>
+      <Name>Research.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\Dragablz\Dragablz.net45.csproj">
+      <Project>{7b11011c-7fd7-4ab0-a1ad-04e940b026de}</Project>
+      <Name>Dragablz.net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660C2-8155-4769-991D-08AFBA69A302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
+      <Name>System.Waf.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_configuration\lib_configuration.csproj">
+      <Project>{83B10C13-C2AE-42CB-AFB4-CFA150407F61}</Project>
+      <Name>lib_configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_xqclient_base\lib_xqclient_base.csproj">
+      <Project>{251D71EE-27E6-46E8-BB87-2B2120564CD8}</Project>
+      <Name>lib_xqclient_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\Thrift\Thrift.45.csproj">
+      <Project>{ebce35da-cf6a-42bc-a357-a9c09b534299}</Project>
+      <Name>Thrift.45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Touyan\Touyan.Interface\Touyan.Interface.csproj">
+      <Project>{550B51B0-8903-4C0D-AA38-A8E93E1E75D2}</Project>
+      <Name>Touyan.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Trade\Trade.Interfaces\Trade.Interfaces.csproj">
+      <Project>{1FCF2AE6-4881-4DC9-8377-AA128791B8AA}</Project>
+      <Name>Trade.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\business_foundation_lib\business_foundation_lib.csproj">
+      <Project>{8380879B-9396-4095-8D2D-C721E20DA632}</Project>
+      <Name>business_foundation_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\IDLAutoGenerated\IDLAutoGenerated.csproj">
+      <Project>{E9B131CA-A3DA-4A12-9C9E-235957B0F139}</Project>
+      <Name>IDLAutoGenerated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.Shared\XueQiaoFoundation.Shared.csproj">
+      <Project>{2497225a-7dbd-4901-bddd-3f8b37996769}</Project>
+      <Name>XueQiaoFoundation.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI\XueQiaoFoundation.UI.csproj">
+      <Project>{a811ca2b-99b3-4688-9175-5cfcffae88b5}</Project>
+      <Name>XueQiaoFoundation.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContainerShell.Interfaces\ContainerShell.Interfaces.csproj">
+      <Project>{BD65CD7D-6128-4A01-8F1A-74A835681B98}</Project>
+      <Name>ContainerShell.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

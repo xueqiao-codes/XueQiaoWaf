@@ -1,0 +1,103 @@
+﻿<Page x:Class="Manage.Presentations.Views.SubAccountEquityDailyHistoryView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:controls="clr-namespace:XueQiaoFoundation.UI.Controls;assembly=XueQiaoFoundation.UI"  
+      xmlns:helper="clr-namespace:XueQiaoFoundation.Shared.Helper;assembly=XueQiaoFoundation.Shared"
+      xmlns:vm="clr-namespace:Manage.Applications.ViewModels;assembly=Manage.Applications"
+      xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+      mc:Ignorable="d" 
+      d:DataContext="{x:Type vm:SubAccountEquityDailyHistoryViewModel}"
+      d:DesignHeight="300" d:DesignWidth="600"
+      Background="{DynamicResource RootBgBrush}"
+      Style="{StaticResource GeneralPageStyle}">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/SubAccountEquityListColumnRes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <uiextra_convert:Timestamp2StringConverter x:Key="Ms2StringConverter" Convert2StringFormatType="DateTime" ValueType="Millisecond"/>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical">
+            <Grid Height="40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" x:Name="NavbarFirstColumn"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="{Binding ElementName=NavbarFirstColumn, Path=ActualWidth}"/>
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding PageGoBackCmd}" Style="{StaticResource FlatContentButtonPrimary3}"
+                    VerticalAlignment="Center">
+                    <TextBlock>
+                        <Run Text="〈 返回" FontSize="{DynamicResource RegularTitleFontSize}"/>
+                    </TextBlock>
+                </Button>
+                <TextBlock Grid.Column="1" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center" 
+                           Margin="10,0"
+                           FontSize="{DynamicResource LargeTitleFontSize}">
+                    <Run>操作账户</Run>
+                    <Run Text="{Binding SubAccount.SubAccountName}"/>
+                    <Run>的历史权益</Run>
+                </TextBlock>
+            </Grid>
+            <Rectangle Height="1" Fill="{DynamicResource BorderBrush3}"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="15,8,15,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">日期：</TextBlock>
+                <controls:DayDatePicker
+                    MinWidth="120"
+                    VerticalAlignment="Center"
+                    Padding="2,2"
+                    Watermark="选择日期"
+                    IsTodayHighlighted="True"
+                    SelectedDateFormat="Long"
+                    Culture="{x:Static helper:DateHelper.DefaultDateTimePickerCulture}"
+                    SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Style="{StaticResource FlatBgButtonPrimary3}" 
+                        VerticalAlignment="Center"  
+                        Margin="15,0,0,0"
+                        Command="{Binding DataRefreshCmd}"
+                        Content="刷新"/>
+                <TextBlock VerticalAlignment="Center" Margin="15,0">
+                    <Run Text="结算时间："/>
+                    <Run Text="{Binding EquityUpdateTimestampMs, Converter={StaticResource Ms2StringConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Margin="0,15,0,0" Grid.Row="1">
+                <TextBlock Margin="0,0,0,6">总权益</TextBlock>
+                <DataGrid ItemsSource="{Binding TotalEquityItems}"
+                      CanUserSortColumns="False"
+                      BorderThickness="1,1,0,0"
+                      x:Name="TotalEquityItemsDataGrid">
+                    <!-- Note:在 codebehind 文件设置 Columns -->
+                </DataGrid>
+            </StackPanel>
+
+            <DockPanel Margin="0,15,0,0" Grid.Row="2">
+                <TextBlock Margin="0,0,0,6" DockPanel.Dock="Top">货币权益明细</TextBlock>
+                <DataGrid DockPanel.Dock="Bottom" 
+                      ItemsSource="{Binding CurrencyGroupedEquityItems}"
+                      CanUserSortColumns="False"
+                      x:Name="CurrencyGroupedEquityItemsDataGrid">
+                    <!-- Note:在 codebehind 文件设置 Columns -->
+                </DataGrid>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Page>

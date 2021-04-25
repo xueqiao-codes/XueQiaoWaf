@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.OrderConditionListHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:res_dm="clr-namespace:XueQiaoFoundation.BusinessResources.DataModels;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             mc:Ignorable="d" 
+             d:DesignWidth="600">
+    <!-- DataContext 为 ConditionOrderRealtimeListDataContext -->
+    <UserControl.Resources>
+        <uiconvert:EqualityToBooleanConverter x:Key="EqualityToBooleanConverter"/>
+    </UserControl.Resources>
+
+    <DockPanel LastChildFill="False" Margin="4,6">
+        <WrapPanel DockPanel.Dock="Left" VerticalAlignment="Center">
+            <RadioButton Content="全部"
+                         IsChecked="{Binding ListFilterType, Mode=OneWay, Converter={StaticResource EqualityToBooleanConverter}, ConverterParameter={x:Static res_dm:ConditionOrderListFilterType.All}}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Checked">
+                        <i:InvokeCommandAction 
+                                        Command="{Binding OrderListFilterTypeSelectCommand}"
+                                        CommandParameter="{x:Static res_dm:ConditionOrderListFilterType.All}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </RadioButton>
+            <RadioButton Content="挂单"
+                         IsChecked="{Binding ListFilterType, Mode=OneWay, Converter={StaticResource EqualityToBooleanConverter}, ConverterParameter={x:Static res_dm:ConditionOrderListFilterType.Hanging}}"
+                         Margin="8,0,0,0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Checked">
+                        <i:InvokeCommandAction 
+                                        Command="{Binding OrderListFilterTypeSelectCommand}"
+                                        CommandParameter="{x:Static res_dm:ConditionOrderListFilterType.Hanging}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </RadioButton>
+        </WrapPanel>
+        <StackPanel DockPanel.Dock="Right" Margin="8,0,0,0" Orientation="Horizontal">
+            <Button 
+                    Content="全选" 
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    Command="{Binding SelectAllOrderItemsCmd}"/>
+            <Button 
+                    Margin="20,0,0,0"
+                    Content="启动" 
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    Command="{Binding SelectedOrdersOptCommands.ResumeSelectedOrdersCmd}"/>
+            <Button 
+                    Margin="10,0,0,0"
+                    Content="暂停" 
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    Command="{Binding SelectedOrdersOptCommands.SuspendSelectedOrdersCmd}"/>
+            <Button 
+                    Margin="10,0,0,0"
+                    Content="撤单" 
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    Command="{Binding SelectedOrdersOptCommands.RevokeSelectedOrdersCmd}"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

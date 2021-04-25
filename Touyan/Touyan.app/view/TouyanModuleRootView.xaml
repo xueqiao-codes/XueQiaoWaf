@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="Touyan.app.view.TouyanModuleRootView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+             xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Microsoft.Windows.Shell"
+             xmlns:ccl="clr-namespace:CustomChromeLibrary;assembly=CustomChromeLibrary"
+             xmlns:uiextra_helper="clr-namespace:XueQiaoFoundation.UI.Extra.helper;assembly=XueQiaoFoundation.UI.Extra"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             d:DesignWidth="800" d:DesignHeight="400"
+             x:Name="ViewRoot">
+    <Grid>
+        <dragablz:TabablzControl 
+            IsSynchronizedWithCurrentItem="True"
+            ItemsSource="{Binding WorkspaceItems}"
+            SelectedItem="{Binding ActiveWorkspaceItem, Mode=TwoWay}"
+            FixedHeaderCount="{Binding WorkspaceItems.Count}"
+            dragablz:TabablzControl.InterTabController="{x:Null}"
+            ItemContainerStyle="{StaticResource WorkspaceDragableTabItemStyle}"
+            Style="{StaticResource XqTabablzControl_TopTabStripPlacement}"
+            uiextra_helper:TabablzControlHelper.HeaderContainerHeight="{Binding EmbedInWindowCaptionDataHolder.CaptionHeight, Mode=OneWayToSource}"
+            uiextra_helper:TabablzControlHelper.HeaderContainerMargin="0,10,0,0"
+            HeaderSuffixContentMinWidth="178">
+
+            <!-- 通过uiextra_helper:TabablzControlHelper.HeaderContainerHeight 绑定到 CaptionHeight，获取嵌入到 window 的控件头部高度 -->
+            <!-- 绑定关闭按钮的 CustomButtonClickHandler，用于处理窗体关闭 -->
+            <!-- 必须设置 HeaderSuffixContentMinWidth，否则无法确认tabs列表的最大宽度 -->
+
+            <dragablz:TabablzControl.HeaderSuffixContent>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1" Margin="0,-6,4,0" VerticalAlignment="Top"
+                                Orientation="Horizontal" HorizontalAlignment="Right"
+                                shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                        <ccl:MinimizeButton 
+                                Style="{StaticResource WindowMinimizeButtonStyleDefault}" Margin="0,0,0,0"
+                                x:Name="MinimizeWindowCommandButton"/>
+                        <ccl:MaximizeButton 
+                                Style="{StaticResource WindowMaximizeButtonStyleDefault}" Margin="10,0,0,0"
+                                x:Name="MaximizeWindowCommandButton"/>
+                        <ccl:CloseButton 
+                                Style="{StaticResource WindowCloseButtonStyleDefault}" Margin="10,0,0,0"
+                                CustomButtonClickHandler="{Binding Path=DataContext.EmbedInWindowCaptionDataHolder.CloseWindowMenuButtonClickHandler, ElementName=ViewRoot, Mode=OneWay}"
+                                x:Name="CloseWindowCommandButton"/>
+                    </StackPanel>
+                </Grid>
+            </dragablz:TabablzControl.HeaderSuffixContent>
+
+            <dragablz:TabablzControl.HeaderItemTemplate>
+                <DataTemplate>
+                    <Grid MinWidth="120">
+                        <ContentControl HorizontalAlignment="Center" Content="{Binding Header}"/>
+                    </Grid>
+                </DataTemplate>
+            </dragablz:TabablzControl.HeaderItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding ContentView}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </dragablz:TabablzControl>
+    </Grid>
+</UserControl>

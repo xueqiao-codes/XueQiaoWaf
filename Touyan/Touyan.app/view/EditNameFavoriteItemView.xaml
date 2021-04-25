@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Touyan.app.view.EditNameFavoriteItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:uiextra_helper="clr-namespace:XueQiaoFoundation.UI.Extra.helper;assembly=XueQiaoFoundation.UI.Extra"
+             mc:Ignorable="d" 
+             Width="380">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="True2Visible"/>
+    </UserControl.Resources>
+    <StackPanel Margin="20" Grid.IsSharedSizeScope="True">
+        <HeaderedContentControl 
+            Header="原名称：" Grid.Row="0" Style="{StaticResource HorizonalOrientationFieldHeaderedStyle}"
+            Margin="0,0,0,15"
+            Visibility="{Binding ShowOriginNameRow, Converter={StaticResource True2Visible}}">
+            <TextBox 
+                IsReadOnly="True" 
+                Text="{Binding FavoriteItemOriginName, Mode=OneWay}"
+                AutoWordSelection="True"
+                Background="Transparent"
+                Padding="0, 0"
+                BorderThickness="0"
+                ScrollViewer.CanContentScroll="False"
+                TextWrapping="Wrap">
+                <i:Interaction.Behaviors>
+                    <uiextra_helper:TextBoxDoubleClickSelectAllTextBehavior/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </HeaderedContentControl>
+
+        <HeaderedContentControl Header="新名称：" Grid.Row="1" Style="{StaticResource HorizonalOrientationFieldHeaderedStyle}">
+            <TextBox 
+                 Text="{Binding FavoriteItemNewName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 HorizontalScrollBarVisibility="Hidden"/>
+        </HeaderedContentControl>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,25,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Margin="0,0,10,0"
+                    Content="确定"
+                    Command="{Binding SubmitCmd}" 
+                    Style="{StaticResource BordedButtonPrimary3}"/>
+            <Button Content="取消"
+                    Command="{Binding CancelCmd}"
+                    Style="{StaticResource BordedButtonStyle}"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

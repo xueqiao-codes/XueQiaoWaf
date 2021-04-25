@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Touyan.app.view.ChartViewHistoryListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="450">
+    <UserControl.Resources>
+        <uiextra_convert:Timestamp2StringConverter x:Key="HistoryViewTime2Str" Convert2StringFormatType="DateTimeIgnoreYear" ValueType="Second"/>
+    </UserControl.Resources>
+    <ListBox 
+        IsSynchronizedWithCurrentItem="True"
+        ItemsSource="{Binding HistoryCollectionView}"
+        SelectedItem="{Binding SelectedHistoryItem, Mode=TwoWay}"
+        ScrollViewer.VerticalScrollBarVisibility="Auto" 
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        OverridesDefaultStyle="True"
+        VirtualizingPanel.VirtualizationMode="Recycling">
+        <ListBox.ItemContainerStyle>
+            <Style BasedOn="{StaticResource ListBoxItemStyleDefault}" TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+        </ListBox.ItemContainerStyle>
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <DockPanel LastChildFill="True">
+                    <Rectangle x:Name="BottomBorderRect" Fill="{DynamicResource BorderBrush2}" Height="1" DockPanel.Dock="Bottom" HorizontalAlignment="Stretch"/>
+                    <Grid DockPanel.Dock="Top" Margin="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <ContentControl Style="{StaticResource GeometryContentCheckedStyle}"
+                                    Content="{StaticResource TouyanChartIcon}"
+                                    Foreground="{DynamicResource ContentBrush1}"
+                                    Width="14" Height="14" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding ChartInfo.ChartName}" Margin="8,0,0,0"  VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <TextBlock Grid.Column="1" Margin="8,0,0,0" 
+                                   Text="{Binding ViewTimestamp, Converter={StaticResource HistoryViewTime2Str}}" 
+                                   Foreground="{DynamicResource ContentBrush3}" FontSize="{DynamicResource SecondaryContentFontSize}"/>
+                    </Grid>
+                </DockPanel>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</UserControl>

@@ -1,0 +1,66 @@
+﻿<Window x:Class="XueQiaoFoundation.UI.Components.MessageWindow.Views.MessageLayoutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Microsoft.Windows.Shell"
+        xmlns:vm="clr-namespace:XueQiaoFoundation.UI.Components.MessageWindow.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{x:Type vm:MessageLayoutWindowVM}"
+        MinWidth="200" MinHeight="100">
+    <Window.Style> 
+        <Style TargetType="Window" BasedOn="{StaticResource WindowCustomByWindowChromeStyleDefault}">
+            <Setter Property="ResizeMode" Value="NoResize"/>
+            <Setter Property="WindowStyle" Value="None"/>
+            <Setter Property="AllowsTransparency" Value="True"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding WindowCanResize}" Value="True">
+                    <Setter Property="ResizeMode" Value="CanResize"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
+    
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CornerRadius="0" CaptionHeight="{Binding CaptionHeightHolder.DialogCaptionHeight}" GlassFrameThickness="0" UseAeroCaptionButtons="False" NonClientFrameEdges="None" />
+    </shell:WindowChrome.WindowChrome>
+    
+    <ContentControl HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <ContentControl.ContentTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Border 
+                        BorderThickness="1" 
+                        BorderBrush="{DynamicResource BorderBrush2}" 
+                        SnapsToDevicePixels="True"
+                        Effect="{DynamicResource BossyControlShadowEffect}"
+                        Background="{DynamicResource RootBgBrush}"
+                        Margin="4"
+                        Name="BodyBorder">
+                        <Grid>
+                            <ContentControl Content="{Binding Path=DataContext.ContentView, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+                            <ResizeGrip x:Name="WindowResizeGrip"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Bottom"
+                                          Visibility="Collapsed"
+                                          IsTabStop="false" />
+                        </Grid>
+                    </Border>
+                </Grid>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=IsActive}"
+                                 Value="True">
+                        <Setter TargetName="BodyBorder" Property="BorderBrush" Value="{DynamicResource PrimaryBrush3}" />
+                        <Setter TargetName="BodyBorder" Property="Effect" Value="{DynamicResource BossyControlShadowEffectPrimary3}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.WindowCanResize}"
+                                 Value="True">
+                        <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </ContentControl.ContentTemplate>
+    </ContentControl>
+</Window>

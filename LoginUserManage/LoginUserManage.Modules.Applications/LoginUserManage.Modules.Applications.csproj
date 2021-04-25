@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D93AB3AE-B48F-4BF2-84F1-C4127CF12510}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XueQiaoWaf.LoginUserManage.Modules.Applications</RootNamespace>
+    <AssemblyName>XueQiaoWaf.LoginUserManage.Modules.Applications</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="ParallelExtensionsExtras, Version=1.2.3.0, Culture=neutral, PublicKeyToken=665f4d61f853b5a9, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ParallelExtensionsExtras.1.2.0.0\lib\net40\ParallelExtensionsExtras.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\Link2TouyanUserDialogCtrl.cs" />
+    <Compile Include="Controllers\LoginDialogController.cs" />
+    <Compile Include="Controllers\UserAppUpdateDialogCtrl.cs" />
+    <Compile Include="Controllers\UserAppVersionInfoDialogCtrl.cs" />
+    <Compile Include="ILoginModuleServiceCtrl.cs" />
+    <Compile Include="ModuleController.cs" />
+    <Compile Include="Controllers\SelectCompanyGroupDialogController.cs" />
+    <Compile Include="Controllers\UpdateLoginPwdDialogCtrl.cs" />
+    <Compile Include="Domains\EditPwd.cs" />
+    <Compile Include="Domains\UpdatePwd.cs" />
+    <Compile Include="ServiceControllers\TouyanAuthUserLoginServiceCtrl.cs" />
+    <Compile Include="ViewModels\CompanyUserLoginOperateVM.cs" />
+    <Compile Include="ViewModels\Link2TouyanUserVM.cs" />
+    <Compile Include="ViewModels\LoginDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\PersonalUserLoginOperateVM.cs" />
+    <Compile Include="ViewModels\SelectCompanyGroupContentVM.cs" />
+    <Compile Include="ViewModels\UpdateLoginPwdContentVM.cs" />
+    <Compile Include="ViewModels\UserAppDowloadProgressDataContext.cs" />
+    <Compile Include="ViewModels\UserAppUpdateVM.cs" />
+    <Compile Include="ViewModels\UserAppVersionInfoVM.cs" />
+    <Compile Include="Views\ICompanyUserLoginOperateView.cs" />
+    <Compile Include="Views\ILink2TouyanUserView.cs" />
+    <Compile Include="Views\ILoginDialogContentView.cs" />
+    <Compile Include="Views\IPersonalUserLoginOperateView.cs" />
+    <Compile Include="Views\ISelectCompanyGroupContentView.cs" />
+    <Compile Include="Views\IUpdateLoginPwdContentView.cs" />
+    <Compile Include="Views\IUserAppUpdateView.cs" />
+    <Compile Include="Views\IUserAppVersionInfoView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppAssembler\AppAssembler.Interfaces\AppAssembler.Interfaces.csproj">
+      <Project>{4903FB80-2DC0-4319-B0ED-93DF17503AA9}</Project>
+      <Name>AppAssembler.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.BusinessResources\XueQiaoFoundation.BusinessResources.csproj">
+      <Project>{7C429834-FD64-4CBA-A742-C798ECC5A58B}</Project>
+      <Name>XueQiaoFoundation.BusinessResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_xqclient_base\lib_xqclient_base.csproj">
+      <Project>{251d71ee-27e6-46e8-bb87-2b2120564cd8}</Project>
+      <Name>lib_xqclient_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\Thrift\Thrift.45.csproj">
+      <Project>{ebce35da-cf6a-42bc-a357-a9c09b534299}</Project>
+      <Name>Thrift.45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Touyan\Touyan.Interface\Touyan.Interface.csproj">
+      <Project>{550B51B0-8903-4C0D-AA38-A8E93E1E75D2}</Project>
+      <Name>Touyan.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Trade\Trade.Interfaces\Trade.Interfaces.csproj">
+      <Project>{1FCF2AE6-4881-4DC9-8377-AA128791B8AA}</Project>
+      <Name>Trade.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\business_foundation_lib\business_foundation_lib.csproj">
+      <Project>{8380879B-9396-4095-8D2D-C721E20DA632}</Project>
+      <Name>business_foundation_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\IDLAutoGenerated\IDLAutoGenerated.csproj">
+      <Project>{e9b131ca-a3da-4a12-9c9e-235957b0f139}</Project>
+      <Name>IDLAutoGenerated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.Shared\XueQiaoFoundation.Shared.csproj">
+      <Project>{2497225a-7dbd-4901-bddd-3f8b37996769}</Project>
+      <Name>XueQiaoFoundation.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI\XueQiaoFoundation.UI.csproj">
+      <Project>{a811ca2b-99b3-4688-9175-5cfcffae88b5}</Project>
+      <Name>XueQiaoFoundation.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LoginUserManage.Interfaces\LoginUserManage.Interfaces.csproj">
+      <Project>{1B1A96A8-D556-4404-9712-50794D5F2D12}</Project>
+      <Name>LoginUserManage.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660C2-8155-4769-991D-08AFBA69A302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Project>{27b67dfe-0bf1-4435-b036-e4c083eaea03}</Project>
+      <Name>System.Waf.Wpf</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

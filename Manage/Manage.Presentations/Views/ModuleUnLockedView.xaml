@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Manage.Presentations.Views.ModuleUnLockedView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dm="clr-namespace:Manage.Applications.DataModels;assembly=Manage.Applications"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Type dm:ModuleLockStatusDM}"
+             d:DesignHeight="600" d:DesignWidth="600">
+    <!-- View's DataContext is ModuleLockStatusDM -->
+    
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,30,20,0">
+            <TextBlock FontSize="{DynamicResource ExtraLargeContentFontSize}" TextWrapping="Wrap">
+                您将进入该页面，进入后其他用户将无法进入。</TextBlock>
+            <Button Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    MinWidth="100"
+                    Content="立即进入"
+                    Style="{StaticResource FlatBgButtonPrimary3}"
+                    Command="{Binding RequestModuleLockCmd}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

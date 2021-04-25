@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="XueQiaoWaf.LoginUserManage.Modules.Presentation.Views.LoginDialogContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:XueQiaoWaf.LoginUserManage.Modules.Applications.ViewModels;assembly=XueQiaoWaf.LoginUserManage.Modules.Applications"
+             mc:Ignorable="d" 
+             Height="380" Width="800"
+             d:DataContext="{x:Type vm:LoginDialogContentViewModel}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="True2Visible"/>
+    </UserControl.Resources>
+    <Grid Margin="20, 0, 20, 20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="../Images/logo_bg.png" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+               Margin="0, 60, 0, 0"
+               x:Name="BgImage"/>
+        <Canvas>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Images/logo80.png" Width="48" Height="48"
+                       x:Name="IconImage"/>
+                <TextBlock FontSize="30" VerticalAlignment="Center" Margin="10,0,0,0">雪橇投资管理系统</TextBlock>
+            </StackPanel>
+            <StackPanel Canvas.Bottom="0" Canvas.Right="0">
+                <TextBlock HorizontalAlignment="Right" Text="{Binding CurrentVersionStr}"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,4,0,0" Text="雪橇科技（深圳）有限公司"/>
+            </StackPanel>
+
+            <StackPanel Canvas.Bottom="0" Canvas.Left="0" 
+                        Visibility="{Binding ShowApiEnvironmentSelectBox, Converter={StaticResource True2Visible}}">
+                <TextBlock Margin="0,0,0,4">环境配置：</TextBlock>
+                <ComboBox ItemsSource="{Binding ApiEnvironments}"
+                          IsSynchronizedWithCurrentItem="True"
+                          SelectedItem="{Binding SelectedApiEnvironment, Mode=TwoWay}"
+                          MinWidth="50">
+                </ComboBox>
+            </StackPanel>
+        </Canvas>
+
+        <Rectangle Margin="30,0" Fill="{DynamicResource BorderBrush2}" Width="1"
+                   Grid.Column="1"/>
+
+        <TabControl Grid.Column="2" Width="260" Style="{StaticResource XqHorizonTabControlStyle}">
+            <TabItem IsSelected="True"
+                     Content="{Binding CompanyUserLoginOperateView}">
+                <TabItem.Header>
+                    <TextBlock Text="机构用户" FontSize="{DynamicResource RegularTitleFontSize}"/>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Content="{Binding PersonalUserLoginOperateView}">
+                <TabItem.Header>
+                    <TextBlock Text="个人用户" FontSize="{DynamicResource RegularTitleFontSize}"/>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

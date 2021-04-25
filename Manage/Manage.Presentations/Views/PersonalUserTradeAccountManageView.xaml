@@ -1,0 +1,186 @@
+﻿<UserControl x:Class="Manage.Presentations.Views.PersonalUserTradeAccountManageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1800"
+             x:Name="ViewRoot"
+             Background="{DynamicResource RootBgBrush}">
+    <UserControl.Resources>
+        <sys:String x:Key="NotFoundTradeAccountsTip">未设置资金账户或后台未完成关联</sys:String>
+        <sys:Int32 x:Key="Int_Zero">0</sys:Int32>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2Visible" CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2Collapsed" CollapsedWhenEquals="True" CollapsedWhenNotEquals="False"/>
+        <convert:HostingTradeAccountField2DisplayConverter x:Key="HostingTradeAccountField2DisplayConverter"/>
+        
+        <DataGridTextColumn Header="券商（经纪商）" 
+                            Binding="{Binding BrokerName}"
+                            MinWidth="100"
+                            x:Shared="False"
+                            x:Key="Column_BrokerName"/>
+        <DataGridTextColumn Header="交易接口"
+                            Binding="{Binding AccountMeta.BrokerTechPlatform, Converter={StaticResource HostingTradeAccountField2DisplayConverter}, ConverterParameter={x:Static convert:HostingUser2DisplayField.BrokerTechPlatform}}"
+                            MinWidth="100"
+                            x:Shared="False"
+                            x:Key="Column_BrokerTechPlatform"/>
+        <DataGridTextColumn Header="席位" Binding="{Binding BrokerAccessName}"
+                            MinWidth="100"
+                            x:Shared="False"
+                            x:Key="Column_BrokerAccessName"/>
+        <DataGridTextColumn Header="账号" Binding="{Binding AccountMeta.LoginUserName}"
+                            MinWidth="100"
+                            x:Shared="False"
+                            x:Key="Column_LoginUserName"/>
+        
+        <DataGridTextColumn Header="账号状态"
+                            Binding="{Binding AccountMeta.AccountState, Converter={StaticResource HostingTradeAccountField2DisplayConverter}, ConverterParameter={x:Static convert:HostingUser2DisplayField.TradeAccountState}}"
+                            MinWidth="100"
+                            x:Shared="False"
+                            x:Key="Column_AccountState"/>
+        <DataGridTextColumn Header="接入状态" 
+                            Binding="{Binding AccountMeta.AccountAccessState, Converter={StaticResource HostingTradeAccountField2DisplayConverter}, ConverterParameter={x:Static convert:HostingUser2DisplayField.TradeAccountAccessState}}"
+                            MinWidth="100"
+                            x:Shared="False"
+                            x:Key="Column_AccountAccessState"/>
+        <DataGridTextColumn Header="不可用原因"
+                            Binding="{Binding AccountMeta.InvalidReason}"
+                            Width="2*"
+                            x:Shared="False"
+                            x:Key="Column_AccountInvalidReason"/>
+        <DataGridTextColumn Width="*"
+                            x:Shared="False"
+                            x:Key="Column_StarWidth"/>
+        <DataGridTemplateColumn Header="附加信息" CanUserSort="False" 
+                                MinWidth="60"
+                                x:Shared="False"
+                                x:Key="Column_ShowExtraInfo">
+            <DataGridTemplateColumn.HeaderTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="附加信息" VerticalAlignment="Center"/>
+                        <Button VerticalAlignment="Center" Margin="6,0,0,0" 
+                                        Style="{StaticResource CornerTipButton}"
+                                        Content="?"
+                                        ToolTip="由相应券商提供"/>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGridTemplateColumn.HeaderTemplate>
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <Button Content="查看" 
+                            Command="{Binding ElementName=ViewRoot, Path=DataContext.ShowAccountExtraInfoCmd}"
+                            CommandParameter="{Binding}"
+                            Style="{StaticResource FlatContentButtonPrimary3}"/>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        
+        <!--
+        <DataGridTextColumn Header="账户简称" Binding="{Binding AccountMeta.TradeAccountRemark}"
+                            MinWidth="100"
+                            x:Shared="False"
+                            x:Key="Column_TradeAccountRemark"/>
+        
+        <DataGridTemplateColumn Header="修改" CanUserSort="False" 
+                                MinWidth="50"
+                                HeaderStyle="{StaticResource DataGridColumnHeader_HorizontalAlignCenter}"
+                                x:Shared="False"
+                                x:Key="Column_AccountEdit">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <Button Style="{StaticResource FlatContentButtonPrimary3}"
+                        Margin="10,0"
+                        Content="修改"
+                        Command="{Binding ElementName=ViewRoot, Path=DataContext.EditAccountCmd}"
+                        CommandParameter="{Binding}"/>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        -->
+    </UserControl.Resources>
+    
+    <Grid Grid.Row="1" Margin="20,20,20,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Style="{StaticResource FlatBgButtonPrimary3}" 
+                    VerticalAlignment="Center"  
+                    Content="设置内盘账户"
+                    Command="{Binding AddInnerTradeAccountCmd}"/>
+            <Button Style="{StaticResource FlatBgButtonPrimary3}" 
+                    VerticalAlignment="Center"  
+                    Margin="15,0,0,0"
+                    Content="设置外盘账户"
+                    Command="{Binding AddOutterTradeAccountCmd}"/>
+            <Button Style="{StaticResource FlatBgButtonPrimary3}" 
+                    VerticalAlignment="Center"  
+                    Margin="15,0,0,0"
+                    Content="刷新"
+                    Command="{Binding DataRefreshCmd}"/>
+        </StackPanel>
+
+        <StackPanel Margin="0,15,0,0" Grid.Row="1">
+            <TextBlock Margin="0,0,0,5" FontSize="{DynamicResource RegularTitleFontSize}">内盘资金账户</TextBlock>
+            <DataGrid ItemsSource="{Binding InnerTradeAccountItems}" BorderThickness="1,1,1,0"
+                      CanUserSortColumns="False">
+                <DataGrid.Columns>
+                    <StaticResource ResourceKey="Column_BrokerName"/>
+                    <StaticResource ResourceKey="Column_BrokerTechPlatform"/>
+                    <StaticResource ResourceKey="Column_BrokerAccessName"/>
+                    <StaticResource ResourceKey="Column_LoginUserName"/>
+                    <StaticResource ResourceKey="Column_AccountState"/>
+                    <StaticResource ResourceKey="Column_AccountAccessState"/>
+                    <StaticResource ResourceKey="Column_AccountInvalidReason"/>
+                    <StaticResource ResourceKey="Column_StarWidth"/>
+                    <StaticResource ResourceKey="Column_ShowExtraInfo"/>
+                    <StaticResource ResourceKey="Column_StarWidth"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Margin="0,5,0,0"
+                       Text="{StaticResource NotFoundTradeAccountsTip}" Foreground="{DynamicResource ContentBrush2}"
+                       Visibility="{Binding InnerTradeAccountItems.Count, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource Int_Zero}}"/>
+        </StackPanel>
+
+        <StackPanel Margin="0,25,0,0" Grid.Row="2">
+            <TextBlock Margin="0,0,0,5" FontSize="{DynamicResource RegularTitleFontSize}">外盘资金账户</TextBlock>
+            <DataGrid ItemsSource="{Binding OutterTradeAccountItems}" BorderThickness="1,1,1,0"
+                      CanUserSortColumns="False">
+                <DataGrid.Columns>
+                    <StaticResource ResourceKey="Column_BrokerName"/>
+                    <StaticResource ResourceKey="Column_BrokerTechPlatform"/>
+                    <StaticResource ResourceKey="Column_BrokerAccessName"/>
+                    <StaticResource ResourceKey="Column_LoginUserName"/>
+                    <StaticResource ResourceKey="Column_AccountState"/>
+                    <StaticResource ResourceKey="Column_AccountAccessState"/>
+                    <StaticResource ResourceKey="Column_AccountInvalidReason"/>
+                    <StaticResource ResourceKey="Column_StarWidth"/>
+                    <StaticResource ResourceKey="Column_ShowExtraInfo"/>
+                    <StaticResource ResourceKey="Column_StarWidth"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Margin="0,5,0,0" Text="{StaticResource NotFoundTradeAccountsTip}" Foreground="{DynamicResource ContentBrush2}"
+                       Visibility="{Binding OutterTradeAccountItems.Count, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource Int_Zero}}"/>
+        </StackPanel>
+
+        <StackPanel Margin="0,40,0,0" Grid.Row="3">
+            <TextBlock Foreground="{DynamicResource ContentBrush2}" TextWrapping="Wrap">
+                <Run>说明：</Run>
+                <LineBreak/>
+                <Run>1.内外盘账户只支持各设置一个账户。</Run>
+                <LineBreak/>
+                <Run>2.首次设置资金账户后，该账户暂时无法使用，账户信息需要一定时间关联至后台，请待账户关联成功后继续相应操作。（变更账户信息需要重新关联，也可能造成账户暂时无法使用。）</Run>
+                <LineBreak/>
+                <Run>3.若更换资金账户，在新资金账户关联完成之前，仍延用原有资金账户；关联完成后，此前已挂订单，若已发送到交易所，亦会延用原有资金账户。（不建议盘中更换账户，如需盘中更换账户，建议先撤掉所有订单。）
+                </Run>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

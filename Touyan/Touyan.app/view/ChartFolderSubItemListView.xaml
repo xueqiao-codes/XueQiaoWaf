@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Touyan.app.view.ChartFolderSubItemListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:moduleconvert="clr-namespace:Touyan.app.converter"
+             xmlns:styles="clr-namespace:XueQiaoFoundation.UI.Styles;assembly=XueQiaoFoundation.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="330"
+             Background="{DynamicResource RootBgBrush}">
+    <UserControl.Resources>
+        <moduleconvert:CheckConverter_ChartFolderListTreeNode_Folder x:Key="CheckFolderNode"/>
+        <BooleanToVisibilityConverter x:Key="True2Visible"/>
+    </UserControl.Resources>
+    
+    <TreeView ItemsSource="{Binding ChartFolderNodeTree}">
+        <TreeView.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../resource/ChartFolderListTreeNodeDTs.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </TreeView.Resources>
+
+        <TreeView.ItemContainerStyle>
+            <Style TargetType="TreeViewItem" BasedOn="{StaticResource TreeViewItemDefault}">
+                <EventSetter Event="Selected" Handler="TreeViewItem_Selected"/>
+                <EventSetter Event="Expanded" Handler="TreeViewItem_Expanded"/>
+                <Setter Property="styles:TreeViewItemHelper.AlwaysDisplayExpandCollapseIcon" 
+                        Value="{Binding Converter={StaticResource CheckFolderNode}}"/>
+            </Style>
+        </TreeView.ItemContainerStyle>
+    </TreeView>
+</UserControl>

@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="Touyan.app.view.ChartFavoriateListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Touyan.app.view"
+             xmlns:styles="clr-namespace:XueQiaoFoundation.UI.Styles;assembly=XueQiaoFoundation.UI"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="330"
+             Background="{DynamicResource RootBgBrush}">
+    <UserControl.Resources>
+        <local:BindingProxy x:Key="RootDataContextProxy" Data="{Binding}"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2Visible" CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <sys:Boolean x:Key="TrueValue">True</sys:Boolean>
+        <sys:Boolean x:Key="FalseValue">False</sys:Boolean>
+    </UserControl.Resources>
+    <Grid>
+        <WrapPanel x:Name="NotLoginedContainerView"
+            Margin="8" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top"
+            Visibility="{Binding AuthorUserHasLogined, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource FalseValue}}">
+            <TextBlock Foreground="{DynamicResource ContentBrush3}" Text="用户暂未登录" VerticalAlignment="Center"/>
+            <Button Margin="15,0,0,0" VerticalAlignment="Center" Content="登录" Style="{StaticResource FlatContentButtonPrimary3}"
+                    Command="{Binding LoginEntryCmd}"/>
+            <Button Margin="10,0,0,0" VerticalAlignment="Center" Content="注册" Style="{StaticResource FlatContentButtonPrimary3}"
+                    Command="{Binding RegisterEntryCmd}"
+                    Visibility="{Binding HasUserRegisterFeature, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource TrueValue}}"/>
+        </WrapPanel>
+
+        <Grid x:Name="LoginedContainerView"
+              Visibility="{Binding AuthorUserHasLogined, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource TrueValue}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <WrapPanel 
+            Grid.Row="0" Margin="8" Orientation="Horizontal" HorizontalAlignment="Center"
+            Visibility="{Binding ShowLink2TouyanUserGuideView, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource TrueValue}}">
+                <TextBlock Foreground="{DynamicResource ContentBrush3}" Text="未关联投研账号" VerticalAlignment="Center"/>
+                <Button Margin="15,0,0,0" VerticalAlignment="Center" Content="关联" Style="{StaticResource FlatContentButtonPrimary3}"
+                    Command="{Binding Link2TouyanUserEntryCmd}"/>
+            </WrapPanel>
+
+            <TreeView Grid.Row="1" ItemsSource="{Binding FavoriteListRootFolderNode.Children}">
+                <TreeView.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="../resource/ChartFavoriteListTreeNodeDTs.xaml"/>
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </TreeView.Resources>
+
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="TreeViewItem" BasedOn="{StaticResource TreeViewItemDefault}">
+                        <Setter Property="styles:TreeViewItemHelper.AlwaysDisplayExpandCollapseIcon" Value="False"/>
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Setter Property="Tag" Value="{Binding Source={StaticResource RootDataContextProxy}, Path=Data}"/>
+                        <Setter Property="ContextMenu">
+                            <Setter.Value>
+                                <ContextMenu DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext}"
+                                             Tag="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.Tag}">
+                                    <MenuItem 
+                                        Header="添加子收藏夹"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=Tag.NewChildFolderCmd}"
+                                        CommandParameter="{Binding}"/>
+                                    <MenuItem 
+                                        Header="重命名"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=Tag.RenameFavoriteItemCmd}"
+                                        CommandParameter="{Binding}"/>
+                                    <MenuItem 
+                                        Header="移动"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=Tag.MoveFavoriteItemCmd}"
+                                        CommandParameter="{Binding}"/>
+                                    <MenuItem 
+                                        Header="删除"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=Tag.RemoveFavoriteItemCmd}"
+                                        CommandParameter="{Binding}"/>
+                                </ContextMenu>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+
+                <TreeView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="添加收藏夹" Command="{Binding Path=Data.NewTopLevelFolderCmd, Source={StaticResource RootDataContextProxy}}"/>
+                        <MenuItem Header="刷新列表" Command="{Binding Path=Data.RefreshFavoriteListCmd, Source={StaticResource RootDataContextProxy}}"/>
+                    </ContextMenu>
+                </TreeView.ContextMenu>
+            </TreeView>
+        </Grid>
+    </Grid>
+</UserControl>

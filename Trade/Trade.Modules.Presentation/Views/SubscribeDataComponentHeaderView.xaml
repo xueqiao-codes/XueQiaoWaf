@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.SubscribeDataComponentHeaderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+             xmlns:convert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:convert2="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Converters"
+             xmlns:business_const="clr-namespace:XueQiaoFoundation.BusinessResources.Constants;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="300"
+             d:DataContext="{x:Type vm:SubscribeDataComponentHeaderViewModel}">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <convert:EqualityToVisibilityConverter 
+                x:Key="EqualityToVisibilityConverter"
+                CollapsedWhenEquals="False"
+                CollapsedWhenNotEquals="True"/>
+
+            <convert2:TradeComponentTypeToNameConverter x:Key="TradeComponentTypeToNameConverter"/>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid x:Name="ComponentHeaderRoot">
+        <DockPanel LastChildFill="True">
+
+            <!-- 必须要用一个容器包着 button,否则弹出的popup 会使用button 的foreground作为它的元素的默认内容前景色 -->
+            <Grid DockPanel.Dock="Right" x:Name="TriggerSubscribeContractButtonGrid">
+                <Grid.Visibility>
+                    <Binding Path="SelectedItem"
+                             Mode="OneWay"
+                             ElementName="TabList"
+                             Converter="{StaticResource EqualityToVisibilityConverter}"
+                             ConverterParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_CONTRACT_LIST}"/>
+                </Grid.Visibility>
+                <Button Content="订阅合约" 
+                        Command="{Binding TriggerSubscribeContractCmd}"
+                        CommandParameter="{Binding ElementName=TriggerSubscribeContractButtonGrid}"
+                        Style="{StaticResource FlatContentButtonPrimary3}"
+                        x:Name="TriggerSubscribeContractButton"/>
+            </Grid>
+            <!-- 必须要用一个容器包着 button,否则弹出的popup 会使用button 的foreground作为它的元素的默认内容前景色 -->
+            <Grid DockPanel.Dock="Right" x:Name="TriggerNewComposeButtonGrid">
+                <Grid.Visibility>
+                    <Binding Path="SelectedItem"
+                             Mode="OneWay"
+                             ElementName="TabList"
+                             Converter="{StaticResource EqualityToVisibilityConverter}"
+                             ConverterParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_COMPOSE_LIST}"/>
+                </Grid.Visibility>
+                <Button Content="创建组合" DockPanel.Dock="Right"
+                    Command="{Binding TriggerNewComposeCmd}"
+                    CommandParameter="{Binding ElementName=TriggerNewComposeButtonGrid}"
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    x:Name="TriggerNewComposeButton"/>
+            </Grid>
+            
+            <DockPanel LastChildFill="True">
+                <ListBox  DockPanel.Dock="Left"
+                          SelectionMode="Single"
+                          Name="TabList"
+                          ItemsSource="{Binding TogatherTabbedComponentTypeListView}"
+                          IsSynchronizedWithCurrentItem="True"
+                          SelectedItem="{Binding SelectedTabComponentType, Mode=TwoWay}"
+                          Style="{StaticResource ListBoxTabStyle}"
+                          ItemContainerStyle="{StaticResource ListBoxItemComponentTabStyle}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource TradeComponentTypeToNameConverter}}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <!-- you should provide your own Thumb, which will be used to monitor dragging -->
+                <Thumb Style="{StaticResource InvisibleThumbStyle}"
+                       dragablz:DragablzItem.IsCustomThumb="True" />
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

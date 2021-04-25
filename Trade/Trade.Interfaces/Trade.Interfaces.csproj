@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1FCF2AE6-4881-4DC9-8377-AA128791B8AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XueQiaoWaf.Trade.Interfaces</RootNamespace>
+    <AssemblyName>XueQiaoWaf.Trade.Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Applications\IOrderItemsController.cs" />
+    <Compile Include="Applications\ISelectedOrdersOperateCommandsCtrl.cs" />
+    <Compile Include="Applications\ISelectedTradeLameTNOperateCommandsCtrl.cs" />
+    <Compile Include="Applications\ITradeItemsController.cs" />
+    <Compile Include="Applications\ITradeModuleService.cs" />
+    <Compile Include="Applications\IXqOrderDetailDialogCtrl.cs" />
+    <Compile Include="Applications\IXQTradeLameTaskNoteCtrl.cs" />
+    <Compile Include="DataModels\OrderUpdateTemplate.cs" />
+    <Compile Include="DataModels\SubAccountAnyDataRefreshStateChangedArgs.cs" />
+    <Compile Include="DataModels\SubscribeDataGroupsDataRoot.cs" />
+    <Compile Include="DataModels\TradeWorkspaceDataRoot.cs" />
+    <Compile Include="Events\OrderEventDrivedFromPush.cs" />
+    <Compile Include="Events\AmbiguousOrderStateQueryFailedEvent.cs" />
+    <Compile Include="Events\OrderTradedEventDrivedFromPush.cs" />
+    <Compile Include="Events\TradeLameTaskNoteNativeEvent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Services\IOrderItemsService.cs" />
+    <Compile Include="Services\ITradeItemsService.cs" />
+    <Compile Include="Services\IXQTradeLameTaskNoteService.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppAssembler\NativeModel\NativeModel.csproj">
+      <Project>{017D3C55-D3AF-4F0F-91D9-249AB6A15371}</Project>
+      <Name>NativeModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.BusinessResources\XueQiaoFoundation.BusinessResources.csproj">
+      <Project>{7C429834-FD64-4CBA-A742-C798ECC5A58B}</Project>
+      <Name>XueQiaoFoundation.BusinessResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ContainerShell\ContainerShell.Interfaces\ContainerShell.Interfaces.csproj">
+      <Project>{BD65CD7D-6128-4A01-8F1A-74A835681B98}</Project>
+      <Name>ContainerShell.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660C2-8155-4769-991D-08AFBA69A302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\IDLAutoGenerated\IDLAutoGenerated.csproj">
+      <Project>{E9B131CA-A3DA-4A12-9C9E-235957B0F139}</Project>
+      <Name>IDLAutoGenerated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.Shared\XueQiaoFoundation.Shared.csproj">
+      <Project>{2497225A-7DBD-4901-BDDD-3F8B37996769}</Project>
+      <Name>XueQiaoFoundation.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

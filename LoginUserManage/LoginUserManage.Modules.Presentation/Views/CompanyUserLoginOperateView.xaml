@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="XueQiaoWaf.LoginUserManage.Modules.Presentation.Views.CompanyUserLoginOperateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="clr-namespace:XueQiaoFoundation.UI.Controls;assembly=XueQiaoFoundation.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="380" d:DesignWidth="260"
+             Margin="{Binding ViewMargin}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="True2Visible"/>
+    </UserControl.Resources>
+    <StackPanel>
+        <HeaderedContentControl Grid.Row="0" IsTabStop="False"
+                                Header="公司登录名">
+            <TextBox Text="{Binding CompanyCode, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+        </HeaderedContentControl>
+        <HeaderedContentControl Grid.Row="2"  IsTabStop="False"
+                                Header="用户名" 
+                                Margin="0,16,0,0">
+            <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+        </HeaderedContentControl>
+        <HeaderedContentControl Grid.Row="3" IsTabStop="False"
+                                Header="用户密码" 
+                                Margin="0,16,0,0">
+            <!-- 正式版本中不保存密码，现在只为了方便先保存 -->
+
+            <Controls:CustomPasswordBox
+                x:Name="PasswordBox">
+                <Controls:CustomPasswordBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                </Controls:CustomPasswordBox.InputBindings>
+            </Controls:CustomPasswordBox>
+            <!--
+            
+            <PasswordBox 
+                        PasswordChar="*"
+                        x:Name="PasswordBox">
+                <PasswordBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                </PasswordBox.InputBindings>
+            </PasswordBox>
+            
+            <PasswordBox 
+                    PasswordChar="*"
+                    x:Name="PasswordBox"
+                    Styles:PasswordBoxHelper.Attach="True" 
+                    Styles:PasswordBoxHelper.Password="{Binding LoginInfo.Password, Mode=TwoWay}">
+                    </PasswordBox>
+             -->
+        </HeaderedContentControl>
+        <UniformGrid Columns="2" Margin="4,16,0,0">
+            <RadioButton 
+                        Content="实盘"
+                        IsChecked="{Binding IsSelectRealHostingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </RadioButton>
+            <RadioButton 
+                        Content="模拟盘"
+                        IsChecked="{Binding IsSelectSimulatorHostingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </RadioButton>
+        </UniformGrid>
+
+        <Button Command="{Binding LoginCommand}" Grid.ColumnSpan="2" Margin="0,20,0,4"
+                        Style="{StaticResource FlatBgButtonPrimary2}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>立即登录</TextBlock>
+                <ProgressBar Style="{StaticResource CircularProgressBarDefault}"
+                            Visibility="{Binding Path=IsLogining, Converter={StaticResource True2Visible}}"
+                            VerticalAlignment="Center"
+                            Foreground="{DynamicResource ForegroundInPrimaryBgBrush}"         
+                            IsIndeterminate="True"
+                            Value="0"
+                            Height="18"
+                            Width="18"
+                            Margin="8,0"/>
+            </StackPanel>
+        </Button>
+        <DockPanel Margin="4,4,4,0">
+            <CheckBox DockPanel.Dock="Left"
+                      IsChecked="{Binding IsRememberLoginInfo, Mode=TwoWay}">记住登录信息</CheckBox>
+            <Button DockPanel.Dock="Right" HorizontalAlignment="Right" 
+                            Command="{Binding ForgetPwdCmd}" 
+                            Style="{StaticResource FlatContentButtonPrimary3}">忘记密码？</Button>
+        </DockPanel>
+    </StackPanel>
+</UserControl>

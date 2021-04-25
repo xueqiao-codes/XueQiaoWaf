@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.CreateComposeWithSameTemplateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Width="300"
+             MinHeight="230">
+    <DockPanel Margin="20,20,20,10" LastChildFill="True">
+        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap">系统已存在相同组合！</TextBlock>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical">
+            <Button Style="{StaticResource BordedButtonPrimary3}" HorizontalAlignment="Center" 
+                    Command="{Binding CreateWithTemplateCmd}"
+                    IsEnabled="{Binding IsCreateButtonEnabled, Mode=OneWay}">引用</Button>
+        </StackPanel>
+        
+        <StackPanel Margin="0,20">
+            <HeaderedContentControl 
+                Margin="0,5,0,0"
+                Style="{StaticResource HorizonalOrientationFieldHeaderedStyle}"
+                Header="公式："
+                Content="{Binding TemplateComposeDetailContainer.BasicComposeGraph.Formular}"/>
+            <HeaderedContentControl 
+                Margin="0,5,0,0"
+                Style="{StaticResource HorizonalOrientationFieldHeaderedStyle}"
+                VerticalContentAlignment="Top"
+                Header="配比：">
+                <ContentControl Content="{Binding TemplateComposeDetailContainer}" ContentTemplate="{StaticResource ComposeLegDetailsDT}"/>
+            </HeaderedContentControl>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

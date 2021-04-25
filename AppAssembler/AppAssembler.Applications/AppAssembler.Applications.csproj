@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props" Condition="Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props')" />
+  <Import Project="..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props" Condition="Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props')" />
+  <Import Project="..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props" Condition="Exists('..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props')" />
+  <Import Project="..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props" Condition="Exists('..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6CD232B6-7B77-4756-880D-0240B56C3C23}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AppAssembler.Applications</RootNamespace>
+    <AssemblyName>XueQiaoTrading</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <HockeyAppResourceId>e0c3ef49162c43739118c97db3b5bb9b</HockeyAppResourceId>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;AnyCPU</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;AnyCPU</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="GongSolutions.Wpf.DragDrop, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\gong-wpf-dragdrop.1.1.0\lib\net45\GongSolutions.Wpf.DragDrop.dll</HintPath>
+    </Reference>
+    <Reference Include="Gu.Wpf.Adorners, Version=1.5.1.0, Culture=neutral, PublicKeyToken=6dfb64f9972bd31d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Gu.Wpf.Adorners.1.5.1.0\lib\net45\Gu.Wpf.Adorners.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.HockeyApp.Core45, Version=4.1.6.1005, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HockeySDK.WPF.4.1.6\lib\net45\Microsoft.HockeyApp.Core45.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.HockeyApp.Kit, Version=4.1.6.1005, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HockeySDK.WPF.4.1.6\lib\net45\Microsoft.HockeyApp.Kit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\..\ThirdFramework\ThirdDLL\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ToastNotifications, Version=2.5.0.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ToastNotifications.2.5.0\lib\net40\ToastNotifications.dll</HintPath>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ModuleController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ContainerShell\ContainerShell.Applications\ContainerShell.Applications.csproj">
+      <Project>{367be265-1b67-409e-955b-c4a04470c69b}</Project>
+      <Name>ContainerShell.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ContainerShell\ContainerShell.Interfaces\ContainerShell.Interfaces.csproj">
+      <Project>{BD65CD7D-6128-4A01-8F1A-74A835681B98}</Project>
+      <Name>ContainerShell.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ContainerShell\ContainerShell.Presentations\ContainerShell.Presentations.csproj">
+      <Project>{da3b7fc9-7acd-4d99-be05-348102e5e1b8}</Project>
+      <Name>ContainerShell.Presentations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LoginUserManage\LoginUserManage.Interfaces\LoginUserManage.Interfaces.csproj">
+      <Project>{1B1A96A8-D556-4404-9712-50794D5F2D12}</Project>
+      <Name>LoginUserManage.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LoginUserManage\LoginUserManage.Modules.Applications\LoginUserManage.Modules.Applications.csproj">
+      <Project>{d93ab3ae-b48f-4bf2-84f1-c4127cf12510}</Project>
+      <Name>LoginUserManage.Modules.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LoginUserManage\LoginUserManage.Modules.Presentation\LoginUserManage.Modules.Presentation.csproj">
+      <Project>{9736ef3b-7dd2-4de4-968e-d5348fd98221}</Project>
+      <Name>LoginUserManage.Modules.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Manage\Manage.Applications\Manage.Applications.csproj">
+      <Project>{bef5e8fd-af1d-4eee-a5d9-0b3c83eddeb6}</Project>
+      <Name>Manage.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Manage\Manage.Presentations\Manage.Presentations.csproj">
+      <Project>{3a4f931d-bf37-45b9-b56a-f1b15c7077d7}</Project>
+      <Name>Manage.Presentations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Research\Research.app\Research.app.csproj">
+      <Project>{599dbf6d-fc33-46f7-bfd2-f7bd7bf29c27}</Project>
+      <Name>Research.app</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\AttachedCommandBehavior\AttachedCommandBehavior.csproj">
+      <Project>{50c6d92d-132d-409e-a85f-944ca466ad2a}</Project>
+      <Name>AttachedCommandBehavior</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\CustomChromeLibrary\CustomChromeLibrary.csproj">
+      <Project>{25990f61-a27b-4edf-a402-b31bf952153f}</Project>
+      <Name>CustomChromeLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\Dragablz\Dragablz.net45.csproj">
+      <Project>{7b11011c-7fd7-4ab0-a1ad-04e940b026de}</Project>
+      <Name>Dragablz.net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\ItemsFilter\ItemsFilter.csproj">
+      <Project>{aab57bb1-a448-457c-ad53-16b32a1c1f1d}</Project>
+      <Name>ItemsFilter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
+      <Name>System.Waf.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_configuration\lib_configuration.csproj">
+      <Project>{83B10C13-C2AE-42CB-AFB4-CFA150407F61}</Project>
+      <Name>lib_configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_xqclient_base\lib_xqclient_base.csproj">
+      <Project>{251D71EE-27E6-46E8-BB87-2B2120564CD8}</Project>
+      <Name>lib_xqclient_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Touyan\Touyan.app\Touyan.app.csproj">
+      <Project>{1563c865-81be-4dd0-aefc-10a6a64bd7ea}</Project>
+      <Name>Touyan.app</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Trade\Trade.Interfaces\Trade.Interfaces.csproj">
+      <Project>{1FCF2AE6-4881-4DC9-8377-AA128791B8AA}</Project>
+      <Name>Trade.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Trade\Trade.Modules.Applications\Trade.Modules.Applications.csproj">
+      <Project>{63d97f3e-df6d-4758-bf2a-6fb5ee2d5a28}</Project>
+      <Name>Trade.Modules.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Trade\Trade.Modules.Presentation\Trade.Modules.Presentation.csproj">
+      <Project>{847f66c7-04fd-4e9b-a632-cc92a31c8f8e}</Project>
+      <Name>Trade.Modules.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\business_foundation_lib\business_foundation_lib.csproj">
+      <Project>{8380879B-9396-4095-8D2D-C721E20DA632}</Project>
+      <Name>business_foundation_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\IDLAutoGenerated\IDLAutoGenerated.csproj">
+      <Project>{e9b131ca-a3da-4a12-9c9e-235957b0f139}</Project>
+      <Name>IDLAutoGenerated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.Shared\XueQiaoFoundation.Shared.csproj">
+      <Project>{2497225a-7dbd-4901-bddd-3f8b37996769}</Project>
+      <Name>XueQiaoFoundation.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI.Extra\XueQiaoFoundation.UI.Extra.csproj">
+      <Project>{2f323e88-fadd-47d6-92a7-c3149e301f06}</Project>
+      <Name>XueQiaoFoundation.UI.Extra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI\XueQiaoFoundation.UI.csproj">
+      <Project>{a811ca2b-99b3-4688-9175-5cfcffae88b5}</Project>
+      <Name>XueQiaoFoundation.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppAssembler.Interfaces\AppAssembler.Interfaces.csproj">
+      <Project>{4903FB80-2DC0-4319-B0ED-93DF17503AA9}</Project>
+      <Name>AppAssembler.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XueQiaoFoundation.Applications\XueQiaoFoundation.Applications.csproj">
+      <Project>{3799d24c-2b36-4586-96e4-5b0ae08044a0}</Project>
+      <Name>XueQiaoFoundation.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XueQiaoFoundation.BusinessResources\XueQiaoFoundation.BusinessResources.csproj">
+      <Project>{7C429834-FD64-4CBA-A742-C798ECC5A58B}</Project>
+      <Name>XueQiaoFoundation.BusinessResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XueQiaoFoundation.Interfaces\XueQiaoFoundation.Interfaces.csproj">
+      <Project>{b31a5e02-2467-4119-a690-7d542965e2bb}</Project>
+      <Name>XueQiaoFoundation.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if exist "$(TargetDir)publish_res\" (
+rd /s/q "$(TargetDir)publish_res\"
+)
+md "$(TargetDir)publish_res\"
+if exist "$(SolutionDir)publish_res\" (
+xcopy /s /y "$(SolutionDir)publish_res\*.*" "$(TargetDir)publish_res" 
+)</PostBuildEvent>
+  </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets" Condition="Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets')" />
+  <Import Project="..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets" Condition="Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets')" />
+</Project>

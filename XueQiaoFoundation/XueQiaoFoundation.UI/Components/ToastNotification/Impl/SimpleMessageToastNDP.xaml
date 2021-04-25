@@ -1,0 +1,34 @@
+﻿<core:NotificationDisplayPart 
+    x:Class="XueQiaoFoundation.UI.Components.ToastNotification.Impl.SimpleMessageToastNDP"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:core="clr-namespace:ToastNotifications.Core;assembly=ToastNotifications"
+    xmlns:xq_toast_impl="clr-namespace:XueQiaoFoundation.UI.Components.ToastNotification.Impl"
+    mc:Ignorable="d" 
+    d:DesignHeight="50" d:DesignWidth="300"
+    FontSize="{DynamicResource PrimaryContentFontSize}"
+    Foreground="{DynamicResource ContentBrush1}">
+
+    <Border BorderThickness="1" BorderBrush="{DynamicResource PrimaryBrush3}">
+        <Border.Style>
+            <Style TargetType="Border">
+                <!--
+                <Setter Property="Foreground" Value="{DynamicResource ContentBrush1}"/>
+                -->
+                <Setter Property="Background" Value="{DynamicResource RootBgBrush}"/>
+                <Style.Triggers>
+                    <!-- TODO: Config Styles by NotificationType -->
+                    <!--
+                    <DataTrigger Binding="{Binding NotificationType}" Value="{x:Static xq_toast_impl:XqToastNotificationType.Information}">
+                    </DataTrigger>
+                    -->
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+
+        <ContentControl Margin="8,8" Content="{Binding MessageContent}"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Border>
+</core:NotificationDisplayPart>

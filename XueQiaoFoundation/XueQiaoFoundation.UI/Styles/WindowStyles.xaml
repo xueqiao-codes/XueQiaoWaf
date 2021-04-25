@@ -1,0 +1,64 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Microsoft.Windows.Shell">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/SharedStyles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <Style x:Key="WindowCustomByWindowChromeStyleDefault"
+           TargetType="{x:Type Window}" 
+           BasedOn="{StaticResource GeneralControlStyle}">
+        <Setter Property="shell:WindowChrome.WindowChrome">
+            <Setter.Value>
+                <shell:WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" NonClientFrameEdges="None" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush2}" />
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource RootBgBrush}"/>
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <!--<Border Background="{TemplateBinding Background}"-->
+                    <!--Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}">-->
+                    <Border Background="{TemplateBinding Background}"
+                            Margin="{Binding Source={x:Static shell:SystemParameters2.Current}, Path=WindowNonClientFrameThickness}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <AdornerDecorator>
+                                <Grid x:Name="LayoutRoot" Margin="0">
+                                    <ContentPresenter/>
+                                    <ResizeGrip x:Name="WindowResizeGrip"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Bottom"
+                                          Visibility="Collapsed"
+                                          IsTabStop="false" />
+                                </Grid>
+                            </AdornerDecorator>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush1}" />
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="LayoutRoot" Property="Margin" Value="7" />
+                            <Setter Property="BorderBrush" Value="{x:Null}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResizeWithGrip" />
+                                <Condition Property="WindowState" Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="WindowResizeGrip" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

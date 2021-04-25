@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BEF5E8FD-AF1D-4EEE-A5D9-0B3C83EDDEB6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Manage.Applications</RootNamespace>
+    <AssemblyName>Manage.Applications</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ParallelExtensionsExtras, Version=1.2.3.0, Culture=neutral, PublicKeyToken=665f4d61f853b5a9, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ParallelExtensionsExtras.1.2.0.0\lib\net40\ParallelExtensionsExtras.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ToastNotifications, Version=2.5.0.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ToastNotifications.2.5.0\lib\net40\ToastNotifications.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\FundManage\FundAccountEquityDailyHistoryController.cs" />
+    <Compile Include="Controllers\FundManage\FundAccountEquityDetailDialogController.cs" />
+    <Compile Include="Controllers\FundManage\FundManageByFundAccountController.cs" />
+    <Compile Include="Controllers\FundManage\FundManageBySubAccountController.cs" />
+    <Compile Include="Controllers\PersonalUser\AddFundAccountWorkOrderDialogCtrl.cs" />
+    <Compile Include="Controllers\PersonalUser\PersonalUserManageModuleRootViewCtrl.cs" />
+    <Compile Include="Controllers\PersonalUser\PersonalUserTradeAccountManageViewCtrl.cs" />
+    <Compile Include="Controllers\PositionManage\PositionShowByFundAccountCtrl.cs" />
+    <Compile Include="Controllers\PositionManage\PositionShowBySubAccountCtrl.cs" />
+    <Compile Include="Controllers\PositionManage\UATAssignTabContentCtrl.cs" />
+    <Compile Include="Controllers\PositionManage\UATPreviewAssignPopupCtrl.cs" />
+    <Compile Include="Controllers\PositionManage\UATPreviewTabContentCtrl.cs" />
+    <Compile Include="Controllers\PositionVerify\PositionVerifyTradeInputAreaViewCtrl.cs" />
+    <Compile Include="Controllers\PositionVerify\PositionDailyVerifyPageCtrl.cs" />
+    <Compile Include="Controllers\PositionVerify\PositionDiffOverviewCtrl.cs" />
+    <Compile Include="Controllers\PositionManage\SubAccountPositionDetailDialogCtrl.cs" />
+    <Compile Include="Controllers\PositionManage\SubAccountPositionHistoryCtrl.cs" />
+    <Compile Include="Controllers\PositionManage\UATManageCtrl.cs" />
+    <Compile Include="Controllers\PositionVerify\PositionVerifyManageCtrl.cs" />
+    <Compile Include="Controllers\PositionVerify\SettlementBillsCompareViewCtrl.cs" />
+    <Compile Include="Controllers\PositionVerify\UpdateDailyPositionVerifyStatusDialogCtrl.cs" />
+    <Compile Include="Controllers\PositionVerify\XqTradeItemsCompareViewCtrl.cs" />
+    <Compile Include="Controllers\Settlement\FundAccountSBCtrl.cs" />
+    <Compile Include="Controllers\Settlement\SubAccountSBCtrl.cs" />
+    <Compile Include="Controllers\SubAccountAddWizardDialogController.cs" />
+    <Compile Include="Controllers\SubAccountAuthToSubUsersDialogController.cs" />
+    <Compile Include="Controllers\FundManage\SubAccountEquityDailyHistoryController.cs" />
+    <Compile Include="Controllers\SubAccountInOutFundDialogController.cs" />
+    <Compile Include="Controllers\SubAccountInOutFundHistoryPageController.cs" />
+    <Compile Include="Controllers\SubAccountRenamePopupCtrl.cs" />
+    <Compile Include="Controllers\OrderRouteRuleAddDialogController.cs" />
+    <Compile Include="Controllers\OrderRouteRuleEditDialogController.cs" />
+    <Compile Include="Controllers\FundAccounAddDialogController.cs" />
+    <Compile Include="Controllers\FundAccounEditDialogController.cs" />
+    <Compile Include="Controllers\FundAccountExtraInfoShowDialogController.cs" />
+    <Compile Include="Controllers\ManageModuleRootViewCtrl.cs" />
+    <Compile Include="Controllers\FundAccountAddViewCtrl.cs" />
+    <Compile Include="DataModels\ModuleLockStatusDM.cs" />
+    <Compile Include="DataModels\PositionManageDM.cs" />
+    <Compile Include="DataModels\SettlementCompareItem.cs" />
+    <Compile Include="DataModels\SettlementDiffItem.cs" />
+    <Compile Include="DataModels\SubAccHistoryPositionDM.cs" />
+    <Compile Include="DataModels\SubAccountEquityModel.cs" />
+    <Compile Include="DataModels\UnAssignTrade\IUATVolumeSummaryDM.cs" />
+    <Compile Include="DataModels\UnAssignTrade\PAItemAccountInfoContainer.cs" />
+    <Compile Include="DataModels\UnAssignTrade\PAItemCheckItem.cs" />
+    <Compile Include="DataModels\UnAssignTrade\PAItemPreviewItem.cs" />
+    <Compile Include="DataModels\UnAssignTrade\PAItemPreviewItemsContractSummary.cs" />
+    <Compile Include="DataModels\UnAssignTrade\PositionPreviewAssignDM.cs" />
+    <Compile Include="DataModels\UnAssignTrade\UATItemCheckItem.cs" />
+    <Compile Include="DataModels\UnAssignTrade\UnAssignTradeDM.cs" />
+    <Compile Include="DataModels\UnAssignTrade\UATContractGroupedSummary.cs" />
+    <Compile Include="DataModels\UnAssignTrade\PreviewAssignVolumesSynchronizer.cs" />
+    <Compile Include="DataModels\UnAssignTrade\UATVolumeSummaryDM.cs" />
+    <Compile Include="Domain\EditSettlementXqTradeItem.cs" />
+    <Compile Include="ModuleController.cs" />
+    <Compile Include="Controllers\SubAccountManageNavContainerController.cs" />
+    <Compile Include="Controllers\SubAccountManagePageController.cs" />
+    <Compile Include="Controllers\SubUserManagePageController.cs" />
+    <Compile Include="Controllers\OrderRouteManagePageController.cs" />
+    <Compile Include="Controllers\FundAccountManagePageController.cs" />
+    <Compile Include="Controllers\TabController_TradeManage.cs" />
+    <Compile Include="Controllers\TabController_TradeSetting.cs" />
+    <Compile Include="DataModels\BrokerAccessSelectTree.cs" />
+    <Compile Include="DataModels\Extensions.cs" />
+    <Compile Include="DataModels\FundAccountEquityModel.cs" />
+    <Compile Include="DataModels\ManageItemModel.cs" />
+    <Compile Include="DataModels\OrderRouteRuleCommoditySelectModel.cs" />
+    <Compile Include="DataModels\OrderRouteRuleDiscreteModel.cs" />
+    <Compile Include="DataModels\OrderRouteRuleListItemModel.cs" />
+    <Compile Include="DataModels\OrderRouteRuleSelectTree.cs" />
+    <Compile Include="DataModels\FundAccountModel.cs" />
+    <Compile Include="DataModels\PositionVerifyTradeInputDM.cs" />
+    <Compile Include="DataModels\SubAccountAddWizardData.cs" />
+    <Compile Include="DataModels\SubAccountAuthToSubUsersCheckViewData.cs" />
+    <Compile Include="DataModels\SubAccountDataModel.cs" />
+    <Compile Include="DataModels\SubUserDataModel.cs" />
+    <Compile Include="DataModels\SubUserSelectModel.cs" />
+    <Compile Include="DataModels\WizardStepItem.cs" />
+    <Compile Include="Domain\AddFundAccount.cs" />
+    <Compile Include="Domain\AddSubUser.cs" />
+    <Compile Include="Domain\EditFundAccount.cs" />
+    <Compile Include="Domain\EditSubUser.cs" />
+    <Compile Include="IManageModuleSingletonController.cs" />
+    <Compile Include="PersonalUserManageModuleController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceControllers\Events\ManageSubAccountItemsRefreshEvent.cs" />
+    <Compile Include="ServiceControllers\Events\ManageFundAccountItemsRefreshEvent.cs" />
+    <Compile Include="ServiceControllers\FundAccountRelatedDataRefreshStateHolder.cs" />
+    <Compile Include="ServiceControllers\FundAccountRelatedDataRefreshStateChangedArgs.cs" />
+    <Compile Include="ServiceControllers\IManageFundAccountCacheCtrl.cs" />
+    <Compile Include="ServiceControllers\IManageFundAccountItemsController.cs" />
+    <Compile Include="ServiceControllers\IManageFundAccountQueryCtrl.cs" />
+    <Compile Include="ServiceControllers\IManageSubAccountCacheCtrl.cs" />
+    <Compile Include="ServiceControllers\IManageSubAccountQueryCtrl.cs" />
+    <Compile Include="ServiceControllers\IUATPAController.cs" />
+    <Compile Include="ServiceControllers\IPositionVerifyTradeInputItemsCtrl.cs" />
+    <Compile Include="ServiceControllers\IManageSubAccountItemsController.cs" />
+    <Compile Include="ServiceControllers\ManageFundAccountCacheCtrl.cs" />
+    <Compile Include="ServiceControllers\ManageFundAccountItemsController.cs" />
+    <Compile Include="ServiceControllers\ManageFundAccountQueryCtrl.cs" />
+    <Compile Include="ServiceControllers\ManageSubAccountCacheCtrl.cs" />
+    <Compile Include="ServiceControllers\ManageSubAccountItemsController.cs" />
+    <Compile Include="ServiceControllers\ManageSubAccountQueryCtrl.cs" />
+    <Compile Include="ServiceControllers\PositionVerifyTradeInputItemsCtrl.cs" />
+    <Compile Include="ServiceControllers\UATPAContractSummariesCtrl.cs" />
+    <Compile Include="ServiceControllers\UATPAController.cs" />
+    <Compile Include="Services\ManageFundAccountItemsService.cs" />
+    <Compile Include="Services\ManageSubAccountItemsService.cs" />
+    <Compile Include="Services\PADataSource.cs" />
+    <Compile Include="Services\PositionVerifyTradeInputItemsService.cs" />
+    <Compile Include="Services\UATPAContractSummaryService.cs" />
+    <Compile Include="Services\UATPAService.cs" />
+    <Compile Include="ViewModels\FundAccounEditDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\FundAccountAddDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\FundAccountEquityDailyHistoryViewModel.cs" />
+    <Compile Include="ViewModels\FundAccountEquityDetailViewModel.cs" />
+    <Compile Include="ViewModels\FundAccountSettlementContainerVM.cs" />
+    <Compile Include="ViewModels\FundManageByFundAccountViewModel.cs" />
+    <Compile Include="ViewModels\FundManageBySubAccountViewModel.cs" />
+    <Compile Include="ViewModels\PersonalUserTradeAccountManageVM.cs" />
+    <Compile Include="ViewModels\PositionDailyVerifyPageModel.cs" />
+    <Compile Include="ViewModels\PositionDiffOverviewVM.cs" />
+    <Compile Include="ViewModels\PositionManByFundAccViewModel.cs" />
+    <Compile Include="ViewModels\PositionShowByFundAccountVM.cs" />
+    <Compile Include="ViewModels\PositionShowBySubAccountVM.cs" />
+    <Compile Include="ViewModels\PositionVerifyTradeInputAreaVM.cs" />
+    <Compile Include="ViewModels\SettlementBillsCompareViewModel.cs" />
+    <Compile Include="ViewModels\PositionVerifyManageVM.cs" />
+    <Compile Include="ViewModels\ManageModuleRootVM.cs" />
+    <Compile Include="ViewModels\OrderRouteRuleAddDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\OrderRouteManagePageModel.cs" />
+    <Compile Include="ViewModels\SettlementXqPreviewTradeItemEditVM.cs" />
+    <Compile Include="ViewModels\SettlementXqTradePreviewViewModel.cs" />
+    <Compile Include="ViewModels\SubAccountAddWizardDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\SubAccountAddWizardStepPageModel_AuthToSubUsers.cs" />
+    <Compile Include="ViewModels\SubAccountAddWizardStepPageModel_Finished.cs" />
+    <Compile Include="ViewModels\SubAccountAddWizardStepPageModel_SetAccountName.cs" />
+    <Compile Include="ViewModels\SubAccountAddWizardStepPageModel_SetInitialInFund.cs" />
+    <Compile Include="ViewModels\SubAccountAuthToSubUserDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\SubAccountEquityDailyHistoryViewModel.cs" />
+    <Compile Include="ViewModels\SubAccountInOutFundDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\SubAccountInOutFundHistoryPageModel.cs" />
+    <Compile Include="ViewModels\SubAccountManagePageModel.cs" />
+    <Compile Include="ViewModels\SubAccountPositionDetailVM.cs" />
+    <Compile Include="ViewModels\SubAccountPositionHistoryVM.cs" />
+    <Compile Include="ViewModels\SubAccountRenameVM.cs" />
+    <Compile Include="ViewModels\SubAccountSettlementContainerVM.cs" />
+    <Compile Include="ViewModels\SubUserAddDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\OrderRouteRuleEditDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\FundAccountExtraInfoViewModel.cs" />
+    <Compile Include="ViewModels\TradeManageTabContentViewModel.cs" />
+    <Compile Include="ViewModels\TradeSettingTabContentViewModel.cs" />
+    <Compile Include="ViewModels\SubUserEditDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\SubUserManageViewModel.cs" />
+    <Compile Include="ViewModels\FundAccountManageViewModel.cs" />
+    <Compile Include="ViewModels\UATAssignTabContentVM.cs" />
+    <Compile Include="ViewModels\UATManageVM.cs" />
+    <Compile Include="ViewModels\UATPreviewAssignItemsVM.cs" />
+    <Compile Include="ViewModels\UATPreviewAssignPopupVM.cs" />
+    <Compile Include="ViewModels\UATPreviewTabContentVM.cs" />
+    <Compile Include="ViewModels\UATUnpreviewAssignItemsVM.cs" />
+    <Compile Include="ViewModels\UpdateDailyPositionVerifyStatusVM.cs" />
+    <Compile Include="ViewModels\XqTradeItemsCompareViewModel.cs" />
+    <Compile Include="Views\IFundAccountEquityDailyHistoryView.cs" />
+    <Compile Include="Views\IFundAccountEquityDetailView.cs" />
+    <Compile Include="Views\IFundAccountAddDialogContentView.cs" />
+    <Compile Include="Views\IFundAccountSettlementContainerView.cs" />
+    <Compile Include="Views\IFundManageByFundAccountView.cs" />
+    <Compile Include="Views\IFundManageBySubAccountView.cs" />
+    <Compile Include="Views\IOrderRouteRuleAddDialogContentView.cs" />
+    <Compile Include="Views\IOrderRouteManagePage.cs" />
+    <Compile Include="Views\IPersonalUserTradeAccountManageView.cs" />
+    <Compile Include="Views\IPositionDailyVerifyPage.cs" />
+    <Compile Include="Views\IPositionDiffOverviewView.cs" />
+    <Compile Include="Views\IPositionManByFundAccView.cs" />
+    <Compile Include="Views\IPositionShowByFundAccountView.cs" />
+    <Compile Include="Views\IPositionVerifyTradeInputAreaView.cs" />
+    <Compile Include="Views\ISubAccountPositionDetailView.cs" />
+    <Compile Include="Views\IPositionShowBySubAccountView.cs" />
+    <Compile Include="Views\ISettlementBillsCompareView.cs" />
+    <Compile Include="Views\IPositionVerifyManageView.cs" />
+    <Compile Include="Views\ISettlementXqPreviewTradeItemEditView.cs" />
+    <Compile Include="Views\ISettlementXqTradePreviewView.cs" />
+    <Compile Include="Views\ISubAccountAddWizardDialogContentView.cs" />
+    <Compile Include="Views\ISubAccountAddWizardStepPage_Finished.cs" />
+    <Compile Include="Views\ISubAccountAddWizardStepPage_SetAccountName.cs" />
+    <Compile Include="Views\ISubAccountAddWizardStepPage_AuthToSubUsers.cs" />
+    <Compile Include="Views\ISubAccountAddWizardStepPage_SetInitialInFund.cs" />
+    <Compile Include="Views\ISubAccountAuthToSubUserDialogContentView.cs" />
+    <Compile Include="Views\ISubAccountEquityDailyHistoryView.cs" />
+    <Compile Include="Views\ISubAccountInOutFundDialogContentView.cs" />
+    <Compile Include="Views\ISubAccountInOutFundHistoryPage.cs" />
+    <Compile Include="Views\ISubAccountManagePage.cs" />
+    <Compile Include="Views\ISubAccountPositionHistoryView.cs" />
+    <Compile Include="Views\ISubAccountRenameView.cs" />
+    <Compile Include="Views\ISubAccountSettlementContainerView.cs" />
+    <Compile Include="Views\ISubUserAddDialogContentView.cs" />
+    <Compile Include="Views\IFundAccountEditDialogContentView.cs" />
+    <Compile Include="Views\IOrderRouteRuleEditDialogContentView.cs" />
+    <Compile Include="Views\IFundAccountExtraInfoView.cs" />
+    <Compile Include="Views\ITradeManageTabContentView.cs" />
+    <Compile Include="Views\ITradeSettingTabContentView.cs" />
+    <Compile Include="Views\ISubUserEditDialogContentView.cs" />
+    <Compile Include="Views\ISubUserManageView.cs" />
+    <Compile Include="Views\IFundAccountManageView.cs" />
+    <Compile Include="Views\ISubAccountAddWizardStepPageFunction.cs" />
+    <Compile Include="Views\IManageModuleRootView.cs" />
+    <Compile Include="Views\IUATAssignTabContentView.cs" />
+    <Compile Include="Views\IUATManageView.cs" />
+    <Compile Include="Views\IUATPreviewAssignPopupView.cs" />
+    <Compile Include="Views\IUATPreviewTabContentView.cs" />
+    <Compile Include="Views\IUpdateDailyPositionVerifyStatusView.cs" />
+    <Compile Include="Views\IXqTradeItemsCompareView.cs" />
+    <Compile Include="Views\SubAccountAddWizardStepPageFunctionDelegate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppAssembler\AppAssembler.Interfaces\AppAssembler.Interfaces.csproj">
+      <Project>{4903FB80-2DC0-4319-B0ED-93DF17503AA9}</Project>
+      <Name>AppAssembler.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\NativeModel\NativeModel.csproj">
+      <Project>{017D3C55-D3AF-4F0F-91D9-249AB6A15371}</Project>
+      <Name>NativeModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.BusinessResources\XueQiaoFoundation.BusinessResources.csproj">
+      <Project>{7C429834-FD64-4CBA-A742-C798ECC5A58B}</Project>
+      <Name>XueQiaoFoundation.BusinessResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.Interfaces\XueQiaoFoundation.Interfaces.csproj">
+      <Project>{B31A5E02-2467-4119-A690-7D542965E2BB}</Project>
+      <Name>XueQiaoFoundation.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ContainerShell\ContainerShell.Interfaces\ContainerShell.Interfaces.csproj">
+      <Project>{BD65CD7D-6128-4A01-8F1A-74A835681B98}</Project>
+      <Name>ContainerShell.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LoginUserManage\LoginUserManage.Interfaces\LoginUserManage.Interfaces.csproj">
+      <Project>{1B1A96A8-D556-4404-9712-50794D5F2D12}</Project>
+      <Name>LoginUserManage.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660C2-8155-4769-991D-08AFBA69A302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
+      <Name>System.Waf.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_xqclient_base\lib_xqclient_base.csproj">
+      <Project>{251D71EE-27E6-46E8-BB87-2B2120564CD8}</Project>
+      <Name>lib_xqclient_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\Thrift\Thrift.45.csproj">
+      <Project>{EBCE35DA-CF6A-42BC-A357-A9C09B534299}</Project>
+      <Name>Thrift.45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\business_foundation_lib\business_foundation_lib.csproj">
+      <Project>{8380879B-9396-4095-8D2D-C721E20DA632}</Project>
+      <Name>business_foundation_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\IDLAutoGenerated\IDLAutoGenerated.csproj">
+      <Project>{e9b131ca-a3da-4a12-9c9e-235957b0f139}</Project>
+      <Name>IDLAutoGenerated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.Shared\XueQiaoFoundation.Shared.csproj">
+      <Project>{2497225a-7dbd-4901-bddd-3f8b37996769}</Project>
+      <Name>XueQiaoFoundation.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI\XueQiaoFoundation.UI.csproj">
+      <Project>{a811ca2b-99b3-4688-9175-5cfcffae88b5}</Project>
+      <Name>XueQiaoFoundation.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Manage.Interfaces\Manage.Interfaces.csproj">
+      <Project>{00B242B1-64F2-4AF7-A283-C4E19FADF84E}</Project>
+      <Name>Manage.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

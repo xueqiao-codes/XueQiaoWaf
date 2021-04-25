@@ -1,0 +1,171 @@
+﻿<Popup x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.ComposeSearchPopupView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:dm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.DataModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+        xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+        xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:acb="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
+        xmlns:adorners="http://gu.se/Adorners"
+        mc:Ignorable="d" 
+        StaysOpen="False"
+        Placement="Bottom"
+        AllowsTransparency="True"
+        Width="Auto"
+        x:Name="PageRoot">
+
+    <Popup.Resources>
+        <convert:CommodityType2NameConverter x:Key="CommodityType2NameConverter"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2CollapsedConverter" CollapsedWhenEquals="True" CollapsedWhenNotEquals="False"/>
+        <uiconvert:IsNull2VisibilityConverter x:Key="Null2CollapsedConverter"  NullTargetVisibility="Collapsed" NotNullTargetVisibility="Visible"/>
+        <sys:Int32 x:Key="ZeroValue">0</sys:Int32>
+
+        <DataTemplate x:Key="ComposeLegNamesColumnTemplate" DataType="{x:Type dm:SubscribeComposeDataModel}">
+            <ItemsControl ItemsSource="{Binding ComposeDetailContainer.DetailLegs}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <!-- white space -->
+                            <Run x:Name="SpaceSeperator" Text="  "/><!--
+                         --><Run>
+                                <MultiBinding StringFormat="{}{0}:{1}">
+                                    <Binding Path="BasicLeg.VariableName" Mode="OneWay"/>
+                                    <Binding Path="LegDetailContainer.CnDisplayName" Mode="OneWay"/>
+                                </MultiBinding>
+                            </Run>
+                        </TextBlock>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                <Setter TargetName="SpaceSeperator" Property="Text" Value="{x:Null}"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ComposeLegQuantitysColumnTemplate" DataType="{x:Type dm:SubscribeComposeDataModel}">
+            <ItemsControl ItemsSource="{Binding ComposeDetailContainer.DetailLegs}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <!-- white space -->
+                            <Run x:Name="SpaceSeperator" Text="  "/><!--
+                         --><Run>
+                                <MultiBinding StringFormat="{}{0}:{1}">
+                                    <Binding Path="BasicLeg.VariableName" Mode="OneWay"/>
+                                    <Binding Path="BasicLeg.Quantity" Mode="OneWay"/>
+                                </MultiBinding>
+                            </Run>
+                        </TextBlock>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                <Setter TargetName="SpaceSeperator" Property="Text" Value="{x:Null}"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DataTemplate>
+    </Popup.Resources>
+
+    <Grid Margin="4" 
+          Effect="{DynamicResource BossyControlShadowEffect}"
+          Background="{DynamicResource RootBgBrush}">
+
+        <StackPanel Margin="10,15">
+            <Border Padding="4" CornerRadius="0" BorderThickness="1" BorderBrush="{DynamicResource BorderBrush2}">
+                <DockPanel x:Name="SearchBoxContainer">
+                    <TextBox 
+                        DockPanel.Dock="Left" 
+                        VerticalContentAlignment="Center"
+                        BorderThickness="0"
+                        Background="{x:Null}"
+                        adorners:Watermark.Text="输入组合名称搜索..."
+                        adorners:Watermark.VisibleWhen="Empty"
+                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        x:Name="SearchTextBox">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Up" Command="{Binding SelectPrevComposeCmd}"/>
+                            <KeyBinding Key="Down" Command="{Binding SelectNextComposeCmd}"/>
+                            <KeyBinding Key="Enter" Command="{Binding ConfirmSelComposeCmd}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                </DockPanel>
+            </Border>
+
+            <Grid Margin="0,10,0,0" MinWidth="500">
+                <StackPanel Visibility="{Binding ComposeItems.Count, Converter={StaticResource Equal2CollapsedConverter}, ConverterParameter={StaticResource ZeroValue}}">
+                    <TextBlock Foreground="{DynamicResource ContentBrush3}">请选择组合组合</TextBlock>
+                    <DataGrid 
+                        Width="500"
+                        MaxHeight="300"
+                        HorizontalScrollBarVisibility="Auto"
+                        HeadersVisibility="None"
+                        BorderThickness="0"
+                        GridLinesVisibility="None"
+                        CanUserSortColumns="False"
+                        CanUserResizeColumns="False"
+                        CanUserReorderColumns="False"
+                        IsReadOnly="True"  
+                        ItemsSource="{Binding ComposeItems}"
+                        SelectedItem="{Binding SelectedComposeItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        IsSynchronizedWithCurrentItem="True"
+                        x:Name="ComposeListDataGrid">
+                        
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn MinWidth="60">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock 
+                                            HorizontalAlignment="Left"
+                                            Text="{Binding UserComposeViewContainer.UserComposeView.AliasName}"
+                                            ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
+                                            TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn 
+                                MinWidth="80"
+                                CellTemplate="{StaticResource ComposeLegNamesColumnTemplate}"/>
+
+                            <DataGridTemplateColumn 
+                                MinWidth="80"
+                                CellTemplate="{StaticResource ComposeLegQuantitysColumnTemplate}"/>
+                        </DataGrid.Columns>
+
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellDefault}">
+                                <Setter Property="Focusable" Value="False"/>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow" BasedOn="{StaticResource DataGridRowDefault}">
+                                <!-- ListBoxItem has no LeftDoubleClick event, but has MouseDoubleClick event -->
+                                <Setter Property="acb:CommandBehavior.Event" Value="MouseDoubleClick" />
+                                <Setter Property="acb:CommandBehavior.Command" Value="{Binding DataContext.ConfirmSelComposeCmd, ElementName=PageRoot}" />
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding ConfirmSelComposeCmd}"/>
+                        </DataGrid.InputBindings>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Popup>

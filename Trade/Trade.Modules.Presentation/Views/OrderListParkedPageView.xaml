@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.OrderListParkedPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:ItemsFilter="clr-namespace:BolapanControl.ItemsFilter;assembly=ItemsFilter"
+             xmlns:FilterInitializer="clr-namespace:BolapanControl.ItemsFilter.Initializer;assembly=ItemsFilter"
+             xmlns:res_filters="clr-namespace:XueQiaoFoundation.BusinessResources.ItemsFilters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600"
+             x:Name="ViewRoot">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/OrderParkedListColumnRes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <convert:StringEmptyConverter x:Key="StringEmptyConverter"/>
+
+            <DataGridTemplateColumn Header="子订单" 
+                            CanUserSort="False"
+                            x:Key="OrderListColumn_Parked_ChildOrder"
+                            x:Shared="False">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{StaticResource NullValueDataDefaultDisplayText}"
+                                       Visibility="Collapsed"
+                                       x:Name="NoChildOrderText"/>
+                            <Button 
+                                Style="{StaticResource FlatContentButtonPrimary3}"
+                                Visibility="Visible"
+                                Command="{Binding Path=DataContext.ToShowChildOrderCmd, ElementName=ViewRoot}"
+                                CommandParameter="{Binding}"
+                                Content="查看"
+                                x:Name="ShowChildOrderButn"/>
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding ActionOrderId, Converter={StaticResource StringEmptyConverter}}" Value="True">
+                                <Setter TargetName="NoChildOrderText" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ShowChildOrderButn" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn 
+                Header="名称" MinWidth="100"
+                CanUserSort="True"
+                SortMemberPath="TargetKey"
+                x:Key="OrderListColumn_Parked_Name"
+                x:Shared="False">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Style="{StaticResource FlatContentButtonPrimary3}"
+                                Content="{Binding}"
+                                ContentTemplateSelector="{StaticResource XqTargetNameWithTooltipDTSelector}"
+                                Command="{Binding ElementName=ViewRoot, Path=DataContext.ClickItemTargetKeyRelatedColumnCmd}"
+                                CommandParameter="{Binding}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+                <ItemsFilter:ColumnFilter.BindingPath>
+                    <sys:String>TargetKey</sys:String>
+                </ItemsFilter:ColumnFilter.BindingPath>
+                <ItemsFilter:ColumnFilter.Initializers>
+                    <FilterInitializer:FilterInitializersManager>
+                        <res_filters:OrderTargetKeyEqualFilterInitializer/>
+                    </FilterInitializer:FilterInitializersManager>
+                </ItemsFilter:ColumnFilter.Initializers>
+            </DataGridTemplateColumn>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <local:OrderParkedListHeader Grid.Row="0" DataContext="{Binding OrderListDataContext}"/>
+
+        <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding OrderListCollectionView}"
+                  AutoGenerateColumns="False"
+                  RowHeaderWidth="0"
+                  IsReadOnly="True"
+                  SelectionMode="Extended"
+                  MouseDown="OrdersDataGrid_MouseDown"
+                  x:Name="OrdersDataGrid">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction 
+                            Command="{Binding OrderListDataContext.SelectedOrdersOptCommands.OrderItemsSelectionChangedCmd}" 
+                            CommandParameter="{Binding SelectedItems, ElementName=OrdersDataGrid}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="配置列显示" Command="{Binding PlacementTarget.DataContext.ToConfigOrderListColumnsCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                    <MenuItem Header="应用默认列显示" Command="{Binding PlacementTarget.DataContext.ToApplyDefaultOrderListColumnsCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource DataGridRowDefault}">
+                    <Setter Property="Tag" Value="{Binding DataContext, ElementName=ViewRoot}"/>
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu>
+                                <MenuItem Header="订阅行情" 
+                                          Command="{Binding PlacementTarget.Tag.SubscribeTargetQuotationCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                          CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                <Separator/>
+                                <MenuItem Header="配置列显示" Command="{Binding PlacementTarget.Tag.ToConfigOrderListColumnsCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                <MenuItem Header="应用默认列显示" Command="{Binding PlacementTarget.Tag.ToApplyDefaultOrderListColumnsCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+        </DataGrid>
+    </Grid>
+</UserControl>

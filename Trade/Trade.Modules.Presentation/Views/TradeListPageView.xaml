@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.TradeListPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{x:Type vm:TradeListPageViewModel}"
+             x:Name="ViewRoot">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/TradeListColumnRes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataGridTemplateColumn 
+                Header="名称" 
+                MinWidth="100"
+                CanUserSort="False"
+                x:Key="TradeListColumn_Name"
+                x:Shared="False">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Style="{StaticResource FlatContentButtonPrimary3}"
+                                Content="{Binding}"
+                                ContentTemplateSelector="{StaticResource XqTargetNameWithTooltipDTSelector}"
+                                Command="{Binding ElementName=ViewRoot, Path=DataContext.ClickItemTargetKeyRelatedColumnCmd}"
+                                CommandParameter="{Binding}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn 
+                Header="订单ID"
+                CanUserSort="False"
+                x:Key="TradeListColumn_OrderId"
+                x:Shared="False">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Style="{StaticResource FlatContentButtonPrimary3}"
+                                Content="{Binding OrderId}"
+                                Command="{Binding ElementName=ViewRoot, Path=DataContext.ToShowOrderExecuteDetailCmd}"
+                                CommandParameter="{Binding}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <DataGrid AutoGenerateColumns="False"
+                  ItemsSource="{Binding TradeListCollectionView}"
+                  RowHeaderWidth="0"
+                  IsReadOnly="True"
+                  x:Name="TradeItemsDataGrid">
+            <!-- item type:TradeItemDataModel -->
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="配置列显示" Command="{Binding PlacementTarget.DataContext.ToConfigTradeListColumnsCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                    <MenuItem Header="应用默认列显示" Command="{Binding PlacementTarget.DataContext.ToApplyDefaultTradeListColumnsCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource DataGridRowDefault}">
+                    <Setter Property="Tag" Value="{Binding DataContext, ElementName=ViewRoot}"/>
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu>
+                                <MenuItem Header="订阅行情" 
+                                          Command="{Binding PlacementTarget.Tag.SubscribeTargetQuotationCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                          CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                <Separator/>
+                                <MenuItem Header="配置列显示" Command="{Binding PlacementTarget.Tag.ToConfigTradeListColumnsCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                <MenuItem Header="应用默认列显示" Command="{Binding PlacementTarget.Tag.ToApplyDefaultTradeListColumnsCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+        </DataGrid>
+    </Grid>
+</UserControl>

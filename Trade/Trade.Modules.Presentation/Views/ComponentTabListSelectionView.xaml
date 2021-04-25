@@ -1,0 +1,53 @@
+﻿<Popup x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.ComponentTabListSelectionView"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+       xmlns:convert2="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Converters"
+       xmlns:dm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.DataModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+       mc:Ignorable="d" 
+       d:DesignHeight="200" d:DesignWidth="100"
+       StaysOpen="False"
+       AllowsTransparency="True"
+       Placement="Bottom"
+       x:Name="rootContainer">
+    <Popup.Resources>
+        <convert2:TradeComponentTypeToNameConverter x:Key="TradeComponentTypeToNameConverter"/>
+    </Popup.Resources>
+    <Grid Margin="4" 
+          Effect="{DynamicResource BossyControlShadowEffect}"
+          Background="{DynamicResource RootBgBrush}">
+       
+        <ListBox ItemsSource="{Binding ComponentTypes}"
+                 Background="{x:Null}"
+                 Margin="0,8">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type dm:ComponentTabSelectionItem}">
+                    <CheckBox Content="{Binding Path=ComponentType, Converter={StaticResource TradeComponentTypeToNameConverter}}">
+                        <CheckBox.IsChecked>
+                            <Binding Path="IsChecked" Mode="TwoWay"/>
+                        </CheckBox.IsChecked>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction 
+                                Command="{Binding DataContext.CheckCommand, ElementName=rootContainer}"
+                                CommandParameter="{Binding Path=ComponentType}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Unchecked">
+                                <i:InvokeCommandAction 
+                                Command="{Binding DataContext.UncheckCommand, ElementName=rootContainer}"
+                                CommandParameter="{Binding Path=ComponentType}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Popup>

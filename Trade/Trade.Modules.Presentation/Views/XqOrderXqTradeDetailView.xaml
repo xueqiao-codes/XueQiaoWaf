@@ -1,0 +1,175 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.XqOrderXqTradeDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:uiextra_helper="clr-namespace:XueQiaoFoundation.UI.Extra.helper;assembly=XueQiaoFoundation.UI.Extra"
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+             xmlns:module_convert="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Converters"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600"
+             x:Name="ViewRoot">
+
+    <UserControl.Resources>
+        <convert:TradeDirection2NameConverter x:Key="TradeDirection2NameConverter"/>
+        <uiextra_convert:Timestamp2StringConverter x:Key="Ms2StringConverter" Convert2StringFormatType="DateTime" ValueType="Millisecond"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2CollapsedConverter" CollapsedWhenEquals="True" CollapsedWhenNotEquals="False"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2VisibleConverter" CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <module_convert:XqTradeDetailDMType2NameConverter x:Key="XqTradeDetailDMType2NameConverter"/>
+        <sys:Int32 x:Key="ZeroValue">0</sys:Int32>
+
+        <DataGridTextColumn 
+            Header="合约" MinWidth="100"
+            Binding="{Binding TargetContractDetailContainer.CnDisplayName}"
+            x:Shared="False"
+            x:Key="XqTradeDetailColumn_TargetContractName">
+        </DataGridTextColumn>
+        
+        <DataGridTextColumn 
+            Header="状态" MinWidth="60"
+            Binding="{Binding ItemType, Converter={StaticResource XqTradeDetailDMType2NameConverter}}"
+            x:Shared="False"
+            x:Key="XqTradeDetailColumn_ItemType">
+        </DataGridTextColumn>
+
+        <DataGridTextColumn 
+            Header="方向" MinWidth="60"
+            Binding="{Binding Direction, Converter={StaticResource TradeDirection2NameConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Shared="False"
+            x:Key="XqTradeDetailColumn_Direction"/>
+
+        <DataGridTextColumn 
+            Header="成交数量" MinWidth="80"
+            Binding="{Binding TradeVolume, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Shared="False"
+            x:Key="XqTradeDetailColumn_TradeVolume"/>
+        <DataGridTextColumn 
+            Header="成交均价" MinWidth="80"
+            Binding="{Binding TradePrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Shared="False"
+            x:Key="XqTradeDetailColumn_TradePrice"/>
+        <DataGridTextColumn 
+            Header="成交时间" MinWidth="100"
+            Binding="{Binding CreateTimestampMs, Converter={StaticResource Ms2StringConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Shared="False"
+            x:Key="XqTradeDetailColumn_TradeTime"/>
+
+        <DataGridTemplateColumn
+            MinWidth="200"
+            HeaderTemplate="{StaticResource TargetComposeLegTradeSummarysColumnHeaderDT}"
+            x:Shared="False"
+            x:Key="XqTradeDetailColumn_TargetComposeLegTradeSummarys">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding TargetComposeLegTradeSummarysContainer}" 
+                                ContentTemplate="{StaticResource TargetComposeLegTradeSummarysTextDT}"/>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn
+            Header="详情" MinWidth="60"
+            x:Shared="False"
+            x:Key="XqTradeDetailColumn_Detail">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <Button Content="查看"
+                            Style="{StaticResource FlatContentButtonPrimary3}"
+                            HorizontalAlignment="Left"
+                            Command="{Binding Path=DataContext.ShowXqTradeExecTradesCmd, ElementName=ViewRoot}"
+                            CommandParameter="{Binding}"/>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn
+            Header="订单ID" MinWidth="100"
+            x:Shared="False"
+            x:Key="XqTradeDetailColumn_OrderId">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBox IsReadOnly="True" 
+                        Text="{Binding OrderId, Mode=OneWay}"
+                        AutoWordSelection="True"
+                        Background="Transparent"
+                        Padding="0, 0"
+                        BorderThickness="0"
+                        ScrollViewer.CanContentScroll="False">
+                        <i:Interaction.Behaviors>
+                            <uiextra_helper:TextBoxDoubleClickSelectAllTextBehavior/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+    </UserControl.Resources>
+    
+    <Grid Margin="0,15,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid 
+            Grid.Row="0"
+            Margin="0,4,0,0" 
+            BorderThickness="1,1,0,0"
+            ItemsSource="{Binding XqComposeWaitTradeItems}"
+            Visibility="{Binding XqComposeWaitTradeItems.Count, 
+                                 Converter={StaticResource Equal2CollapsedConverter}, 
+                                 ConverterParameter={StaticResource ZeroValue}}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn 
+                        Header="状态" MinWidth="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="待成交"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn 
+                        Header="数量" MinWidth="80"
+                        Binding="{Binding TradeVolume}"/>
+
+                <DataGridTemplateColumn
+                        MinWidth="200" Width="*"
+                        HeaderTemplate="{StaticResource TargetComposeLegTradeSummarysColumnHeaderDT}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl 
+                                    Content="{Binding TargetComposeLegTradeSummarysContainer}" 
+                                    ContentTemplate="{StaticResource TargetComposeLegTradeSummarysTextDT}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn
+                        Header="详情" MinWidth="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="查看"
+                                        Style="{StaticResource FlatContentButtonPrimary3}"
+                                        HorizontalAlignment="Left"
+                                        Command="{Binding Path=DataContext.ShowXqTradeExecTradesCmd, ElementName=ViewRoot}"
+                                        CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid  
+            Grid.Row="1" Margin="0,15,0,0"
+            ItemsSource="{Binding XqTradeDetailItems}"
+            x:Name="XqTradeDetailItemsDataGrid"
+            Visibility="{Binding XqTradeDetailItems.Count, 
+                                Converter={StaticResource Equal2CollapsedConverter}, 
+                                ConverterParameter={StaticResource ZeroValue}}">
+            <!-- Note:Columns 在 CodeBehind 设置 -->
+        </DataGrid>
+    </Grid>
+</UserControl>

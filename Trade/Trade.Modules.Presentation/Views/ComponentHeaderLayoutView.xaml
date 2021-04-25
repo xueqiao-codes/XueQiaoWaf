@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.ComponentHeaderLayoutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cvt2="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Converters"
+             xmlns:businessResModel="clr-namespace:XueQiaoFoundation.BusinessResources.Models;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="600"
+             d:DataContext="{x:Type vm:ComponentHeaderLayoutVM}">
+    <!-- designViewModel:ComponentHeaderLayoutViewModel -->
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0">
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Padding" Value="4"/>
+                    <Setter Property="Background" Value="{DynamicResource RootBgBrush}"/>
+                </Style>
+            </Border.Style>
+            <DockPanel LastChildFill="True">
+                <!-- 关闭组件 icon -->
+                <Button DockPanel.Dock="Right"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource ComponentCloseButtonStyle}"
+                        Margin="2,0,4,0"
+                        Command="{Binding CloseComponentCommand}"
+                        Visibility="{Binding ShowCloseItem, Converter={StaticResource BooleanToVisibilityConverter}}">
+                </Button>
+
+                <!-- 设置 icon -->
+                <Button DockPanel.Dock="Right"
+                        VerticalContentAlignment="Center"
+                        Margin="2,0,4,0"
+                        Command="{Binding TriggerSettingCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Style="{StaticResource ComponentSettingButtonStyle}"
+                        Visibility="{Binding ShowSettingItem, Converter={StaticResource BooleanToVisibilityConverter}}">
+                </Button>
+                
+                <!-- 锁 icon -->
+                <Button DockPanel.Dock="Right"
+                        Margin="2,0,4,0"
+                        VerticalContentAlignment="Center"
+                        Command="{Binding LockComponentOrNotCommand}"
+                        Visibility="{Binding ShowComponentLockItem, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource MenuIconButton1}">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <PathGeometry Figures="M128 992l0-512 96 0 0-160c0-141.376 114.592-256 256-256l32 0c141.376 0 256 114.624 256 256l0 160 96 0 0 512-736 0zM471.808 729.184l-23.808 166.816 96 0-23.84-166.816c23.328-9.536 39.84-32.416 39.84-59.2 0-35.328-28.672-64-64-64-35.36 0-64 28.672-64 64 0 26.784 16.48 49.664 39.808 59.2zM672 336c0-97.216-78.816-176-176-176-97.216 0-176 78.784-176 176l0 144 352 0 0-144z"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ToolTip" Value="已锁定，不能响应联动"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsComponentLocked}" Value="False">
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <PathGeometry Figures="M928 480l0-144c0-97.216-78.816-176-176-176-97.216 0-176 78.784-176 176l0 146.272 160 0 0 509.728-736 0 0-512 480 0 0-160c0-141.376 114.592-256 256-256l32 0c141.376 0 256 114.624 256 256l0 160-96 0zM368 606.016c-35.36 0-64 28.672-64 64 0 26.784 16.48 49.664 39.808 59.2l-23.808 166.784 96 0-23.84-166.816c23.328-9.536 39.84-32.416 39.84-59.2 0-35.328-28.672-63.968-64-63.968z"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="ToolTip" Value="未锁定，可以响应联动"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <!-- 自定义部分 -->
+                <ContentControl DockPanel.Dock="Left"
+                                x:Name="CustomPart"
+                                VerticalContentAlignment="Center"
+                                Margin="0,0,4,0"
+                                Content="{Binding CustomPartView}"/>
+            </DockPanel>
+        </Border>
+        <Rectangle Grid.Row="1" Height="1" Fill="{DynamicResource BorderBrush2}"/>
+    </Grid>
+</UserControl>

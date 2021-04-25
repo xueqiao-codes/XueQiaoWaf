@@ -1,0 +1,38 @@
+﻿<PageFunction 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:Manage.Presentations.Views"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    x:Class="Manage.Presentations.Views.SubAccountAddWizardStepPage_AuthToSubUsers"
+    x:TypeArguments="sys:Int32"
+    KeepAlive="True"
+    mc:Ignorable="d" 
+    Width="300" MinHeight="150" MaxHeight="400"
+    Background="{DynamicResource RootBgBrush}"
+    Style="{StaticResource GeneralPageStyle}"
+    x:Name="PageRoot">
+    <Grid Margin="20,8,20,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <local:WinzardStepView DataContext="{Binding WizardStepItem}"
+                               Grid.Row="0"/>
+        <DockPanel Grid.Row="1" Margin="0,20,0,0" LastChildFill="True">
+            <TextBlock DockPanel.Dock="Top">Step3：分配用户</TextBlock>
+            <local:SubAccountAuthToSubUsersCheckView DataContext="{Binding SubUsersCheckViewData}"
+                                                     Margin="0,8,0,0"/>
+        </DockPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center">
+            <Button Content="设置" Command="{Binding SaveCmd}"
+                    Style="{StaticResource BordedButtonPrimary3}"/>
+            <Button Content="跳过" Margin="10,0,0,0"
+                    Command="{Binding SkipStepCmd}"
+                    Style="{StaticResource BordedButtonStyle}"/>
+        </StackPanel>
+    </Grid>
+</PageFunction>

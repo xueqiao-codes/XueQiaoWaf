@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.ChildrenContractDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             xmlns:local="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{x:Type vm:ChildrenContractDetailVM}">
+    <Grid Margin="15">
+        <ItemsControl ItemsSource="{Binding ChildrenContractBasicInfos}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel IsItemsHost="True" Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Rectangle Height="1" Fill="{DynamicResource BorderBrush2}" HorizontalAlignment="Stretch"
+                                   Margin="0,15"
+                                   Visibility="Visible"
+                                   x:Name="Seperator"/>
+                        <local:ContractBasicInfoView DataContext="{Binding}"/>
+                    </StackPanel>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                            <Setter TargetName="Seperator" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

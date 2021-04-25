@@ -1,0 +1,199 @@
+﻿<UserControl x:Class="Manage.Presentations.Views.OrderRouteRuleAddDialogContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:moduleConvert="clr-namespace:Manage.Presentations.Converters"
+             xmlns:vm="clr-namespace:Manage.Applications.ViewModels;assembly=Manage.Applications"
+             mc:Ignorable="d" 
+             d:DesignWidth="500"
+             d:DataContext="{x:Type vm:OrderRouteRuleAddDialogContentViewModel}"
+             Background="{DynamicResource RootBgBrush}"
+             x:Name="ContentViewRoot">
+    <UserControl.Resources>
+        <convert:CommodityType2NameConverter x:Key="CommodityType2NameConverter"/>
+        <convert:CommodityToDisplayNameConverter x:Key="CommodityToDisplayNameConverter"/>
+        <uiconvert:EqualityToBooleanConverter x:Key="EqualityToBooleanConverter"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="EqualsToVisibleConverter" CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <moduleConvert:FundAccountDisplayNameConverter x:Key="FundAccountDisplayNameConverter"/>
+    </UserControl.Resources>
+    <DockPanel Height="380">
+        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Content="确定" Margin="0,10"
+                    Command="{Binding SaveCmd}"
+                    Style="{StaticResource BordedButtonPrimary3}"/>
+            <Button Content="取消" Margin="15,10"
+                    Command="{Binding CancelCmd}"
+                    Style="{StaticResource BordedButtonStyle}"/>
+        </StackPanel>
+        <Grid Margin="10" DockPanel.Dock="Top" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0" Margin="0,0,10,0">
+                <TextBlock DockPanel.Dock="Top">选择类型</TextBlock>
+                <Border Padding="10" 
+                        Margin="0,4,0,0"
+                        BorderThickness="1" 
+                        BorderBrush="{DynamicResource BorderBrush2}">
+                    <StackPanel>
+                        <RadioButton Command="{Binding RuleCreateTypeChangeCmd}" 
+                                                 CommandParameter="{x:Static vm:OrderRouteRuleCreateType.ByCommodityType}"
+                                                 Margin="0,0,0,10"
+                                                 IsChecked="{Binding RuleCreateType, Converter={StaticResource EqualityToBooleanConverter}, ConverterParameter={x:Static vm:OrderRouteRuleCreateType.ByCommodityType}}">
+                            按商品类型
+                        </RadioButton>
+                        <RadioButton Command="{Binding RuleCreateTypeChangeCmd}" 
+                                                 CommandParameter="{x:Static vm:OrderRouteRuleCreateType.ByCommodity}"
+                                                 IsChecked="{Binding RuleCreateType, Converter={StaticResource EqualityToBooleanConverter}, ConverterParameter={x:Static vm:OrderRouteRuleCreateType.ByCommodity}}">
+                            按具体商品
+                        </RadioButton>
+                    </StackPanel>
+                </Border>
+            </DockPanel>
+
+            <Grid Grid.Column="1"
+                              DataContext="{Binding ByCommodityTypeCreateRuleSelectTree.Exchanges}"
+                              Width="300"
+                              Visibility="{Binding Path=DataContext.RuleCreateType, ElementName=ContentViewRoot, Converter={StaticResource EqualsToVisibleConverter}, ConverterParameter={x:Static vm:OrderRouteRuleCreateType.ByCommodityType}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <DockPanel Grid.Row="0" Grid.Column="0" Margin="0,0,10,0">
+                    <TextBlock DockPanel.Dock="Top">交易所</TextBlock>
+                    <ListBox ItemsSource="{Binding}"
+                            IsSynchronizedWithCurrentItem="True" 
+                            SelectedItem="{Binding Path=DataContext.ByCommodityTypeSelectedRuleExchangeNode, Mode=TwoWay, ElementName=ContentViewRoot}"
+                            SelectionMode="Single"
+                            BorderThickness="1"
+                            Margin="0,4,0,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Node.CnName}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+                <DockPanel Grid.Row="0" Grid.Column="1" Margin="0,0,10,0">
+                    <TextBlock DockPanel.Dock="Top">商品类型</TextBlock>
+                    <ListBox ItemsSource="{Binding Children}"
+                                     SelectionMode="Single"
+                                     IsSynchronizedWithCurrentItem="True" 
+                                     SelectedItem="{Binding DataContext.ByCommodityTypeSelectedRuleCommodityTypeNode, Mode=TwoWay, ElementName=ContentViewRoot}"
+                                     BorderThickness="1"
+                                     Margin="0,4,0,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Node, Converter={StaticResource CommodityType2NameConverter}}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </Grid>
+
+            <Grid Grid.Column="1"
+                              DataContext="{Binding ByCommodityCreateRuleSelectTree.Exchanges}"
+                              Width="450"
+                              Visibility="{Binding Path=DataContext.RuleCreateType, ElementName=ContentViewRoot, Converter={StaticResource EqualsToVisibleConverter}, ConverterParameter={x:Static vm:OrderRouteRuleCreateType.ByCommodity}}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <DockPanel Grid.Row="0" Grid.Column="0" Margin="0,0,10,0">
+                    <TextBlock DockPanel.Dock="Top">交易所</TextBlock>
+                    <ListBox  ItemsSource="{Binding}"
+                                      IsSynchronizedWithCurrentItem="True" 
+                                      SelectedItem="{Binding Path=DataContext.ByCommoditySelectedRuleExchangeNode, Mode=TwoWay, ElementName=ContentViewRoot}"
+                                      SelectionMode="Single"
+                                      BorderThickness="1"
+                                      Margin="0,4,0,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Node.CnName}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+                <DockPanel Grid.Row="0" Grid.Column="1" Margin="0,0,10,0">
+                    <TextBlock DockPanel.Dock="Top">商品类型</TextBlock>
+                    <ListBox ItemsSource="{Binding Children}"
+                                     SelectionMode="Single"
+                                     IsSynchronizedWithCurrentItem="True" 
+                                     SelectedItem="{Binding DataContext.ByCommoditySelectedRuleCommodityTypeNode, Mode=TwoWay, ElementName=ContentViewRoot}"
+                                     BorderThickness="1"
+                                     Margin="0,4,0,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Node, Converter={StaticResource CommodityType2NameConverter}}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+                <DockPanel Grid.Row="0" Grid.Column="2" Margin="0,0,10,0">
+                    <TextBlock DockPanel.Dock="Top">商品</TextBlock>
+                    <ItemsControl ItemsSource="{Binding Children/Children}"
+                                          BorderThickness="1"
+                                          BorderBrush="{DynamicResource BorderBrush2}"
+                                          Margin="0,4,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" Margin="4" IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Commodity, Converter={StaticResource CommodityToDisplayNameConverter}}" 
+                                                  ToolTip="{Binding Commodity, Converter={StaticResource CommodityToDisplayNameConverter}}"
+                                                  IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                  Margin="0,4"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.Template>
+                            <ControlTemplate>
+                                <Border Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ScrollViewer Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                    </ItemsControl>
+                </DockPanel>
+            </Grid>
+
+            <DockPanel Grid.Column="2" MinWidth="100">
+                <TextBlock DockPanel.Dock="Top">路由至帐号：</TextBlock>
+                <ListBox ItemsSource="{Binding RouteToAccountItems}"
+                        SelectionMode="Single"
+                        IsSynchronizedWithCurrentItem="True" 
+                        SelectedItem="{Binding DataContext.SelectedRouteToAccount, Mode=TwoWay, ElementName=ContentViewRoot}"
+                        BorderThickness="1"
+                        Margin="0,4,0,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource FundAccountDisplayNameConverter}">
+                                        <Binding Path="LoginUserName"/>
+                                        <Binding Path="TradeAccountRemark"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Research.app.View.ResearchWorkspaceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+             xmlns:local="clr-namespace:Research.app.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Background="{DynamicResource RootBgBrush}">
+            <Menu Margin="10,4" VerticalAlignment="Center">
+                <MenuItem Header="新建窗口"
+                      VerticalContentAlignment="Center">
+                    <MenuItem Header="打开URL窗口"
+                          Command="{Binding AddUrlComponentCmd}">
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </Border>
+
+        <dragablz:DragablzItemsControl
+            ItemsSource="{Binding DraggableComponentPanelContext.ComponentItems}"
+            Grid.Row="1"
+            Style="{StaticResource ComponentDragablzItemsControlStyle}"
+            x:Name="ComponentDragablzItemsControl">
+            <dragablz:DragablzItemsControl.ItemContainerStyle>
+                <Style TargetType="{x:Type dragablz:DragablzItem}" BasedOn="{StaticResource DraggableComponentContainerStyle}">
+                    <EventSetter Event="MouseDownWithin" Handler="MouseDownWithinComponent"/>
+                </Style>
+            </dragablz:DragablzItemsControl.ItemContainerStyle>
+            <dragablz:DragablzItemsControl.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="添加 URL 窗口" Command="{Binding AddUrlComponentCmd}"/>
+                    <MenuItem Header="加载所有 URL" Command="{Binding LoadAllUrlsCmd}"/>
+                    <MenuItem Header="隐藏所有 URL" Command="{Binding HideAllUrlsCmd}"/>
+                    <MenuItem Header="显示所有 URL" Command="{Binding ShowAllUrlsCmd}"/>
+                </ContextMenu>
+            </dragablz:DragablzItemsControl.ContextMenu>
+        </dragablz:DragablzItemsControl>
+    </Grid>
+</UserControl>

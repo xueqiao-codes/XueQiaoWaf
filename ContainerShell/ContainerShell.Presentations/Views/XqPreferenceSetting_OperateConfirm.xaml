@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="ContainerShell.Presentations.Views.XqPreferenceSetting_OperateConfirm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:MahAppsMetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:styles="clr-namespace:XueQiaoFoundation.UI.Styles;assembly=XueQiaoFoundation.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="600">
+
+    <!-- DataContext: XqPreferenceSettingVM -->
+    
+    <StackPanel Orientation="Vertical" Margin="15" Grid.IsSharedSizeScope="True">
+        <StackPanel.Resources>
+            <Style TargetType="HeaderedContentControl" BasedOn="{StaticResource HorizonalOrientationFieldHeaderedStyle}">
+                <Setter Property="styles:HeaderedContentControlHelper.HorizonalColumnSpacing" Value="20"/>
+                <Setter Property="styles:HeaderedContentControlHelper.HorizonalHeaderColumnSharedSizeGroup" Value="OperateConfirmHeaderSharedSizeGroup"/>
+            </Style>
+            <Style TargetType="{x:Type MahAppsMetroControls:ToggleSwitch}" BasedOn="{StaticResource XqToggleSwitchDefault}">
+                <Setter Property="OffLabel" Value="关"/>
+                <Setter Property="OnLabel" Value="开"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
+        </StackPanel.Resources>
+        
+        <HeaderedContentControl Header="买入、卖出下单确认">
+            <MahAppsMetroControls:ToggleSwitch IsChecked="{Binding AppPref.PlaceOrderNeedConfirm, Mode=TwoWay}" />
+        </HeaderedContentControl>
+        <HeaderedContentControl Header="订单暂停确认" Margin="0,15,0,0">
+            <MahAppsMetroControls:ToggleSwitch IsChecked="{Binding AppPref.SuspendOrderNeedConfirm, Mode=TwoWay}" />
+        </HeaderedContentControl>
+        <HeaderedContentControl Header="订单启动确认" Margin="0,15,0,0">
+            <MahAppsMetroControls:ToggleSwitch IsChecked="{Binding AppPref.ResumeOrderNeedConfirm, Mode=TwoWay}" />
+        </HeaderedContentControl>
+        <HeaderedContentControl Header="订单强追确认" Margin="0,15,0,0">
+            <MahAppsMetroControls:ToggleSwitch IsChecked="{Binding AppPref.StrongChaseOrderNeedConfirm, Mode=TwoWay}" />
+        </HeaderedContentControl>
+        <HeaderedContentControl Header="订单撤单确认" Margin="0,15,0,0">
+            <MahAppsMetroControls:ToggleSwitch IsChecked="{Binding AppPref.RevokeOrderNeedConfirm, Mode=TwoWay}" />
+        </HeaderedContentControl>
+        <!--
+        <CheckBox Content="买入、卖出下单确认"
+                  IsChecked="{Binding AppPref.PlaceOrderNeedConfirm, Mode=TwoWay}"/>
+
+        <CheckBox Margin="0,10,0,0"
+                  Content="订单暂停确认"
+                  IsChecked="{Binding AppPref.SuspendOrderNeedConfirm, Mode=TwoWay}"/>
+
+        <CheckBox Margin="0,10,0,0"
+                  Content="订单启动确认"
+                  IsChecked="{Binding AppPref.ResumeOrderNeedConfirm, Mode=TwoWay}"/>
+
+        <CheckBox Margin="0,10,0,0"
+                  Content="订单强追确认"
+                  IsChecked="{Binding AppPref.StrongChaseOrderNeedConfirm, Mode=TwoWay}"/>
+
+        <CheckBox Margin="0,10,0,0"
+                  Content="订单撤单确认"
+                  IsChecked="{Binding AppPref.RevokeOrderNeedConfirm, Mode=TwoWay}"/>
+        -->
+    </StackPanel>
+</UserControl>

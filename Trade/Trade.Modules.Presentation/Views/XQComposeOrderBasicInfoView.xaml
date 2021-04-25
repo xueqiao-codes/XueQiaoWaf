@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.XQComposeOrderBasicInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <!-- DataContext:XqOrderDetailViewModel -->
+
+    <UserControl.Resources>
+        <convert:StringEmptyConverter x:Key="StringEmptyConverter"/>
+        <convert:TradeDirection2NameConverter x:Key="TradeDirection2NameConverter"/>
+        <convert:XQComposeOrderExecParamsSendType2NameConverter x:Key="XQComposeOrderExecParamsSendType2NameConverter"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                    Orientation="Horizontal" Margin="0,0,8,0">
+            <TextBlock Text="组合名称："/>
+            <ContentControl Content="{Binding SourceOrderItem}" ContentTemplate="{StaticResource XqTargetNameDT}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
+                    Orientation="Horizontal">
+            <TextBlock Text="订单ID："/>
+            <ContentControl Content="{Binding SourceOrderItem}" ContentTemplate="{StaticResource OrderListOrderIdDataTemplate}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" 
+                    Orientation="Horizontal">
+            <TextBlock Text="方向："/>
+            <TextBlock Text="{Binding SourceOrderItem.Direction, Converter={StaticResource TradeDirection2NameConverter}}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" 
+                    Orientation="Horizontal">
+            <TextBlock Text="下单价差："/>
+            <TextBlock Text="{Binding SourceOrderItem.Price}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="2" 
+                    Orientation="Horizontal">
+            <TextBlock Text="总数量："/>
+            <TextBlock Text="{Binding SourceOrderItem.Quantity}"/>
+            <TextBlock Text="{Binding SourceOrderItem.ComposeOrderExecParams.ExecEveryQty, StringFormat=（每次发单：{0}）}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="3" 
+                    Orientation="Horizontal">
+            <TextBlock Text="公式："/>
+            <TextBlock Text="{Binding SourceOrderItem.TargetComposeDetailContainer.BasicComposeGraph.Formular, Mode=OneWay}"
+                       ToolTip="{Binding RelativeSource={RelativeSource self}, Path=Text}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
+                    Orientation="Horizontal">
+            <TextBlock Text="配比：" VerticalAlignment="Top"/>
+            <ContentControl Content="{Binding SourceOrderItem.TargetComposeDetailContainer}" ContentTemplate="{StaticResource ComposeLegDetailsDT}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" 
+                    Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="触发执行方式："/>
+                <TextBlock Text="{Binding SourceOrderItem.ComposeOrderSendType, Converter={StaticResource XQComposeOrderExecParamsSendType2NameConverter}}"/>
+                <Button Margin="8,0,0,0" Style="{StaticResource FlatContentButtonPrimary3}"
+                        Content="详情"
+                        Command="{Binding ToShowOrderExecuteParamsCmd}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding SourceOrderItem.SourceOrderId, Converter={StaticResource StringEmptyConverter}}" Value="True"/>
+                                    <Condition Binding="{Binding SourceOrderItem.ActionOrderId, Converter={StaticResource StringEmptyConverter}}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
+                <TextBlock Text="父/子订单："/>
+                <Button Margin="8,0,0,0" Style="{StaticResource FlatContentButtonPrimary3}"
+                                Content="查看"
+                                Command="{Binding ToShowRelatedOrderCmd}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

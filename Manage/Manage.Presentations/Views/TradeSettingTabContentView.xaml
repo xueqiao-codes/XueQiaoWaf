@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="Manage.Presentations.Views.TradeSettingTabContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dm="clr-namespace:Manage.Applications.DataModels;assembly=Manage.Applications"
+             xmlns:Styles="clr-namespace:XueQiaoFoundation.UI.Styles;assembly=XueQiaoFoundation.UI"
+             mc:Ignorable="d" 
+             Background="{DynamicResource WorkspaceBgBrush}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding ManageItems}"
+                IsSynchronizedWithCurrentItem="True"
+                SelectedItem="{Binding SelectedManageItem, Mode=TwoWay}"
+                Style="{StaticResource ListBoxDefault}"
+                BorderThickness="0"
+                x:Name="ManageItemsListBox"
+                Padding="0,25,0,0"
+                Grid.Column="0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel IsItemsHost="True" Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemStyleDefault}">
+                    <Setter Property="Padding" Value="10,8,6,8"/>
+                    <Setter Property="Styles:StylesHelper.HoverBrush" Value="{DynamicResource PrimaryBrush3}"/>
+                    <Setter Property="Styles:StylesHelper.SelectedBrush" Value="{DynamicResource PrimaryBrush3}"/>
+                    <Setter Property="Styles:StylesHelper.SelectedActiveBrush" Value="{DynamicResource PrimaryBrush3}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource ContentBrush1}" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type dm:ManageItemModel}">
+                    <DockPanel>
+                        <Viewbox DockPanel.Dock="Right" Width="10" Height="10">
+                            <Path Fill="{DynamicResource IconBrush2}" Data="M832.000771 511.993831L191.999229 0v1024l640.001542-512.006169z"/>    
+                        </Viewbox>
+                        <TextBlock Text="{Binding ItemTitle}" 
+                                   FontSize="{DynamicResource RegularTitleFontSize}"
+                                   FontWeight="Regular"
+                                   Margin="5,0"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Rectangle VerticalAlignment="Stretch" Width="1" 
+                       Fill="{DynamicResource BorderBrush2}"
+                       Grid.Column="1"/>
+        <ContentControl Content="{Binding Path=SelectedItem.ItemContentView, ElementName=ManageItemsListBox}"
+                            Grid.Column="2"/>
+    </Grid>
+</UserControl>

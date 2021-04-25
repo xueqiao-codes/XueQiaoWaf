@@ -1,0 +1,705 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BooleanDisplayText_false" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="BooleanDisplayText_true" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="BrokerTechPlatform_1" xml:space="preserve">
+    <value>CTP</value>
+  </data>
+  <data name="BrokerTechPlatform_2" xml:space="preserve">
+    <value>易盛9.0</value>
+  </data>
+  <data name="BrokerTechPlatform_3" xml:space="preserve">
+    <value>易盛3.0</value>
+  </data>
+  <data name="ClientPlaceOrderType_BUY_STOP_LOST" xml:space="preserve">
+    <value>买入止损单</value>
+  </data>
+  <data name="ClientPlaceOrderType_PARKED" xml:space="preserve">
+    <value>预埋单</value>
+  </data>
+  <data name="ClientPlaceOrderType_PRICE_LIMIT" xml:space="preserve">
+    <value>限价单</value>
+  </data>
+  <data name="ClientPlaceOrderType_SELL_STOP_LOST" xml:space="preserve">
+    <value>卖出止损单</value>
+  </data>
+  <data name="ClientXQOrderTargetType_COMPOSE_TARGET" xml:space="preserve">
+    <value>组合</value>
+  </data>
+  <data name="ClientXQOrderTargetType_CONTRACT_TARGET" xml:space="preserve">
+    <value>合约</value>
+  </data>
+  <data name="HostingXQOrderType_XQ_ORDER_COMPOSE_LIMIT" xml:space="preserve">
+    <value>限价单</value>
+  </data>
+  <data name="HostingXQOrderType_XQ_ORDER_CONDITION" xml:space="preserve">
+    <value>条件单</value>
+  </data>
+  <data name="HostingXQOrderType_XQ_ORDER_CONTRACT_LIMIT" xml:space="preserve">
+    <value>限价单</value>
+  </data>
+  <data name="HostingXQOrderType_XQ_ORDER_CONTRACT_PARKED" xml:space="preserve">
+    <value>预埋单</value>
+  </data>
+  <data name="TradeDirection_0" xml:space="preserve">
+    <value>买</value>
+  </data>
+  <data name="TradeDirection_1" xml:space="preserve">
+    <value>卖</value>
+  </data>
+  <data name="HostingRunningMode_1" xml:space="preserve">
+    <value>全天</value>
+  </data>
+  <data name="HostingRunningMode_2" xml:space="preserve">
+    <value>模拟</value>
+  </data>
+  <data name="HostingRunningMode_3" xml:space="preserve">
+    <value>实盘</value>
+  </data>
+  <data name="HostingUserRole_1000" xml:space="preserve">
+    <value>管理员</value>
+  </data>
+  <data name="HostingUserRole_200" xml:space="preserve">
+    <value>交易员</value>
+  </data>
+  <data name="HostingUserRole_500" xml:space="preserve">
+    <value>Boss</value>
+  </data>
+  <data name="HostingUserState_1" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="HostingUserState_2" xml:space="preserve">
+    <value>已停用</value>
+  </data>
+  <data name="Leg" xml:space="preserve">
+    <value>腿</value>
+  </data>
+  <data name="NativeTradeDirection_0" xml:space="preserve">
+    <value>买</value>
+  </data>
+  <data name="NativeTradeDirection_1" xml:space="preserve">
+    <value>卖</value>
+  </data>
+  <data name="CommodityType_NONE" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="CommodityType_FUTURES" xml:space="preserve">
+    <value>期货</value>
+  </data>
+  <data name="CommodityType_PRT" xml:space="preserve">
+    <value>备兑组合</value>
+  </data>
+  <data name="CommodityType_DIRECTFOREX" xml:space="preserve">
+    <value>外汇—直接汇率</value>
+  </data>
+  <data name="CommodityType_INDIRECTFOREX" xml:space="preserve">
+    <value>外汇—间接汇率</value>
+  </data>
+  <data name="CommodityType_CROSSFOREX" xml:space="preserve">
+    <value>外汇—交叉汇率</value>
+  </data>
+  <data name="CommodityType_INDEX" xml:space="preserve">
+    <value>指数</value>
+  </data>
+  <data name="CommodityType_STOCK" xml:space="preserve">
+    <value>股票</value>
+  </data>
+  <data name="CommodityType_OPTION" xml:space="preserve">
+    <value>期权</value>
+  </data>
+  <data name="CommodityType_SPOT" xml:space="preserve">
+    <value>现货</value>
+  </data>
+  <data name="CommodityType_SPREAD_MONTH" xml:space="preserve">
+    <value>跨期套利</value>
+  </data>
+  <data name="CommodityType_SPREAD_COMMODITY" xml:space="preserve">
+    <value>跨品种套利</value>
+  </data>
+  <data name="CommodityType_BUL" xml:space="preserve">
+    <value>看涨垂直套利</value>
+  </data>
+  <data name="CommodityType_BER" xml:space="preserve">
+    <value>看跌垂直套利</value>
+  </data>
+  <data name="CommodityType_STD" xml:space="preserve">
+    <value>跨式套利</value>
+  </data>
+  <data name="CommodityType_STG" xml:space="preserve">
+    <value>宽跨式套利</value>
+  </data>
+  <data name="TradeAccountAccessState_1" xml:space="preserve">
+    <value>可用</value>
+  </data>
+  <data name="TradeAccountAccessState_2" xml:space="preserve">
+    <value>不可用</value>
+  </data>
+  <data name="TradeAccountState_1" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="TradeAccountState_2" xml:space="preserve">
+    <value>已移除</value>
+  </data>
+  <data name="TradeAccountState_3" xml:space="preserve">
+    <value>已停用</value>
+  </data>
+  <data name="xueqiao_broker_BrokerPlatform_0" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="xueqiao_broker_BrokerPlatform_1" xml:space="preserve">
+    <value>CTP</value>
+  </data>
+  <data name="xueqiao_broker_BrokerPlatform_2" xml:space="preserve">
+    <value>易盛9.0</value>
+  </data>
+  <data name="xueqiao_broker_BrokerPlatform_3" xml:space="preserve">
+    <value>SP</value>
+  </data>
+  <data name="xueqiao_broker_BrokerPlatform_4" xml:space="preserve">
+    <value>易盛3.0</value>
+  </data>
+  <data name="HostingXQConditionTriggerPriceType_XQ_ASK_PRICE" xml:space="preserve">
+    <value>卖价</value>
+  </data>
+  <data name="HostingXQConditionTriggerPriceType_XQ_BID_PRICE" xml:space="preserve">
+    <value>买价</value>
+  </data>
+  <data name="HostingXQConditionTriggerPriceType_XQ_LASTEST_PRICE" xml:space="preserve">
+    <value>最新价</value>
+  </data>
+  <data name="HostingXQEffectDateType_XQ_EFFECT_FOREVER" xml:space="preserve">
+    <value>永久有效</value>
+  </data>
+  <data name="HostingXQEffectDateType_XQ_EFFECT_PERIOD" xml:space="preserve">
+    <value>指定时间</value>
+  </data>
+  <data name="HostingXQEffectDateType_XQ_EFFECT_TODAY" xml:space="preserve">
+    <value>当日有效</value>
+  </data>
+  <data name="HostingXQConditionTriggerOperator_Symbol_XQ_OP_EQ" xml:space="preserve">
+    <value>＝</value>
+  </data>
+  <data name="HostingXQConditionTriggerOperator_Symbol_XQ_OP_GE" xml:space="preserve">
+    <value>≥</value>
+  </data>
+  <data name="HostingXQConditionTriggerOperator_Symbol_XQ_OP_GT" xml:space="preserve">
+    <value>＞</value>
+  </data>
+  <data name="HostingXQConditionTriggerOperator_Symbol_XQ_OP_LE" xml:space="preserve">
+    <value>≤</value>
+  </data>
+  <data name="HostingXQConditionTriggerOperator_Symbol_XQ_OP_LT" xml:space="preserve">
+    <value>＜</value>
+  </data>
+  <data name="HostingXQConditionTriggerOperator_Symbol_XQ_OP_NE" xml:space="preserve">
+    <value>≠</value>
+  </data>
+  <data name="HostingXQOrderPriceType_ACTION_PRICE_IN_LINE" xml:space="preserve">
+    <value>排队价</value>
+  </data>
+  <data name="HostingXQOrderPriceType_ACTION_PRICE_LATEST" xml:space="preserve">
+    <value>最新价</value>
+  </data>
+  <data name="HostingXQOrderPriceType_ACTION_PRICE_LIMIT" xml:space="preserve">
+    <value>指定价</value>
+  </data>
+  <data name="HostingXQOrderPriceType_ACTION_PRICE_OPPONENT" xml:space="preserve">
+    <value>对手价</value>
+  </data>
+  <data name="ClientXQOrderState_ClientInaccurate_Unkown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="ClientXQOrderState_Client_RequestCreating" xml:space="preserve">
+    <value>请求创建中</value>
+  </data>
+  <data name="ClientXQOrderState_Client_RequestRevoking" xml:space="preserve">
+    <value>请求撤单中</value>
+  </data>
+  <data name="ClientXQOrderState_Client_RequestSuspending" xml:space="preserve">
+    <value>请求暂停中</value>
+  </data>
+  <data name="ClientXQOrderState_Client_RequestResuming" xml:space="preserve">
+    <value>请求启动中</value>
+  </data>
+  <data name="ClientXQOrderState_Triggered" xml:space="preserve">
+    <value>已触发</value>
+  </data>
+  <data name="ClientXQOrderState_TriggerWaiting" xml:space="preserve">
+    <value>等待触发</value>
+  </data>
+  <data name="ClientXQOrderState_XQ_ORDER_CANCELLED" xml:space="preserve">
+    <value>已撤单</value>
+  </data>
+  <data name="ClientXQOrderState_XQ_ORDER_CANCELLING" xml:space="preserve">
+    <value>撤单中</value>
+  </data>
+  <data name="ClientXQOrderState_XQ_ORDER_CREATED" xml:space="preserve">
+    <value>已创建</value>
+  </data>
+  <data name="ClientXQOrderState_XQ_ORDER_FINISHING" xml:space="preserve">
+    <value>完成中</value>
+  </data>
+  <data name="ClientXQOrderState_XQ_ORDER_FINISHED" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="ClientXQOrderState_XQ_ORDER_RUNNING" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="ClientXQOrderState_XQ_ORDER_STARTING" xml:space="preserve">
+    <value>启动中</value>
+  </data>
+  <data name="ClientXQOrderState_XQ_ORDER_SUSPENDED" xml:space="preserve">
+    <value>已暂停</value>
+  </data>
+  <data name="ClientXQOrderState_XQ_ORDER_SUSPENDING" xml:space="preserve">
+    <value>暂停中</value>
+  </data>
+  <data name="HostingXQConditionOrderLabel_LABEL_NONE" xml:space="preserve">
+    <value>无标签</value>
+  </data>
+  <data name="HostingXQConditionOrderLabel_LABEL_STOP_BUY" xml:space="preserve">
+    <value>止损止盈买入</value>
+  </data>
+  <data name="HostingXQConditionOrderLabel_LABEL_STOP_LOST_BUY" xml:space="preserve">
+    <value>止损买入</value>
+  </data>
+  <data name="HostingXQConditionOrderLabel_LABEL_STOP_LOST_SELL" xml:space="preserve">
+    <value>止损卖出</value>
+  </data>
+  <data name="HostingXQConditionOrderLabel_LABEL_STOP_PROFIT_BUY" xml:space="preserve">
+    <value>止盈买入</value>
+  </data>
+  <data name="HostingXQConditionOrderLabel_LABEL_STOP_PROFIT_SELL" xml:space="preserve">
+    <value>止盈卖出</value>
+  </data>
+  <data name="HostingXQConditionOrderLabel_LABEL_STOP_SELL" xml:space="preserve">
+    <value>止损止盈卖出</value>
+  </data>
+  <data name="TradeDirectionDesc_0" xml:space="preserve">
+    <value>买入</value>
+  </data>
+  <data name="TradeDirectionDesc_1" xml:space="preserve">
+    <value>卖出</value>
+  </data>
+  <data name="HostingXQSuspendReason_StateCode_4150" xml:space="preserve">
+    <value>不在交易时段</value>
+  </data>
+  <data name="HostingXQSuspendReason_StateCode_4151" xml:space="preserve">
+    <value>订单还未生效</value>
+  </data>
+  <data name="HostingXQSuspendReason_StateCode_4200" xml:space="preserve">
+    <value>订单发送失败</value>
+  </data>
+  <data name="HostingXQSuspendReason_StateCode_4201" xml:space="preserve">
+    <value>先手腿撤单次数过多</value>
+  </data>
+  <data name="HostingXQSuspendReason_StateCode_4202" xml:space="preserve">
+    <value>追单次数过多</value>
+  </data>
+  <data name="HostingXQSuspendReason_SUSPENDED_BY_PERSON" xml:space="preserve">
+    <value>人为暂停</value>
+  </data>
+  <data name="HostingXQSuspendReason_SUSPENDED_ERROR_OCCURS" xml:space="preserve">
+    <value>异常暂停</value>
+  </data>
+  <data name="HostingXQSuspendReason_SUSPENDED_FUNCTIONAL" xml:space="preserve">
+    <value>功能性暂停</value>
+  </data>
+  <data name="HostingXQSuspendReason_SUSPENDED_REASON_NONE" xml:space="preserve">
+    <value>无暂停原因</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_CONDITION_NOT_TRIGGER" xml:space="preserve">
+    <value>上手条件单未触发</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_CONDITION_NOT_TRIGGER_REVOKE_SEND_UNKOWN" xml:space="preserve">
+    <value>上手条件单未出发，并且已经发送撤单, 但是上手撤单状况未知</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_CONDITION_NOT_TRIGGER_WAITING_REVOKE" xml:space="preserve">
+    <value>上手条件单未触发，等待撤单</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_CONDITION_TRIGGEDED" xml:space="preserve">
+    <value>上手条件单已触发</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_EXPIRED" xml:space="preserve">
+    <value>订单过期，未完成的订单过了交易时间</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_SLED_ALLOC_REF_FINISHED" xml:space="preserve">
+    <value>订单分配引用完成</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_SLED_SEND_FAILED" xml:space="preserve">
+    <value>雪橇下单提交失败</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_SLED_SEND_UNKOWN" xml:space="preserve">
+    <value>雪橇已经调用了API，但是上手状态未知</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_DELETED" xml:space="preserve">
+    <value>上手已撤单</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_FINISHED" xml:space="preserve">
+    <value>上手全部成交</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_PARTFINISHED" xml:space="preserve">
+    <value>上手已部分成交</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_PARTFINISHED_REVOKE_SEND_UNKOWN" xml:space="preserve">
+    <value>上手部分成交，并且已发送撤单， 但是上手撤单状况未知</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_PARTFINISHED_WAITING_REVOKE" xml:space="preserve">
+    <value>上手部分成交，等待撤单</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_RECEIVED" xml:space="preserve">
+    <value>上手已接收</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_RECEIVED_REVOKE_SEND_UNKOWN" xml:space="preserve">
+    <value>上手已接受，并且已发送撤单, 但是上手撤单状况未知</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_RECEIVED_WAITING_REVOKE" xml:space="preserve">
+    <value>上手已接受，等待撤单</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_REJECTED" xml:space="preserve">
+    <value>上手拒绝</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_RESTING" xml:space="preserve">
+    <value>上手已挂单</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_RESTING_REVOKE_SEND_UNKOWN" xml:space="preserve">
+    <value>上手已挂单，并且已发送撤单, 但是上手撤单状况未知</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_RESTING_WAITING_REVOKE" xml:space="preserve">
+    <value>上手已挂单，等待撤单</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_UPSIDE_REVOKE_RECEIVED" xml:space="preserve">
+    <value>上手已接受撤单</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_VERIFY_FAILED" xml:space="preserve">
+    <value>订单审核失败</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_WAITING_SLED_SEND" xml:space="preserve">
+    <value>订单审核成功，等待雪橇下单，调用发送API</value>
+  </data>
+  <data name="HostingExecOrderStateValue_ORDER_WAITING_VERIFY" xml:space="preserve">
+    <value>等待审核, 合规审查和参数填充</value>
+  </data>
+  <data name="ClientFundCurrency_AUD" xml:space="preserve">
+    <value>澳元</value>
+  </data>
+  <data name="ClientFundCurrency_CAD" xml:space="preserve">
+    <value>加元</value>
+  </data>
+  <data name="ClientFundCurrency_CHF" xml:space="preserve">
+    <value>瑞士法郎</value>
+  </data>
+  <data name="ClientFundCurrency_CNY" xml:space="preserve">
+    <value>人民币</value>
+  </data>
+  <data name="ClientFundCurrency_EUR" xml:space="preserve">
+    <value>欧元</value>
+  </data>
+  <data name="ClientFundCurrency_GBP" xml:space="preserve">
+    <value>英镑</value>
+  </data>
+  <data name="ClientFundCurrency_HKD" xml:space="preserve">
+    <value>港币</value>
+  </data>
+  <data name="ClientFundCurrency_JPY" xml:space="preserve">
+    <value>日元</value>
+  </data>
+  <data name="ClientFundCurrency_KRW" xml:space="preserve">
+    <value>韩元</value>
+  </data>
+  <data name="ClientFundCurrency_MYR" xml:space="preserve">
+    <value>马来西亚林吉特</value>
+  </data>
+  <data name="ClientFundCurrency_SGD" xml:space="preserve">
+    <value>新加坡元</value>
+  </data>
+  <data name="ClientFundCurrency_THB" xml:space="preserve">
+    <value>泰铢</value>
+  </data>
+  <data name="ClientFundCurrency_USD" xml:space="preserve">
+    <value>美元</value>
+  </data>
+  <data name="ListColumnContentAlignment_0" xml:space="preserve">
+    <value>居左</value>
+  </data>
+  <data name="ListColumnContentAlignment_1" xml:space="preserve">
+    <value>居中</value>
+  </data>
+  <data name="ListColumnContentAlignment_2" xml:space="preserve">
+    <value>居右</value>
+  </data>
+  <data name="ClientTradeItemSourceType_ComposeTarget" xml:space="preserve">
+    <value>组合</value>
+  </data>
+  <data name="ClientTradeItemSourceType_ComposeTargetLame" xml:space="preserve">
+    <value>组合(瘸腿)</value>
+  </data>
+  <data name="ClientTradeItemSourceType_ContractTarget" xml:space="preserve">
+    <value>合约</value>
+  </data>
+  <data name="ClientTradeItemSourceType_Unkown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="HostingXQOrderType_IncludeTargetTypeName_XQ_ORDER_COMPOSE_LIMIT" xml:space="preserve">
+    <value>组合限价单</value>
+  </data>
+  <data name="HostingXQOrderType_IncludeTargetTypeName_XQ_ORDER_CONDITION" xml:space="preserve">
+    <value>条件单</value>
+  </data>
+  <data name="HostingXQOrderType_IncludeTargetTypeName_XQ_ORDER_CONTRACT_LIMIT" xml:space="preserve">
+    <value>合约限价单</value>
+  </data>
+  <data name="HostingXQOrderType_IncludeTargetTypeName_XQ_ORDER_CONTRACT_PARKED" xml:space="preserve">
+    <value>合约预埋单</value>
+  </data>
+  <data name="XqTargetPositionDataSourceChannel_FROM_COMPOSE_CONSTRUCTION" xml:space="preserve">
+    <value>组合构造</value>
+  </data>
+  <data name="XqTargetPositionDataSourceChannel_FROM_COMPOSE_CONSTRUCTION_DISASSEMBLY" xml:space="preserve">
+    <value>构造的组合拆解</value>
+  </data>
+  <data name="XqTargetPositionDataSourceChannel_FROM_COMPOSE_REVERSE_CONSTRUCTION" xml:space="preserve">
+    <value>组合反向构造</value>
+  </data>
+  <data name="XqTargetPositionDataSourceChannel_FROM_COMPOSE_TRADE_DISASSEMBLY" xml:space="preserve">
+    <value>成交的组合标的拆解</value>
+  </data>
+  <data name="XqTargetPositionDataSourceChannel_FROM_CONTRACT_ASSIGNATION" xml:space="preserve">
+    <value>合约分配</value>
+  </data>
+  <data name="XqTargetPositionDataSourceChannel_FROM_XQ_COMPOSE_TRADE" xml:space="preserve">
+    <value>组合标的成交</value>
+  </data>
+  <data name="XqTargetPositionDataSourceChannel_FROM_XQ_CONTRACT_TRADE" xml:space="preserve">
+    <value>合约标的成交</value>
+  </data>
+  <data name="XqTargetPositionDataSourceChannel_FROM_XQ_PARTIAL_COMPOSE_TRADE" xml:space="preserve">
+    <value>组合标的部分成交（瘸腿）</value>
+  </data>
+  <data name="HostingXQComposeLimitOrderFirstLegChooseMode_FIRST_LEG_CHOOSE_MODE_APPOINT" xml:space="preserve">
+    <value>指定先手腿</value>
+  </data>
+  <data name="HostingXQComposeLimitOrderFirstLegChooseMode_FIRST_LEG_CHOOSE_MODE_DEFAULT" xml:space="preserve">
+    <value>默认选择模式</value>
+  </data>
+  <data name="HostingXQComposeLimitOrderFirstLegChooseMode_FIRST_LEG_CHOOSE_MODE_OUTER_DISC" xml:space="preserve">
+    <value>如有外盘合约，外盘合约优先</value>
+  </data>
+  <data name="XQComposeOrderExecParamsSendType_PARALLEL_LEG" xml:space="preserve">
+    <value>市价并发</value>
+  </data>
+  <data name="XQComposeOrderExecParamsSendType_SERIAL_LEG_PRICE_BEST" xml:space="preserve">
+    <value>市价逐腿</value>
+  </data>
+  <data name="XQComposeOrderExecParamsSendType_SERIAL_LEG_PRICE_TRYING" xml:space="preserve">
+    <value>限价逐腿</value>
+  </data>
+  <data name="ClientXQOrderState_Client_RequestStrongChasing" xml:space="preserve">
+    <value>请求强追中</value>
+  </data>
+  <data name="VerifyStatus_DOING_VERIFY" xml:space="preserve">
+    <value>未完成</value>
+  </data>
+  <data name="VerifyStatus_VERIFY_COMPLETE" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="VerifyStatus_WAITING_VERIFY" xml:space="preserve">
+    <value>未核对</value>
+  </data>
+  <data name="TradeDetailSource_ASSIGN" xml:space="preserve">
+    <value>管理员分配</value>
+  </data>
+  <data name="TradeDetailSource_XQ_TRADE" xml:space="preserve">
+    <value>合约成交</value>
+  </data>
+  <data name="XQClientOrderType_Condition" xml:space="preserve">
+    <value>条件单</value>
+  </data>
+  <data name="XQClientOrderType_Entrusted" xml:space="preserve">
+    <value>委托单</value>
+  </data>
+  <data name="XQClientOrderType_Parked" xml:space="preserve">
+    <value>预埋单</value>
+  </data>
+  <data name="ClientPlaceOrderType_BUY_STOP_PROFIT" xml:space="preserve">
+    <value>买入止盈单</value>
+  </data>
+  <data name="ClientPlaceOrderType_SELL_STOP_PROFIT" xml:space="preserve">
+    <value>卖出止盈单</value>
+  </data>
+  <data name="HostingServiceStatus_Desc_EXPIRED" xml:space="preserve">
+    <value>服务已过期</value>
+  </data>
+  <data name="HostingServiceStatus_Desc_OPENING" xml:space="preserve">
+    <value>服务开通中</value>
+  </data>
+  <data name="HostingServiceStatus_Desc_RELEASED" xml:space="preserve">
+    <value>服务已释放</value>
+  </data>
+  <data name="HostingServiceStatus_Desc_UPGRADING" xml:space="preserve">
+    <value>服务升级中</value>
+  </data>
+  <data name="HostingServiceStatus_Desc_WAITING" xml:space="preserve">
+    <value>服务等待开通</value>
+  </data>
+  <data name="HostingServiceStatus_Desc_WORKING" xml:space="preserve">
+    <value>服务已开通</value>
+  </data>
+  <data name="ClientFundCurrency_CNH" xml:space="preserve">
+    <value>离岸人民币</value>
+  </data>
+  <data name="XqTargetPositionDataSourceChannel_FROM_CONTRACT_MERGE" xml:space="preserve">
+    <value>合并合约</value>
+  </data>
+  <data name="XqTargetPositionDataSourceChannel_FROM_COMPOSE_DISASSEMBLY" xml:space="preserve">
+    <value>组合的拆解</value>
+  </data>
+  <data name="XqAppThemeType_DARK" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="XqAppThemeType_LIGHT" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="XqAppLanguages_CN" xml:space="preserve">
+    <value>中文简体</value>
+  </data>
+  <data name="XqAppLanguages_ENG" xml:space="preserve">
+    <value>英文</value>
+  </data>
+  <data name="XqAppLanguages_TC" xml:space="preserve">
+    <value>中文繁体</value>
+  </data>
+  <data name="MType_TYPE_EXCHANGE_NOTICE" xml:space="preserve">
+    <value>交易所通知</value>
+  </data>
+  <data name="MType_TYPE_MARKETING_PROMOTION" xml:space="preserve">
+    <value>营销推广</value>
+  </data>
+  <data name="MType_TYPE_SYSTEM_NOTICE" xml:space="preserve">
+    <value>系统通知</value>
+  </data>
+  <data name="MType_TYPE_XUEQIAO_NOTICE" xml:space="preserve">
+    <value>雪橇通知</value>
+  </data>
+</root>

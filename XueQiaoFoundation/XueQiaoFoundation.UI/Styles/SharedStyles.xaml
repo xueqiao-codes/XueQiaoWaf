@@ -1,0 +1,56 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+
+    <!-- Warnning: 为了方便管理 foreground 和 font size, 所有 Control 或子类 Style 需要继承或应用该样式 -->
+    <Style x:Key="GeneralControlStyle" TargetType="{x:Type Control}">
+        <Setter Property="FontStyle" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource ContentBrush1}" />
+        <Setter Property="FontSize" Value="{DynamicResource PrimaryContentFontSize}" />
+    </Style>
+
+    <!-- Warnning: 为了方便管理 foreground 和 font size, 所有 Page 或子类 Style 需要继承或应用该样式 -->
+    <Style x:Key="GeneralPageStyle" TargetType="{x:Type Page}">
+        <Setter Property="Foreground" Value="{DynamicResource ContentBrush1}" />
+        <Setter Property="FontSize" Value="{DynamicResource PrimaryContentFontSize}" />
+    </Style>
+
+    <ExponentialEase x:Key="ExpoEaseInOut"
+                     EasingMode="EaseInOut"
+                     Exponent="2" />
+
+    <Storyboard x:Key="HideFloatingMessageStoryboard" po:Freeze="True">
+        <DoubleAnimation EasingFunction="{StaticResource ExpoEaseInOut}"
+                         Storyboard.TargetName="PART_FloatingMessageContainer"
+                         Storyboard.TargetProperty="Opacity"
+                         From="1"
+                         To="0"
+                         Duration="0:0:.2" />
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_FloatingMessageContainer" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="0:0:.2" Value="{x:Static Visibility.Collapsed}" />
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
+
+    <Storyboard x:Key="ShowFloatingMessageStoryboard" po:Freeze="True">
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_FloatingMessageContainer" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+        </ObjectAnimationUsingKeyFrames>
+        <DoubleAnimation EasingFunction="{StaticResource ExpoEaseInOut}"
+                         Storyboard.TargetName="PART_FloatingMessageContainer"
+                         Storyboard.TargetProperty="Opacity"
+                         From="0"
+                         To="1"
+                         Duration="0:0:.2" />
+    </Storyboard>
+
+    <Style x:Key="MetroAutoCollapsingTextBlock"
+           TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="{DynamicResource SecondaryContentFontSize}" />
+        <Setter Property="Opacity" Value="0.6" />
+        <Style.Triggers>
+            <Trigger Property="Text" Value="">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

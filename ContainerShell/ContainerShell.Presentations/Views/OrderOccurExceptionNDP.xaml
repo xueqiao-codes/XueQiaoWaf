@@ -1,0 +1,51 @@
+﻿<core:NotificationDisplayPart 
+    x:Class="ContainerShell.Presentations.Views.OrderOccurExceptionNDP"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:core="clr-namespace:ToastNotifications.Core;assembly=ToastNotifications"
+    xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+    xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+    xmlns:local="clr-namespace:ContainerShell.Presentations.Views"
+    mc:Ignorable="d" d:DesignWidth="360"
+    Foreground="{DynamicResource ForegroundInErrorPanelBgBrush1}"
+    FontSize="{DynamicResource PrimaryContentFontSize}">
+    <core:NotificationDisplayPart.Resources>
+        <convert:HostingXQSuspendReasonDescConverter x:Key="HostingXQSuspendReasonDescConverter"/>
+        <uiextra_convert:Timestamp2StringConverter x:Key="OrderTimeStrConverter" Convert2StringFormatType="DateTimeIgnoreYearWithMs" ValueType="Millisecond"/>
+    </core:NotificationDisplayPart.Resources>
+    <Border BorderBrush="{DynamicResource ErrorBrush1}" BorderThickness="1" Background="{DynamicResource ErrorPanelBgBrush1}">
+        <StackPanel Margin="15">
+            <DockPanel LastChildFill="False">
+                <TextBlock Text="订单异常" FontSize="{DynamicResource RegularTitleFontSize}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center">
+                    <Button Content="查看" Style="{StaticResource FlatBgButtonPrimary3}" VerticalAlignment="Center"
+                            Command="{Binding ShowDetailCmd}"
+                            CommandParameter="{Binding Order}"/>
+                    <Button Content="关闭" Style="{StaticResource FlatContentButtonPrimary3}" Margin="10,0,0,0" VerticalAlignment="Center"
+                            Command="{Binding CloseCmd}"/>
+                </StackPanel>
+            </DockPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="异常说明："/>
+                <TextBlock TextWrapping="Wrap">
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource HostingXQSuspendReasonDescConverter}" Mode="OneWay">
+                            <Binding Path="Order.OrderStateDetail.SuspendReason"/>
+                            <Binding Path="Order.OrderStateDetail.SuspendedErrorCode"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                <TextBlock Text="下单时间：" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Order.OrderTimestampMs, Converter={StaticResource OrderTimeStrConverter}}"/>
+            </StackPanel>
+            
+            <local:OrderInfoBaseViewForNDP DataContext="{Binding Order}" Margin="0,6,0,0"/>
+        </StackPanel>
+    </Border>
+</core:NotificationDisplayPart>

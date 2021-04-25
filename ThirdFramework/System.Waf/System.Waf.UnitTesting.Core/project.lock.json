@@ -1,0 +1,76 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETPortable,Version=v4.5,Profile=Profile7": {
+      "System.Waf.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETPortable,Version=v4.5,Profile=Profile7"
+      }
+    }
+  },
+  "libraries": {
+    "System.Waf.Core/1.0.0": {
+      "type": "project",
+      "path": "../System.Waf.Core/project.json",
+      "msbuildProject": "../System.Waf.Core/System.Waf.Core.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [],
+    ".NETPortable,Version=v4.5,Profile=Profile7": []
+  },
+  "packageFolders": {
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "packOptions": {
+      "tags": [
+        "WAF",
+        "WPF",
+        "MVVM",
+        "XAML",
+        "UWP",
+        "Model-View-ViewModel",
+        "UI",
+        "MVC",
+        "ViewModel",
+        "PresentationModel",
+        "Architecture",
+        "Module",
+        "Layered"
+      ],
+      "projectUrl": "https://github.com/jbe2277/waf",
+      "releaseNotes": "https://github.com/jbe2277/waf/releases",
+      "licenseUrl": "https://raw.githubusercontent.com/jbe2277/waf/master/LICENSE"
+    },
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Administrator\\source\\repos\\XueQiaoWaf\\ThirdFramework\\System.Waf.UnitTesting.Core\\System.Waf.UnitTesting.Core.csproj",
+      "projectName": "System.Waf.UnitTesting.Core",
+      "projectPath": "C:\\Users\\Administrator\\source\\repos\\XueQiaoWaf\\ThirdFramework\\System.Waf.UnitTesting.Core\\System.Waf.UnitTesting.Core.csproj",
+      "projectJsonPath": "C:\\Users\\Administrator\\source\\repos\\XueQiaoWaf\\ThirdFramework\\System.Waf.UnitTesting.Core\\project.json",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Administrator\\source\\repos\\XueQiaoWaf\\ThirdFramework\\System.Waf.UnitTesting.Core\\obj\\",
+      "projectStyle": "ProjectJson",
+      "configFilePaths": [
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "portable45-net45+win8": {
+          "projectReferences": {
+            "C:\\Users\\Administrator\\source\\repos\\XueQiaoWaf\\ThirdFramework\\System.Waf.Core\\System.Waf.Core.csproj": {
+              "projectPath": "C:\\Users\\Administrator\\source\\repos\\XueQiaoWaf\\ThirdFramework\\System.Waf.Core\\System.Waf.Core.csproj"
+            }
+          }
+        }
+      }
+    },
+    "frameworks": {
+      "portable45-net45+win8": {}
+    }
+  }
+}

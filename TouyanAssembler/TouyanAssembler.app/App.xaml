@@ -1,0 +1,15 @@
+﻿<Application x:Class="TouyanAssembler.app.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Dragablz;Component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/XueQiaoFoundation.UI;Component/Themes/ControlTheme.LIGHT.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/XueQiaoFoundation.UI;Component/Themes/ControlStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/XueQiaoFoundation.UI.Extra;Component/ExtraSharedResources.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/TouyanAssembler.BusinessResource;Component/resource/SharedResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

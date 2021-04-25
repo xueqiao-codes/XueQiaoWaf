@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" 
+         DefaultTargets="Publish">
+  <PropertyGroup Label="Constants">
+    <Platform_AnyCPU>Any CPU</Platform_AnyCPU>
+    <Platform_x86>x86</Platform_x86>
+    <Platform_x64>x64</Platform_x64>
+    
+    <DirName_BuildArtifacts>BuildArtifacts</DirName_BuildArtifacts>
+    <DirName_AnyCPU>AnyCPU</DirName_AnyCPU>
+    <DirName_X86>X86</DirName_X86>
+    <DirName_X64>X64</DirName_X64>
+  </PropertyGroup>
+  
+  <PropertyGroup Label="command line properties">
+
+    <!-- 要 Build 的项目文件路径 -->
+    <BuildProject></BuildProject>
+    
+    <!-- 项目准备发布资料的根目录路径。它是该项目所有的Build文件、安装包、符号表等要发布的文件的根目录 -->
+    <PublishBuildArtifactsRootDir></PublishBuildArtifactsRootDir>
+    
+    <!-- 安装包制作脚本的目录。该目录应该包含所需要的 iss 脚本，logo，license等资源 -->
+    <MakeInstallerScriptDir></MakeInstallerScriptDir>
+    <MyAppId Condition=" '$(MyAppId)' == '' "></MyAppId>
+    <MyAppVersion Condition=" '$(MyAppVersion)' == '' "></MyAppVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <IsPublishAnyCPU Condition=" '$(IsPublishAnyCPU)' == '' ">0</IsPublishAnyCPU>
+    <IsPublishX86 Condition=" '$(IsPublishX86)' == '' ">1</IsPublishX86>
+    <IsPublishX64 Condition=" '$(IsPublishX64)' == '' ">1</IsPublishX64>
+    
+    <HockeyAppApiToken></HockeyAppApiToken>
+    <HockeyX86AppId></HockeyX86AppId>
+    <HockeyX64AppId></HockeyX64AppId>
+
+    <!-- 在 oa 系统中的 app key -->
+    <AppKeyInOa></AppKeyInOa>
+    <!-- 上传包到 oa 的 web service url -->
+    <UploadPackage2OaWebServiceUrl></UploadPackage2OaWebServiceUrl>
+    <!-- 版本发布信息 -->
+    <VersionReleaseNotes></VersionReleaseNotes>
+  </PropertyGroup>
+
+  <Target Name="BuildCheck">
+    <Error Text="'BuildProject' param must be set." Condition="'$(BuildProject)' == ''" />
+    <Error Text="'PublishBuildArtifactsRootDir' param must be set." Condition="'$(PublishBuildArtifactsRootDir)' == ''" />
+    <Error Text="'Configuration' param must be set." Condition="'$(Configuration)' == ''" />
+  </Target>
+
+  <Target Name="AnyCPUBuild" DependsOnTargets="BuildCheck">
+    <ItemGroup>
+      <AnyCPUBuildArtifactsDir Include="$(PublishBuildArtifactsRootDir)\$(DirName_BuildArtifacts)\$(DirName_AnyCPU)\" />
+    </ItemGroup>
+    
+    <RemoveDir Directories="@(AnyCPUBuildArtifactsDir)"/>
+    <MakeDir Directories="@(AnyCPUBuildArtifactsDir)"/>
+    <MSBuild Projects="$(BuildProject)"
+             BuildInParallel="True"
+             Properties="OutDir=%(AnyCPUBuildArtifactsDir.FullPath);Configuration=$(Configuration);Platform=$(Platform_AnyCPU)" />
+  </Target>
+
+  <Target Name="x86Build" DependsOnTargets="BuildCheck">
+    <ItemGroup>
+      <X86BuildArtifactsDir Include="$(PublishBuildArtifactsRootDir)\$(DirName_BuildArtifacts)\$(DirName_X86)\" />
+    </ItemGroup>
+    
+    <RemoveDir Directories="@(X86BuildArtifactsDir)"/>
+    <MakeDir Directories="@(X86BuildArtifactsDir)"/>
+    <MSBuild Projects="$(BuildProject)"
+             BuildInParallel="True"
+             Properties="OutDir=%(X86BuildArtifactsDir.FullPath);Configuration=$(Configuration);Platform=$(Platform_x86)" />
+  </Target>
+
+  <Target Name="x64Build" DependsOnTargets="BuildCheck">
+    <ItemGroup>
+      <X64BuildArtifactsDir Include="$(PublishBuildArtifactsRootDir)\$(DirName_BuildArtifacts)\$(DirName_X64)\" />
+    </ItemGroup>
+    
+    <RemoveDir Directories="@(X64BuildArtifactsDir)"/>
+    <MakeDir Directories="@(X64BuildArtifactsDir)"/>
+    <MSBuild Projects="$(BuildProject)"
+             BuildInParallel="True"
+             Properties="OutDir=%(X64BuildArtifactsDir.FullPath);Configuration=$(Configuration);Platform=$(Platform_x64)" />
+  </Target>
+
+  <Target Name="BuildAllArchitecture" DependsOnTargets="AnyCPUBuild; x86Build; x64Build" />
+
+  <Target Name="PublishCheck">
+    <Error Text="'PublishBuildArtifactsRootDir' param must be set." Condition="'$(PublishBuildArtifactsRootDir)' == ''" />
+    <Error Text="'MakeInstallerScriptDir' param must be set." Condition="'$(MakeInstallerScriptDir)' == ''" />
+    <Error Text="'MyAppId' param must be set." Condition="'$(MyAppId)' == ''" />
+    <Error Text="'MyAppVersion' param must be set." Condition="'$(MyAppVersion)' == ''" />
+  </Target>
+
+  <Target Name="BeforeAnyCPUPublish" DependsOnTargets="AnyCPUBuild" Condition="$(IsPublishAnyCPU) != 0"/>
+  <Target Name="BeforeX86Publish" DependsOnTargets="x86Build" Condition="$(IsPublishX86) != 0"/>
+  <Target Name="BeforeX64Publish" DependsOnTargets="x64Build" Condition="$(IsPublishX64) != 0"/>
+  
+  <Target Name="Publish" DependsOnTargets="PublishCheck; BeforeAnyCPUPublish; BeforeX86Publish; BeforeX64Publish">
+    <ItemGroup>
+      <publishOutputRootDir Include="$(PublishBuildArtifactsRootDir)\PublishOutput" />
+      <buildArtifactsRootDir Include="$(PublishBuildArtifactsRootDir)\$(DirName_BuildArtifacts)" />
+      <_makeInstallerScriptDir Include="$(MakeInstallerScriptDir)" />
+    </ItemGroup>
+    
+    <!-- Running Windows PowerShell Scripts from MSBuild Project Files, see below link: -->
+    <!-- https://docs.microsoft.com/en-us/aspnet/web-forms/overview/deployment/advanced-enterprise-web-deployment/running-windows-powershell-scripts-from-msbuild-project-files -->
+    <!-- https://docs.microsoft.com/en-us/powershell/scripting/core-powershell/console/powershell.exe-command-line-help?view=powershell-6 -->
+    <!-- 不要换行，否则执行脚本会出错 -->
+    <!-- 不要使用 %(item.meta) 传参，改为$(property)传参。否则第二次使用%(item.meta)形式时无法获得值 -->
+    <PropertyGroup>
+      <AnyCPUBuildArtifactsDir>%(buildArtifactsRootDir.FullPath)\$(DirName_AnyCPU)</AnyCPUBuildArtifactsDir>
+      <X86BuildArtifactsDir>%(buildArtifactsRootDir.FullPath)\$(DirName_X86)</X86BuildArtifactsDir>
+      <X64BuildArtifactsDir>%(buildArtifactsRootDir.FullPath)\$(DirName_X64)</X64BuildArtifactsDir>
+      <publishOutputRootDir>%(publishOutputRootDir.FullPath)</publishOutputRootDir>
+      <_makeInstallerScriptDir>%(_makeInstallerScriptDir.FullPath)</_makeInstallerScriptDir>
+    </PropertyGroup>
+    <Exec Command="pwsh –NonInteractive –ExecutionPolicy Unrestricted –Command &quot;&amp; {&amp;&apos;$(MSBuildProjectDirectory)\Publish.ps1&apos; -publishOutputRootDir &apos;$(publishOutputRootDir)&apos; -makeInstallerScriptDir &apos;$(_makeInstallerScriptDir)&apos; -installAppId &apos;$(MyAppId)&apos; -version &apos;$(MyAppVersion)&apos; -isPublishAnyCPU $(IsPublishAnyCPU) -isPublishX86 $(IsPublishX86) -isPublishX64 $(IsPublishX64) -anyCPUBuildArtifactsDir &apos;$(AnyCPUBuildArtifactsDir)&apos; -x86BuildArtifactsDir &apos;$(X86BuildArtifactsDir)&apos; -x64BuildArtifactsDir &apos;$(X64BuildArtifactsDir)&apos; -appKeyInOa &apos;$(AppKeyInOa)&apos; -oaWebServiceUrl &apos;$(UploadPackage2OaWebServiceUrl)&apos; -versionReleaseNotes &apos;$(VersionReleaseNotes)&apos; -hockeyAppApiToken &apos;$(HockeyAppApiToken)&apos; -hockeyX86AppId &apos;$(HockeyX86AppId)&apos; -hockeyX64AppId &apos;$(HockeyX64AppId)&apos;}&quot;" />
+  </Target>
+</Project>

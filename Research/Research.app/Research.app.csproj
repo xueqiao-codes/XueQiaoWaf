@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props" Condition="Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props')" />
+  <Import Project="..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props" Condition="Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props')" />
+  <Import Project="..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props" Condition="Exists('..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props')" />
+  <Import Project="..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props" Condition="Exists('..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{599DBF6D-FC33-46F7-BFD2-F7BD7BF29C27}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Research.app</RootNamespace>
+    <AssemblyName>Research.app</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ParallelExtensionsExtras, Version=1.2.3.0, Culture=neutral, PublicKeyToken=665f4d61f853b5a9, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ParallelExtensionsExtras.1.2.0.0\lib\net40\ParallelExtensionsExtras.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\IResearchComponentCtrl.cs" />
+    <Compile Include="Controller\ResearchModuleRootViewController.cs" />
+    <Compile Include="Controller\ResearchUrlComponentCtrl.cs" />
+    <Compile Include="Controller\ResearchWorkspaceItemCtrl.cs" />
+    <Compile Include="Helper\ResearchWorkspaceDataConvertHelper.cs" />
+    <Compile Include="ModuleController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModel\ResearchWorkspaceVM.cs" />
+    <Compile Include="ViewModel\UrlComponentContentVM.cs" />
+    <Compile Include="ViewModel\UrlComponentHeaderVM.cs" />
+    <Compile Include="View\ResearchWorkspaceView.xaml.cs">
+      <DependentUpon>ResearchWorkspaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UrlComponentContentView.xaml.cs">
+      <DependentUpon>UrlComponentContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UrlComponentHeaderView.xaml.cs">
+      <DependentUpon>UrlComponentHeaderView.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppAssembler\AppAssembler.Interfaces\AppAssembler.Interfaces.csproj">
+      <Project>{4903FB80-2DC0-4319-B0ED-93DF17503AA9}</Project>
+      <Name>AppAssembler.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.BusinessResources\XueQiaoFoundation.BusinessResources.csproj">
+      <Project>{7C429834-FD64-4CBA-A742-C798ECC5A58B}</Project>
+      <Name>XueQiaoFoundation.BusinessResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.Interfaces\XueQiaoFoundation.Interfaces.csproj">
+      <Project>{B31A5E02-2467-4119-A690-7D542965E2BB}</Project>
+      <Name>XueQiaoFoundation.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ContainerShell\ContainerShell.Interfaces\ContainerShell.Interfaces.csproj">
+      <Project>{bd65cd7d-6128-4a01-8f1a-74a835681b98}</Project>
+      <Name>ContainerShell.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LoginUserManage\LoginUserManage.Interfaces\LoginUserManage.Interfaces.csproj">
+      <Project>{1B1A96A8-D556-4404-9712-50794D5F2D12}</Project>
+      <Name>LoginUserManage.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\Dragablz\Dragablz.net45.csproj">
+      <Project>{7b11011c-7fd7-4ab0-a1ad-04e940b026de}</Project>
+      <Name>Dragablz.net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660C2-8155-4769-991D-08AFBA69A302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
+      <Name>System.Waf.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_xqclient_base\lib_xqclient_base.csproj">
+      <Project>{251D71EE-27E6-46E8-BB87-2B2120564CD8}</Project>
+      <Name>lib_xqclient_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\Thrift\Thrift.45.csproj">
+      <Project>{EBCE35DA-CF6A-42BC-A357-A9C09B534299}</Project>
+      <Name>Thrift.45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\IDLAutoGenerated\IDLAutoGenerated.csproj">
+      <Project>{E9B131CA-A3DA-4A12-9C9E-235957B0F139}</Project>
+      <Name>IDLAutoGenerated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.Shared\XueQiaoFoundation.Shared.csproj">
+      <Project>{2497225A-7DBD-4901-BDDD-3F8B37996769}</Project>
+      <Name>XueQiaoFoundation.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI\XueQiaoFoundation.UI.csproj">
+      <Project>{a811ca2b-99b3-4688-9175-5cfcffae88b5}</Project>
+      <Name>XueQiaoFoundation.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Research.Interface\Research.Interface.csproj">
+      <Project>{456e7806-641b-4a48-9516-9cbdf315cd3b}</Project>
+      <Name>Research.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\ResearchWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UrlComponentContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UrlComponentHeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets" Condition="Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets')" />
+  <Import Project="..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets" Condition="Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets')" />
+</Project>

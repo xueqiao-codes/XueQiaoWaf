@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{63D97F3E-DF6D-4758-BF2A-6FB5EE2D5A28}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XueQiaoWaf.Trade.Modules.Applications</RootNamespace>
+    <AssemblyName>XueQiaoWaf.Trade.Modules.Applications</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GongSolutions.Wpf.DragDrop, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\gong-wpf-dragdrop.1.1.0\lib\net45\GongSolutions.Wpf.DragDrop.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MathParser.org-mXparser, Version=4.2.0.0, Culture=neutral, PublicKeyToken=0fbab7add73ed6e2, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MathParser.org-mXparser.4.2.2\lib\net452\MathParser.org-mXparser.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ParallelExtensionsExtras, Version=1.2.3.0, Culture=neutral, PublicKeyToken=665f4d61f853b5a9, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ParallelExtensionsExtras.1.2.0.0\lib\net40\ParallelExtensionsExtras.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="TimeZoneConverter, Version=2.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\TimeZoneConverter.2.4.1\lib\net45\TimeZoneConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="ToastNotifications, Version=2.5.0.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ToastNotifications.2.5.0\lib\net40\ToastNotifications.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp, Version=1.0.4.0, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WebSocketSharpFork.1.0.4.0\lib\net35\websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="xFunc.Maths, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\xFunc.Maths.3.5.0\lib\net40\xFunc.Maths.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountComponentContainerController.cs" />
+    <Compile Include="Controllers\ChooseLegPositions2MergeDialogCtrl.cs" />
+    <Compile Include="Controllers\ComponentHeaderLayoutCtrl.cs" />
+    <Compile Include="Controllers\ComposeListComponentContentController.cs" />
+    <Compile Include="Controllers\ComposeSearchPopupController.cs" />
+    <Compile Include="Controllers\ContractInfoDialogController.cs" />
+    <Compile Include="Controllers\ContractListComponentContentController.cs" />
+    <Compile Include="Controllers\CreateComposeWithSameTemplateController.cs" />
+    <Compile Include="Controllers\DisplayColumnsOrderListParkedConfigDialogController.cs" />
+    <Compile Include="Controllers\DisplayColumnsOrderListConditionConfigDialogController.cs" />
+    <Compile Include="Controllers\DisplayColumnsOrderListEntrustedConfigDialogController.cs" />
+    <Compile Include="Controllers\DisplayColumnsTradeListConfigDialogController.cs" />
+    <Compile Include="Controllers\EditComposeNameDialogController.cs" />
+    <Compile Include="Controllers\EditComposeViewPrecisionNumberDialogCtrl.cs" />
+    <Compile Include="Controllers\Events\ComposeListGroupsOrderIndexChangedEvent.cs" />
+    <Compile Include="Controllers\Events\ContractListGroupsOrderIndexChangedEvent.cs" />
+    <Compile Include="Controllers\Events\GlobalApplyComposeListDisplayColumnsEvent.cs" />
+    <Compile Include="Controllers\Events\GlobalApplyOrderListParkedColumnsEvent.cs" />
+    <Compile Include="Controllers\Events\GlobalApplyOrderListConditionColumnsEvent.cs" />
+    <Compile Include="Controllers\Events\GlobalApplyOrderListEntrustedColumnsEvent.cs" />
+    <Compile Include="Controllers\Events\GlobalApplyContractListDisplayColumnsEvent.cs" />
+    <Compile Include="Controllers\DisplayColumnsComposeListConfigDialogController.cs" />
+    <Compile Include="Controllers\DisplayColumnsSubContractListConfigDialogController.cs" />
+    <Compile Include="Controllers\Events\GlobalApplyTradeListDisplayColumnsEvent.cs" />
+    <Compile Include="Controllers\Events\ComposeListCustomGroupsChangedEvent.cs" />
+    <Compile Include="Controllers\Events\ContractListCustomGroupsChangedEvent.cs" />
+    <Compile Include="Controllers\Events\SubscribeDataGroupsChangedEventArgs.cs" />
+    <Compile Include="Controllers\Events\SubscribeDataGroupsOrderIndexChangedEventArgs.cs" />
+    <Compile Include="Controllers\FundPageController.cs" />
+    <Compile Include="Controllers\GroupedComposeListController.cs" />
+    <Compile Include="Controllers\GroupedContractListController.cs" />
+    <Compile Include="Controllers\ITradeComponentController.cs" />
+    <Compile Include="Controllers\OrderDetail\XqOrderDetailDialogCtrl.cs" />
+    <Compile Include="Controllers\OrderDetail\XqOrderExecDetailViewCtrl.cs" />
+    <Compile Include="Controllers\OrderDetail\XqComposeOrderExecParamsDialogCtrl.cs" />
+    <Compile Include="Controllers\OrderDetail\XqOrderXqTradeDetailViewCtrl.cs" />
+    <Compile Include="Controllers\OrderDetail\XqTradeExecTradesDialogCtrl.cs" />
+    <Compile Include="Controllers\OrderHistory\OrderHistoryConditionListContentController.cs" />
+    <Compile Include="Controllers\OrderHistory\OrderHistoryParkedListContentController.cs" />
+    <Compile Include="Controllers\OrderHistory\OrderHistoryEntrustedListContentController.cs" />
+    <Compile Include="Controllers\OrderHistory\OrderHistoryComponentController.cs" />
+    <Compile Include="Controllers\OrderListConditionPageController.cs" />
+    <Compile Include="Controllers\OrderListParkedPageController.cs" />
+    <Compile Include="Controllers\OrderListEntrustedPageController.cs" />
+    <Compile Include="Controllers\PositionAssignHistoryComponentCtrl.cs" />
+    <Compile Include="Controllers\PositionAssistant\PositionAssistantComponentController.cs" />
+    <Compile Include="Controllers\PositionAssistant\XqTargetClosePositionHistoryViewCtrl.cs" />
+    <Compile Include="Controllers\PositionAssistant\XqTargetClosePositionSearchDialogCtrl.cs" />
+    <Compile Include="Controllers\PositionAssistant\XqTargetPositionDetailDialogCtrl.cs" />
+    <Compile Include="Controllers\PositionAssistant\XqTargetPositionDetailContentViewCtrl.cs" />
+    <Compile Include="Controllers\PositionAssistant\XqTargetPositionSplitDialogCtrl.cs" />
+    <Compile Include="Controllers\PositionAssistant\XqTargetPositionTradeDetailDialogCtrl.cs" />
+    <Compile Include="Controllers\PositionAssistant\XqTargetQuickClosePositionDialogCtrl.cs" />
+    <Compile Include="Controllers\PositionDiscreteListPageController.cs" />
+    <Compile Include="Controllers\PositionDiscreteTradeDetailDialogController.cs" />
+    <Compile Include="Controllers\PositionAssistant\PositionOfComposeAddDialogCtrl.cs" />
+    <Compile Include="Controllers\PositionAssistant\PositionOfComposeController.cs" />
+    <Compile Include="Controllers\PositionAssistant\PositionOfContractController.cs" />
+    <Compile Include="Controllers\PositionOfComposeMergeWindowCtrl.cs" />
+    <Compile Include="Controllers\RelatedOrderDialogCtrl.cs" />
+    <Compile Include="Controllers\PlaceOrderCreateViewController.cs" />
+    <Compile Include="Controllers\PlaceOrderHangingOrdersAreaController.cs" />
+    <Compile Include="Controllers\SubscribeDataComponentContainerController.cs" />
+    <Compile Include="Controllers\SubscribeDataGroupEditDialogController.cs" />
+    <Compile Include="Controllers\TradeComponentXqTargetAssociateHandler.cs" />
+    <Compile Include="Controllers\TradeHistoryComponentController.cs" />
+    <Compile Include="Controllers\TradeWorkspaceTemplateEditDialogController.cs" />
+    <Compile Include="Controllers\Extensions.cs" />
+    <Compile Include="Controllers\TradeListPageController.cs" />
+    <Compile Include="Controllers\TradeModuleRootViewController.cs" />
+    <Compile Include="Controllers\TradeWorkspaceTemplateManageDialogController.cs" />
+    <Compile Include="Controllers\XQComposeOrderEPTManDialogCtrl.cs" />
+    <Compile Include="Controllers\XqTargetParkedOrdersDialogCtrl.cs" />
+    <Compile Include="Controllers\XqTargetConditionOrdersDialogCtrl.cs" />
+    <Compile Include="Controllers\XqTargetOfItemSubscribeQuotationHelpCtrl.cs" />
+    <Compile Include="DataModels\AddComposeLegDetail.cs" />
+    <Compile Include="DataModels\AddSubscribeDataToGroupDM.cs" />
+    <Compile Include="DataModels\ContractBasicInfoDM.cs" />
+    <Compile Include="DataModels\ContractTradeTimeSpanDailyDetail.cs" />
+    <Compile Include="DataModels\CPMergeLegInfoSynchronizer.cs" />
+    <Compile Include="DataModels\DiscreteOrderItemKey.cs" />
+    <Compile Include="DataModels\ExecOrderDM.cs" />
+    <Compile Include="DataModels\ExecTradeDM.cs" />
+    <Compile Include="DataModels\FundItemDataModel.cs" />
+    <Compile Include="DataModels\HostingFundKey.cs" />
+    <Compile Include="DataModels\ComposeLegQuotationDM.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDramaXQComposeBase.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ComposeStopProfitSell.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ComposeStopProfitBuy.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ContractStopProfitSell.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ContractStopProfitBuy.cs" />
+    <Compile Include="DataModels\PositionDiscreteItemKey.cs" />
+    <Compile Include="DataModels\ExecOrderItemDataModel.cs" />
+    <Compile Include="DataModels\OrderListColumn_Condition.cs" />
+    <Compile Include="DataModels\OrderListColumn_Entrusted.cs" />
+    <Compile Include="DataModels\OrderListColumn_Parked.cs" />
+    <Compile Include="DataModels\PlaceOrderComponentPresentKey.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDramaBase.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ComposeLimitPrice.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ComposeStopLostBuy.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ContractLimitPrice.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ContractParked.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ContractStopLostBuy.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ComposeStopLostSell.cs" />
+    <Compile Include="DataModels\PlaceOrderViewCreateDrama_ContractStopLostSell.cs" />
+    <Compile Include="DataModels\ComposePositionPriceInputItem.cs" />
+    <Compile Include="DataModels\CPMergePriceInputItem.cs" />
+    <Compile Include="DataModels\CPMergeLegInfoItem.cs" />
+    <Compile Include="DataModels\PositionTradeDetailItemDM.cs" />
+    <Compile Include="DataModels\RelatedOrderShowType.cs" />
+    <Compile Include="DataModels\SelectedComposesOperateCommands.cs" />
+    <Compile Include="DataModels\SelectedContractsOperateCommands.cs" />
+    <Compile Include="DataModels\SubscribeDataGroupListViewDM.cs" />
+    <Compile Include="DataModels\TargetPositionDataModel.cs" />
+    <Compile Include="DataModels\TradeListColumn.cs" />
+    <Compile Include="DataModels\XqTargetDetailPositionDM_MergeEdit.cs" />
+    <Compile Include="Helper\QuotationDownConversionHandler.cs" />
+    <Compile Include="Helper\TradeComponentConstans.cs" />
+    <Compile Include="Helper\TradeWorkspaceDataConvertHelper.cs" />
+    <Compile Include="DataModels\XQComposeOrderExecParamsTemplate.cs" />
+    <Compile Include="DataModels\XqComposeOrderFirstLegChooseDM.cs" />
+    <Compile Include="DataModels\XqComposeOrderLegExecParamsDM.cs" />
+    <Compile Include="DataModels\XqTargetDetailPositionDM.cs" />
+    <Compile Include="DataModels\XqTargetDetailPositionDM_Archived.cs" />
+    <Compile Include="DataModels\XqTargetDetailPositionDM_Unarchived.cs" />
+    <Compile Include="DataModels\XqTargetClosePositionRemainEditItem.cs" />
+    <Compile Include="DataModels\XqTargetPositionSplitEditItem.cs" />
+    <Compile Include="DataModels\XqTradeDetailDM.cs" />
+    <Compile Include="Helper\AddComposeHelper.cs" />
+    <Compile Include="Helper\TradeComponentAssociateConstants.cs" />
+    <Compile Include="Helper\ListColumnLivePropertiesHelper.cs" />
+    <Compile Include="Helper\OrderItemDataModelCreateHelper.cs" />
+    <Compile Include="Helper\SubscribeDataQuotationHelper.cs" />
+    <Compile Include="Helper\TradeDMLoadHelper.cs" />
+    <Compile Include="Helper\SubscribeDataDisplayHelper.cs" />
+    <Compile Include="Helper\TradeItemDataModelCreateHelper.cs" />
+    <Compile Include="Helper\XQComposeOrderExecParamsGenerator.cs" />
+    <Compile Include="Helper\XQComposeOrderEPTHelper.cs" />
+    <Compile Include="Helper\XQPlaceOrderDramaValidateHelper.cs" />
+    <Compile Include="SelectedTradeLameTNOperateCommandsCtrl.cs" />
+    <Compile Include="SelectedOrdersOperateCommandsCtrl.cs" />
+    <Compile Include="ServiceControllers\CombQuotationSubscribeProcessCtrl.cs" />
+    <Compile Include="ServiceControllers\Events\UserRelatedSubAccountItemsRefreshEvent.cs" />
+    <Compile Include="ServiceControllers\Events\UserComposeViewUpdatedEvent.cs" />
+    <Compile Include="ServiceControllers\Events\OrderItemsRefreshedEvent.cs" />
+    <Compile Include="ServiceControllers\Events\SubscribeContractRemovedEvent.cs" />
+    <Compile Include="ServiceControllers\Events\SubscribeContractAddedEvent.cs" />
+    <Compile Include="ServiceControllers\Events\SubscribeComposeAddedEvent.cs" />
+    <Compile Include="ServiceControllers\Events\SubscribeComposeRemovedEvent.cs" />
+    <Compile Include="ServiceControllers\FundItemsController.cs" />
+    <Compile Include="ServiceControllers\IFundItemsController.cs" />
+    <Compile Include="ServiceControllers\IRelatedSubAccountItemsController.cs" />
+    <Compile Include="ServiceControllers\IXqTargetPositionItemsController.cs" />
+    <Compile Include="ServiceControllers\PositionDiscreteItemsController.cs" />
+    <Compile Include="ServiceControllers\IPositionDiscreteItemsController.cs" />
+    <Compile Include="ServiceControllers\RelatedSubAccountItemsController.cs" />
+    <Compile Include="ServiceControllers\SubAccountAnyDataRefreshStateHolder.cs" />
+    <Compile Include="DataModels\ListDisplayColumnConfigureItem.cs" />
+    <Compile Include="DataModels\SubscribeComposeListDisplayColumn.cs" />
+    <Compile Include="DataModels\SubscribeContractListDisplayColumn.cs" />
+    <Compile Include="Helper\MarketSubscribeStateHelper.cs" />
+    <Compile Include="Helper\TradeWorkspaceDataDisplayHelper.cs" />
+    <Compile Include="ModuleController.cs" />
+    <Compile Include="Controllers\AddComposeDialogController.cs" />
+    <Compile Include="Controllers\PlaceOrderComponentController.cs" />
+    <Compile Include="Controllers\TradeWorkspaceItemController.cs" />
+    <Compile Include="DataModels\ComponentTabSelectionItem.cs" />
+    <Compile Include="DataModels\IMarketSubscribeData.cs" />
+    <Compile Include="DataModels\IntegerAscendingComparer.cs" />
+    <Compile Include="DataModels\SubscribeComposeDataModel.cs" />
+    <Compile Include="DataModels\SubscribeContractDataModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ITradeModuleSingletonController.cs" />
+    <Compile Include="ServiceControllers\ISubscribeComposeController.cs" />
+    <Compile Include="ServiceControllers\ISubscribeContractController.cs" />
+    <Compile Include="ServiceControllers\OrderItemsController.cs" />
+    <Compile Include="ServiceControllers\SubscribeComposeController.cs" />
+    <Compile Include="ServiceControllers\SubscribeContractController.cs" />
+    <Compile Include="ServiceControllers\XqTargetPresentOrderListCtrl.cs" />
+    <Compile Include="ServiceControllers\XqTargetPositionItemsController.cs" />
+    <Compile Include="ServiceControllers\TradeItemsController.cs" />
+    <Compile Include="ServiceControllers\XQTradeLameTaskNoteCtrl.cs" />
+    <Compile Include="Services\FundItemsService.cs" />
+    <Compile Include="Services\PositionDiscreteItemsService.cs" />
+    <Compile Include="Services\OrderItemsService.cs" />
+    <Compile Include="Services\SubscribeComposeService.cs" />
+    <Compile Include="Services\SubscribeContractService.cs" />
+    <Compile Include="Services\TargetPositionService.cs" />
+    <Compile Include="Services\TradeItemsService.cs" />
+    <Compile Include="Services\XQComposeOrderEPTService.cs" />
+    <Compile Include="Services\XQTradeLameTaskNoteService.cs" />
+    <Compile Include="ViewModels\BlankContentViewModel.cs" />
+    <Compile Include="ViewModels\AccountComponentHeaderViewModel.cs" />
+    <Compile Include="ViewModels\ChildrenContractDetailVM.cs" />
+    <Compile Include="ViewModels\ChooseLegPositions2MergeVM.cs" />
+    <Compile Include="ViewModels\ComponentHeaderLayoutVM.cs" />
+    <Compile Include="ViewModels\ComponentTabListSelectionViewModel.cs" />
+    <Compile Include="ViewModels\ComposeSearchPopupViewModel.cs" />
+    <Compile Include="ViewModels\ConditionOrderRealtimeListDataContext.cs" />
+    <Compile Include="ViewModels\ContractInfoContentVM.cs" />
+    <Compile Include="ViewModels\DisplayColumnsConfigItemsContainerModelBase.cs" />
+    <Compile Include="ViewModels\EditComposeViewPrecisionNumberVM.cs" />
+    <Compile Include="ViewModels\OrderOperateConfirmVM.cs" />
+    <Compile Include="ViewModels\ParkedOrderRealtimeListDataContext.cs" />
+    <Compile Include="ViewModels\PlaceOrderConfirmVM.cs" />
+    <Compile Include="ViewModels\PositionAssignHistoryVM.cs" />
+    <Compile Include="ViewModels\PositionOfComposeMergeVM.cs" />
+    <Compile Include="ViewModels\RelatedOrderVM.cs" />
+    <Compile Include="ViewModels\XQComposeOrderEPTManVM.cs" />
+    <Compile Include="ViewModels\XqComposeOrderExecParamsVM.cs" />
+    <Compile Include="ViewModels\XqOrderExecDetailVM.cs" />
+    <Compile Include="ViewModels\OrderHistoryContainerViewModel.cs" />
+    <Compile Include="ViewModels\OrderHistoryEntrustedListVM.cs" />
+    <Compile Include="ViewModels\OrderHistoryConditionListVM.cs" />
+    <Compile Include="ViewModels\OrderHistoryParkedListVM.cs" />
+    <Compile Include="ViewModels\XqOrderExecTradeListVM.cs" />
+    <Compile Include="ViewModels\XqOrderXqTradeDetailVM.cs" />
+    <Compile Include="ViewModels\PositionAssistantComponentContainerModel.cs" />
+    <Compile Include="ViewModels\PositionOfComposeAddViewModel.cs" />
+    <Compile Include="ViewModels\PositionOfComposeViewModel.cs" />
+    <Compile Include="ViewModels\PositionOfContractViewModel.cs" />
+    <Compile Include="ViewModels\SubscribeDataGroupEditDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\SubscribeDataGroupListContainerVM.cs" />
+    <Compile Include="ViewModels\SubscribeDataComponentHeaderViewModel.cs" />
+    <Compile Include="ViewModels\ComposeListViewModel.cs" />
+    <Compile Include="ViewModels\ContractListViewModel.cs" />
+    <Compile Include="ViewModels\CreateComposeWithSameTemplateVM.cs" />
+    <Compile Include="ViewModels\AddComposeDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\DisplayColumnsOrderListParkedConfigItemsContainerModel.cs" />
+    <Compile Include="ViewModels\DisplayColumnsOrderListConditionConfigItemsContainerModel.cs" />
+    <Compile Include="ViewModels\DisplayColumnsOrderListEntrustedConfigItemsContainerModel.cs" />
+    <Compile Include="ViewModels\DisplayColumnsTradeListConfigItemsContainerModel.cs" />
+    <Compile Include="ViewModels\EditComposeNameDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\FundPageViewModel.cs" />
+    <Compile Include="ViewModels\ListDisplayColumnsConfigDialogContentViewModel.cs" />
+    <Compile Include="ViewModels\IDisplayColumnsConfigItemsContainerModel.cs" />
+    <Compile Include="ViewModels\ListDisplayColumnsConfigItemMoveCommands.cs" />
+    <Compile Include="ViewModels\DisplayColumnsComposeListConfigItemsContainerModel.cs" />
+    <Compile Include="ViewModels\DisplayColumnsSubContractListConfigItemsContainerModel.cs" />
+    <Compile Include="ViewModels\OrderListConditionPageViewModel.cs" />
+    <Compile Include="ViewModels\OrderListParkedPageViewModel.cs" />
+    <Compile Include="ViewModels\OrderListEntrustedPageViewModel.cs" />
+    <Compile Include="ViewModels\PlaceOrderComponentContentViewModel.cs" />
+    <Compile Include="ViewModels\PlaceOrderCreateConditionVM.cs" />
+    <Compile Include="ViewModels\PlaceOrderCreateMainViewModel.cs" />
+    <Compile Include="ViewModels\PlaceOrderHangingOrdersAreaVM.cs" />
+    <Compile Include="DataModels\PositionDiscreteItemDataModel.cs" />
+    <Compile Include="ViewModels\PositionDiscreteListPageViewModel.cs" />
+    <Compile Include="ViewModels\PositionDiscreteTradeDetailContentVM.cs" />
+    <Compile Include="ViewModels\TargetChartViewModel.cs" />
+    <Compile Include="ViewModels\TradeHistoryListViewModel.cs" />
+    <Compile Include="ViewModels\TradeWorkspaceTemplateEditDialogContentVM.cs" />
+    <Compile Include="ViewModels\MainWorkspaceComponentLayoutViewModel.cs" />
+    <Compile Include="ViewModels\PlaceOrderComponentHeaderVM.cs" />
+    <Compile Include="ViewModels\TradeListPageViewModel.cs" />
+    <Compile Include="ViewModels\TradeModuleRootVM.cs" />
+    <Compile Include="ViewModels\TradeWorkspaceViewModel.cs" />
+    <Compile Include="ViewModels\TradeWorkspaceTemplateManageDialogContentVM.cs" />
+    <Compile Include="ViewModels\XqComposeOrderTradeDetailVM.cs" />
+    <Compile Include="ViewModels\XqContractOrderExecDetailVM.cs" />
+    <Compile Include="ViewModels\XqContractOrderTradeDetailVM.cs" />
+    <Compile Include="ViewModels\XqOrderDetailViewModel.cs" />
+    <Compile Include="ViewModels\XqTargetClosePositionHistoryVM.cs" />
+    <Compile Include="ViewModels\XqTargetClosePositionSearchVM.cs" />
+    <Compile Include="ViewModels\XqTargetConditionOrdersVM.cs" />
+    <Compile Include="ViewModels\XqTargetParkedOrdersVM.cs" />
+    <Compile Include="ViewModels\XqTargetPositionDetailContentVM.cs" />
+    <Compile Include="ViewModels\XqTargetPositionDetailVM.cs" />
+    <Compile Include="ViewModels\XqTargetPositionTradeDetailVM.cs" />
+    <Compile Include="ViewModels\XqTargetPositionItemDialogTitleVM.cs" />
+    <Compile Include="ViewModels\XqTargetPositionSplitVM.cs" />
+    <Compile Include="ViewModels\XqTargetQuickClosePositionVM.cs" />
+    <Compile Include="ViewModels\XqTargetSelectStopLostOrProfitVM.cs" />
+    <Compile Include="Views\IBlankContentView.cs" />
+    <Compile Include="Views\IAccountComponentHeaderView.cs" />
+    <Compile Include="Views\IChildrenContractDetailView.cs" />
+    <Compile Include="Views\IChooseLegPositions2MergeView.cs" />
+    <Compile Include="Views\IComponentHeaderLayoutView.cs" />
+    <Compile Include="Views\IComponentTabListSelectionView.cs" />
+    <Compile Include="Views\IComposeSearchPopupView.cs" />
+    <Compile Include="Views\IContractInfoContentView.cs" />
+    <Compile Include="Views\IEditComposeViewPrecisionNumberView.cs" />
+    <Compile Include="Views\IOrderOperateConfirmView.cs" />
+    <Compile Include="Views\IPageAvailableOrders.cs" />
+    <Compile Include="Views\IPlaceOrderConfirmView.cs" />
+    <Compile Include="Views\IPositionAssignHistoryView.cs" />
+    <Compile Include="Views\IPositionOfComposeMergeView.cs" />
+    <Compile Include="Views\IRelatedOrderView.cs" />
+    <Compile Include="Views\IXQComposeOrderEPTManView.cs" />
+    <Compile Include="Views\IXqComposeOrderExecParamsView.cs" />
+    <Compile Include="Views\IXqOrderExecDetailView.cs" />
+    <Compile Include="Views\IXqOrderExecTradeListView.cs" />
+    <Compile Include="Views\IXqOrderXqTradeDetailView.cs" />
+    <Compile Include="Views\IPositionAssistantComponentContainer.cs" />
+    <Compile Include="Views\IPositionOfComposeAddView.cs" />
+    <Compile Include="Views\IPositionOfComposeView.cs" />
+    <Compile Include="Views\IPositionOfContractView.cs" />
+    <Compile Include="Views\ITargetChartView.cs" />
+    <Compile Include="Views\ITradeHistoryListView.cs" />
+    <Compile Include="Views\IXqComposeOrderTradeDetailView.cs" />
+    <Compile Include="Views\IXqOrderDetailView.cs" />
+    <Compile Include="Views\IXqTargetClosePositionHistoryView.cs" />
+    <Compile Include="Views\IXqContractOrderTradeDetailView.cs" />
+    <Compile Include="Views\IXqTargetClosePositionSearchView.cs" />
+    <Compile Include="Views\IXqTargetParkedOrdersView.cs" />
+    <Compile Include="Views\IXqTargetPositionDetailContentView.cs" />
+    <Compile Include="Views\IXqTargetPositionDetailView.cs" />
+    <Compile Include="Views\IXqTargetPositionTradeDetailView.cs" />
+    <Compile Include="Views\IXqTargetPositionSplitView.cs" />
+    <Compile Include="Views\IXqTargetQuickClosePositionView.cs" />
+    <Compile Include="Views\IXqTargetSelectStopLostOrProfitView.cs" />
+    <Compile Include="Views\OrderHistory\IOrderHistoryContainerView.cs" />
+    <Compile Include="Views\OrderHistory\IOrderHistoryEntrustedListView.cs" />
+    <Compile Include="Views\IOrderHistoryView.cs" />
+    <Compile Include="Views\ISubscribeDataGroupEditDialogContentView.cs" />
+    <Compile Include="Views\ISubscribeDataGroupListContainerView.cs" />
+    <Compile Include="Views\IComposeListView.cs" />
+    <Compile Include="Views\ISubscribeDataComponentHeaderView.cs" />
+    <Compile Include="Views\IContractListView.cs" />
+    <Compile Include="Views\ICreateComposeWithSameTemplateView.cs" />
+    <Compile Include="Views\IAddComposeDialogContentView.cs" />
+    <Compile Include="Views\IDisplayColumnsOrderListConditionConfigItemsContainerView.cs" />
+    <Compile Include="Views\IDisplayColumnsOrderListParkedConfigItemsContainerView.cs" />
+    <Compile Include="Views\IDisplayColumnsOrderListEntrustedConfigItemsContainerView.cs" />
+    <Compile Include="Views\IDisplayColumnsTradeListConfigItemsContainerView.cs" />
+    <Compile Include="Views\IEditComposeNameDialogContentView.cs" />
+    <Compile Include="Views\IFundPageView.cs" />
+    <Compile Include="Views\IListDisplayColumnsConfigDialogContentView.cs" />
+    <Compile Include="Views\IDisplayColumnsComposeListConfigItemsContainerView.cs" />
+    <Compile Include="Views\IDisplayColumnsSubContractListConfigItemsContainerView.cs" />
+    <Compile Include="Views\IOrderListConditionPageView.cs" />
+    <Compile Include="Views\IOrderListParkedPageView.cs" />
+    <Compile Include="Views\IOrderListEntrustedPageView.cs" />
+    <Compile Include="Views\IPlaceOrderCreateConditionView.cs" />
+    <Compile Include="Views\IPlaceOrderCreateMainView.cs" />
+    <Compile Include="Views\IPlaceOrderHangingOrdersAreaView.cs" />
+    <Compile Include="Views\IPositionDiscreteListPageView.cs" />
+    <Compile Include="Views\IPositionDiscreteTradeDetailContentView.cs" />
+    <Compile Include="Views\ITradeWorkspaceTemplateEditDialogContentView.cs" />
+    <Compile Include="Views\IMainWorkspaceComponentLayoutView.cs" />
+    <Compile Include="Views\IPlaceOrderComponentContentView.cs" />
+    <Compile Include="Views\IPlaceOrderComponentHeaderView.cs" />
+    <Compile Include="Views\ISelectContractDialogContentView.cs" />
+    <Compile Include="Views\ITradeListPageView.cs" />
+    <Compile Include="Views\ITradeInitializeView.cs" />
+    <Compile Include="Views\ITradeModuleRootView.cs" />
+    <Compile Include="Views\ITradeWorkspaceView.cs" />
+    <Compile Include="Views\ITradeWorkspaceTemplateManageDialogContentView.cs" />
+    <Compile Include="Views\OrderHistory\IOrderHistoryConditionListView.cs" />
+    <Compile Include="Views\OrderHistory\IOrderHistoryParkedListView.cs" />
+    <Compile Include="Views\IXqContractOrderExecDetailView.cs" />
+    <Compile Include="Views\IXqTargetPositionItemDialogTitleView.cs" />
+    <Compile Include="Views\IXqTargetConditionOrdersView.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppAssembler\AppAssembler.Interfaces\AppAssembler.Interfaces.csproj">
+      <Project>{4903FB80-2DC0-4319-B0ED-93DF17503AA9}</Project>
+      <Name>AppAssembler.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\NativeModel\NativeModel.csproj">
+      <Project>{017D3C55-D3AF-4F0F-91D9-249AB6A15371}</Project>
+      <Name>NativeModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.BusinessResources\XueQiaoFoundation.BusinessResources.csproj">
+      <Project>{7C429834-FD64-4CBA-A742-C798ECC5A58B}</Project>
+      <Name>XueQiaoFoundation.BusinessResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.Interfaces\XueQiaoFoundation.Interfaces.csproj">
+      <Project>{B31A5E02-2467-4119-A690-7D542965E2BB}</Project>
+      <Name>XueQiaoFoundation.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ContainerShell\ContainerShell.Interfaces\ContainerShell.Interfaces.csproj">
+      <Project>{BD65CD7D-6128-4A01-8F1A-74A835681B98}</Project>
+      <Name>ContainerShell.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LoginUserManage\LoginUserManage.Interfaces\LoginUserManage.Interfaces.csproj">
+      <Project>{1b1a96a8-d556-4404-9712-50794d5f2d12}</Project>
+      <Name>LoginUserManage.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\Dragablz\Dragablz.net45.csproj">
+      <Project>{7b11011c-7fd7-4ab0-a1ad-04e940b026de}</Project>
+      <Name>Dragablz.net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\ItemsFilter\ItemsFilter.csproj">
+      <Project>{aab57bb1-a448-457c-ad53-16b32a1c1f1d}</Project>
+      <Name>ItemsFilter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Project>{27b67dfe-0bf1-4435-b036-e4c083eaea03}</Project>
+      <Name>System.Waf.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_configuration\lib_configuration.csproj">
+      <Project>{83B10C13-C2AE-42CB-AFB4-CFA150407F61}</Project>
+      <Name>lib_configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_xqclient_base\lib_xqclient_base.csproj">
+      <Project>{251d71ee-27e6-46e8-bb87-2b2120564cd8}</Project>
+      <Name>lib_xqclient_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\Thrift\Thrift.45.csproj">
+      <Project>{ebce35da-cf6a-42bc-a357-a9c09b534299}</Project>
+      <Name>Thrift.45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\business_foundation_lib\business_foundation_lib.csproj">
+      <Project>{8380879b-9396-4095-8d2d-c721e20da632}</Project>
+      <Name>business_foundation_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\IDLAutoGenerated\IDLAutoGenerated.csproj">
+      <Project>{e9b131ca-a3da-4a12-9c9e-235957b0f139}</Project>
+      <Name>IDLAutoGenerated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.Shared\XueQiaoFoundation.Shared.csproj">
+      <Project>{2497225a-7dbd-4901-bddd-3f8b37996769}</Project>
+      <Name>XueQiaoFoundation.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI\XueQiaoFoundation.UI.csproj">
+      <Project>{A811CA2B-99B3-4688-9175-5CFCFFAE88B5}</Project>
+      <Name>XueQiaoFoundation.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trade.Interfaces\Trade.Interfaces.csproj">
+      <Project>{1fcf2ae6-4881-4dc9-8377-aa128791b8aa}</Project>
+      <Name>Trade.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trade.Modules.Domain\Trade.Modules.Domain.csproj">
+      <Project>{e504ff99-3354-43c2-a803-c0064769f271}</Project>
+      <Name>Trade.Modules.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

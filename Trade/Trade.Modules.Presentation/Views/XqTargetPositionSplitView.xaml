@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.XqTargetPositionSplitView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             xmlns:controls="clr-namespace:XueQiaoFoundation.UI.Controls;assembly=XueQiaoFoundation.UI"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Type vm:XqTargetPositionSplitVM}"
+             d:DesignHeight="600" d:DesignWidth="800"
+             x:Name="ViewRoot">
+    <UserControl.Resources>
+        <uiconvert:EqualityToBooleanConverter x:Key="Equal2TrueConverter"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2VisibleConverter" CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <uiconvert:CloneValuesConverter x:Key="CloneValuesConverter"/>
+
+        <convert:TradeDirection2NameConverter x:Key="TradeDir2NameConverter"/>
+        <uiextra_convert:Timestamp2StringConverter x:Key="Ms2StringConverter" Convert2StringFormatType="DateTimeIgnoreYear" ValueType="Millisecond"/>
+        <convert:XqTargetPositionDataSourceChannel2NameConverter x:Key="PositionDataSourceChannel2NameConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="20,20,20,10">
+        <DataGrid ItemsSource="{Binding PositionSplitEditItems}">
+            <DataGrid.Columns>
+                <!-- item 类型为 XqTargetPositionSplitEditItem -->
+                <DataGridTextColumn Header="方向" MinWidth="60"
+                        Binding="{Binding Direction, Converter={StaticResource TradeDir2NameConverter}}"/>
+                <DataGridTextColumn Header="数量" MinWidth="60"
+                        Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="价格" MinWidth="80"
+                        Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="时间" MinWidth="100"
+                        Binding="{Binding SourceDataTimestampMs, Converter={StaticResource Ms2StringConverter}}"/>
+                <DataGridTextColumn Header="来源" MinWidth="100" Width="*" CanUserSort="False"
+                        Binding="{Binding SourceDataChannel, Converter={StaticResource PositionDataSourceChannel2NameConverter}}"/>
+                <DataGridTemplateColumn Header="拆分操作" MinWidth="140">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" x:Name="SplitArgsPanel">
+                                <controls:NumericUpDown 
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                    MinWidth="84"
+                                    Maximum="{Binding Quantity}"
+                                    Minimum="0" 
+                                    Interval="1"
+                                    Value="{Binding SplitQuantity, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    BorderThickness="0"/>
+                                <Button 
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                    Margin="8,0,0,0"
+                                    Content="拆分"
+                                    Style="{StaticResource BordedButtonPrimary3}"
+                                    Padding="4,2"
+                                    FontSize="{DynamicResource SecondaryContentFontSize}"
+                                    Command="{Binding ElementName=ViewRoot, Path=DataContext.TriggerSplitPositionItemCmd}">
+                                    <Button.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource CloneValuesConverter}">
+                                            <Binding/>
+                                            <Binding ElementName="SplitArgsPanel"/>
+                                        </MultiBinding>
+                                    </Button.CommandParameter>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

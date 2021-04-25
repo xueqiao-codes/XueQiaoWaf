@@ -1,0 +1,549 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.ContractListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+             xmlns:module_convert="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Converters"
+             xmlns:acb="clr-namespace:AttachedCommandBehavior;assembly=AttachedCommandBehavior"
+             xmlns:local="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Views"
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:res="clr-namespace:XueQiaoFoundation.BusinessResources.Resources;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600"
+             d:DataContext="{x:Type vm:ContractListViewModel}"
+             x:Name="ViewRoot">
+    <UserControl.Resources>
+        <local:BindingProxy x:Key="RootDataContextProxy" Data="{Binding}"/>
+
+        <convert:CommodityType2NameConverter x:Key="CommodityType2NameConverter"/>
+        <uiextra_convert:Timestamp2StringConverter x:Key="TimestampMs2TimeStringConverter" 
+                                           ValueType="Millisecond" 
+                                           Convert2StringFormatType="Time"/>
+        <convert:TradeDirection2NameConverter x:Key="TradeDirection2NameConverter"/>
+        <uiconvert:DoubleCompareConverter x:Key="DoubleCompareConverter"/>
+
+        <uiconvert:EqualityToVisibilityConverter 
+                x:Key="EqualityToVisibilityConverter"
+                CollapsedWhenEquals="False"
+                CollapsedWhenNotEquals="True"/>
+        <uiconvert:CloneValuesConverter x:Key="CloneValuesConverter"/>
+        <module_convert:MarketSubscribeState2NameConverter x:Key="MarketSubscribeState2NameConverter"/>
+        <module_convert:OutterContractProp2NullConverter x:Key="OutterContractProp2NullConverter"/>
+
+        <sys:Double x:Key="Double0">0.0</sys:Double>
+        
+        <Style TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource FlatContentButtonPrimary3}"
+               x:Key="ListItemButtonInCell">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsXqTargetExpired}" Value="True">
+                    <Setter Property="Command" Value="{x:Null}"/>
+                    <Setter Property="CommandParameter" Value="{x:Null}"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <DataGridTemplateColumn 
+            Header="合约名称" MinWidth="100" CanUserSort="True" SortMemberPath="XqTargetName"
+            x:Key="SubscribeContractListDisplayColumn_Name"
+            x:Shared="False">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ContentControl Grid.Column="0" VerticalAlignment="Center"
+                                        Margin="0,0,4,0"
+                                        Content="{Binding}"
+                                        ContentTemplate="{StaticResource SubscribeStateIconViewDT}"/>
+                        <Button 
+                            Grid.Column="1" VerticalAlignment="Center"
+                            Command="{Binding ElementName=ViewRoot, Path=DataContext.ClickItemTargetKeyRelatedColumnCmd}"
+                            CommandParameter="{Binding}"
+                            Content="{Binding ContractDetailContainer.CnDisplayName, Mode=OneWay}"
+                            Style="{StaticResource ListItemButtonInCell}"
+                            ToolTipService.ShowDuration="30000">
+                            <Button.ToolTip>
+                                <ToolTip Style="{StaticResource XQToolTipStyle}">
+                                    <local:ContractTooltipView DataContext="{Binding ContractDetailContainer}"/>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn
+            Header="最新价" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_LastPrice"
+            x:Shared="False">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding Quotation.LastPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+                        Style="{StaticResource RiseOrFallRelatedText}"
+                        res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                        res:QuotationAttachPropertiesProvider.IsInteractive="True">
+                        <res:QuotationAttachPropertiesProvider.CompareResult1>
+                            <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                <Binding Path="Quotation.LastPrice"/>
+                                <Binding Path="Quotation.PreSettlementPrice"/>
+                            </MultiBinding>
+                        </res:QuotationAttachPropertiesProvider.CompareResult1>
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding ElementName=ViewRoot, Path=DataContext.ClickItemPriceRelatedColumnCmd}" 
+                                          MouseAction="LeftClick">
+                                <MouseBinding.CommandParameter>
+                                    <MultiBinding Mode="OneWay" Converter="{StaticResource CloneValuesConverter}">
+                                        <Binding />
+                                        <Binding Path="Quotation.LastPrice"/>
+                                    </MultiBinding>
+                                </MouseBinding.CommandParameter>
+                            </MouseBinding>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTextColumn 
+            Header="最新量" MinWidth="60" CanUserSort="False"
+            Binding="{Binding Quotation.LastQty, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Key="SubscribeContractListDisplayColumn_LastQty"
+            x:Shared="False"/>
+
+        <DataGridTextColumn 
+            Header="买量" MinWidth="60" CanUserSort="False" 
+            Binding="{Binding Quotation.BidQty[0], TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Key="SubscribeContractListDisplayColumn_BidQty"
+            x:Shared="False"/>
+
+        <DataGridTemplateColumn
+            Header="买价" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_BidPrice"
+            x:Shared="False">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding Quotation.BidPrice[0], TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"
+                        Style="{StaticResource RiseOrFallRelatedText}"
+                        res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                        res:QuotationAttachPropertiesProvider.IsInteractive="True">
+                        <res:QuotationAttachPropertiesProvider.CompareResult1>
+                            <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                <Binding Path="Quotation.BidPrice[0]"/>
+                                <Binding Path="Quotation.PreSettlementPrice"/>
+                            </MultiBinding>
+                        </res:QuotationAttachPropertiesProvider.CompareResult1>
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding ElementName=ViewRoot, Path=DataContext.ClickItemPriceRelatedColumnCmd}" 
+                                          MouseAction="LeftClick">
+                                <MouseBinding.CommandParameter>
+                                    <MultiBinding Mode="OneWay" Converter="{StaticResource CloneValuesConverter}">
+                                        <Binding />
+                                        <Binding Path="Quotation.BidPrice[0]"/>
+                                    </MultiBinding>
+                                </MouseBinding.CommandParameter>
+                            </MouseBinding>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTextColumn 
+            Header="卖量" MinWidth="60" CanUserSort="False"
+            Binding="{Binding Quotation.AskQty[0], TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Key="SubscribeContractListDisplayColumn_AskQty"
+            x:Shared="False"/>
+
+        <DataGridTemplateColumn
+            Header="卖价" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_AskPrice"
+            x:Shared="False">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding Quotation.AskPrice[0], TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"
+                        Style="{StaticResource RiseOrFallRelatedText}"
+                        res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                        res:QuotationAttachPropertiesProvider.IsInteractive="True">
+                        <res:QuotationAttachPropertiesProvider.CompareResult1>
+                            <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                <Binding Path="Quotation.AskPrice[0]"/>
+                                <Binding Path="Quotation.PreSettlementPrice"/>
+                            </MultiBinding>
+                        </res:QuotationAttachPropertiesProvider.CompareResult1>
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding ElementName=ViewRoot, Path=DataContext.ClickItemPriceRelatedColumnCmd}" 
+                                          MouseAction="LeftClick">
+                                <MouseBinding.CommandParameter>
+                                    <MultiBinding Mode="OneWay" Converter="{StaticResource CloneValuesConverter}">
+                                        <Binding />
+                                        <Binding Path="Quotation.AskPrice[0]"/>
+                                    </MultiBinding>
+                                </MouseBinding.CommandParameter>
+                            </MouseBinding>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn
+            Header="涨跌" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_IncreasePrice"
+            x:Shared="False">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding Quotation.IncreasePrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+                        Style="{StaticResource RiseOrFallRelatedText}"
+                        res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                        res:QuotationAttachPropertiesProvider.IsInteractive="False">
+                        <res:QuotationAttachPropertiesProvider.CompareResult1>
+                            <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                <Binding Path="Quotation.IncreasePrice"/>
+                                <Binding Source="{StaticResource Double0}"/>
+                            </MultiBinding>
+                        </res:QuotationAttachPropertiesProvider.CompareResult1>
+                    </TextBlock>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        
+        <DataGridTemplateColumn
+            Header="涨幅" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_IncreasePriceRate"
+            x:Shared="False">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding Quotation.IncreasePriceRate, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00%}}"
+                        Style="{StaticResource RiseOrFallRelatedText}"
+                        res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                        res:QuotationAttachPropertiesProvider.IsInteractive="False">
+                        <res:QuotationAttachPropertiesProvider.CompareResult1>
+                            <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                <Binding Path="Quotation.IncreasePriceRate"/>
+                                <Binding Source="{StaticResource Double0}"/>
+                            </MultiBinding>
+                        </res:QuotationAttachPropertiesProvider.CompareResult1>
+                    </TextBlock>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTextColumn 
+            Header="成交量" MinWidth="60" CanUserSort="False"
+            Binding="{Binding Quotation.Volume, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Key="SubscribeContractListDisplayColumn_Volume"
+            x:Shared="False"/>
+
+        <DataGridTextColumn 
+            Header="持仓量" MinWidth="60" CanUserSort="False"
+            Binding="{Binding Quotation.OpenInterest, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Key="SubscribeContractListDisplayColumn_OpenInterest"
+            x:Shared="False"/>
+
+        <DataGridTextColumn 
+            Header="日增仓" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_DailyIncrementOpenInterest"
+            x:Shared="False">
+            <DataGridTextColumn.Binding>
+                <MultiBinding Mode="OneWay" Converter="{StaticResource OutterContractProp2NullConverter}" TargetNullValue="{StaticResource NullValueDataDefaultDisplayText}">
+                    <Binding Path="Quotation.DailyIncrementOpenInterest"/>
+                    <Binding Path="ContractDetailContainer.ExchangeDetail.ExchangeMic"/>
+                    <Binding Path="DataContext.ExchangeDataService" ElementName="ViewRoot"/>
+                </MultiBinding>
+            </DataGridTextColumn.Binding>
+        </DataGridTextColumn>
+
+        <DataGridTextColumn 
+            Header="更新时间" MinWidth="60" CanUserSort="False"
+            Binding="{Binding Quotation.UpdateTimestampMs, Converter={StaticResource TimestampMs2TimeStringConverter}}"
+            x:Key="SubscribeContractListDisplayColumn_UpdateTime"
+            x:Shared="False"/>
+
+        <DataGridTextColumn 
+            Header="订阅状态" MinWidth="60" CanUserSort="False"
+            Binding="{Binding SubscribeState, Converter={StaticResource MarketSubscribeState2NameConverter}}"
+            x:Key="SubscribeContractListDisplayColumn_SubscribeState"
+            x:Shared="False"/>
+
+        <DataGridTextColumn
+            Header="订阅状态信息" MinWidth="80" CanUserSort="False"
+            Binding="{Binding SubscribeStateMsg}"
+            x:Key="SubscribeContractListDisplayColumn_SubscribeStateMsg"
+            x:Shared="False"/>
+
+        <DataGridTemplateColumn
+            Header="开盘价" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_OpenPrice"
+            x:Shared="False">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding Quotation.OpenPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+                        Style="{StaticResource RiseOrFallRelatedText}"
+                        res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                        res:QuotationAttachPropertiesProvider.IsInteractive="False">
+                        <res:QuotationAttachPropertiesProvider.CompareResult1>
+                            <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                <Binding Path="Quotation.OpenPrice"/>
+                                <Binding Path="Quotation.PreSettlementPrice"/>
+                            </MultiBinding>
+                        </res:QuotationAttachPropertiesProvider.CompareResult1>
+                    </TextBlock>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn
+            Header="最高价" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_HighPrice"
+            x:Shared="False">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding Quotation.HighPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+                        Style="{StaticResource RiseOrFallRelatedText}"
+                        res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                        res:QuotationAttachPropertiesProvider.IsInteractive="False">
+                        <res:QuotationAttachPropertiesProvider.CompareResult1>
+                            <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                <Binding Path="Quotation.HighPrice"/>
+                                <Binding Path="Quotation.PreSettlementPrice"/>
+                            </MultiBinding>
+                        </res:QuotationAttachPropertiesProvider.CompareResult1>
+                    </TextBlock>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn
+            Header="最低价" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_LowPrice"
+            x:Shared="False">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding Quotation.LowPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+                        Style="{StaticResource RiseOrFallRelatedText}"
+                        res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                        res:QuotationAttachPropertiesProvider.IsInteractive="False">
+                        <res:QuotationAttachPropertiesProvider.CompareResult1>
+                            <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                <Binding Path="Quotation.LowPrice"/>
+                                <Binding Path="Quotation.PreSettlementPrice"/>
+                            </MultiBinding>
+                        </res:QuotationAttachPropertiesProvider.CompareResult1>
+                    </TextBlock>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTemplateColumn
+            Header="收盘价" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_ClosePrice"
+            x:Shared="False">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding Quotation.ClosePrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+                        Style="{StaticResource RiseOrFallRelatedText}"
+                        res:QuotationAttachPropertiesProvider.IsXqTargetExpired="{Binding IsXqTargetExpired}"
+                        res:QuotationAttachPropertiesProvider.IsInteractive="False">
+                        <res:QuotationAttachPropertiesProvider.CompareResult1>
+                            <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                <Binding Path="Quotation.ClosePrice"/>
+                                <Binding Path="Quotation.PreSettlementPrice"/>
+                            </MultiBinding>
+                        </res:QuotationAttachPropertiesProvider.CompareResult1>
+                    </TextBlock>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+
+        <DataGridTextColumn 
+            Header="昨日结算价" MinWidth="60" CanUserSort="False"
+            Binding="{Binding Quotation.PreSettlementPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Key="SubscribeContractListDisplayColumn_PreSettlementPrice"
+            x:Shared="False"/>
+
+        <DataGridTextColumn 
+            Header="昨日持仓量" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_PreOpenInterest"
+            x:Shared="False">
+            <DataGridTextColumn.Binding>
+                <MultiBinding Mode="OneWay" Converter="{StaticResource OutterContractProp2NullConverter}" TargetNullValue="{StaticResource NullValueDataDefaultDisplayText}">
+                    <Binding Path="Quotation.PreOpenInterest"/>
+                    <Binding Path="ContractDetailContainer.ExchangeDetail.ExchangeMic"/>
+                    <Binding Path="DataContext.ExchangeDataService" ElementName="ViewRoot"/>
+                </MultiBinding>
+            </DataGridTextColumn.Binding>
+        </DataGridTextColumn>
+
+        <DataGridTextColumn 
+            Header="昨日收盘价" MinWidth="60" CanUserSort="False"
+            Binding="{Binding Quotation.PreClosePrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Key="SubscribeContractListDisplayColumn_PreClosePrice"
+            x:Shared="False"/>
+
+        <DataGridTextColumn 
+            Header="总成交额" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_Turnover"
+            x:Shared="False">
+            <DataGridTextColumn.Binding>
+                <MultiBinding Mode="OneWay" Converter="{StaticResource OutterContractProp2NullConverter}" TargetNullValue="{StaticResource NullValueDataDefaultDisplayText}">
+                    <Binding Path="Quotation.Turnover"/>
+                    <Binding Path="ContractDetailContainer.ExchangeDetail.ExchangeMic"/>
+                    <Binding Path="DataContext.ExchangeDataService" ElementName="ViewRoot"/>
+                </MultiBinding>
+            </DataGridTextColumn.Binding>
+        </DataGridTextColumn>
+
+        <DataGridTextColumn 
+            Header="涨停价" MinWidth="60" CanUserSort="False"
+            Binding="{Binding Quotation.UpperLimitPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            x:Key="SubscribeContractListDisplayColumn_UpperLimitPrice"
+            x:Shared="False"/>
+
+        <DataGridTextColumn 
+            Binding="{Binding Quotation.LowerLimitPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            Header="跌停价" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_LowerLimitPrice"
+            x:Shared="False"/>
+
+        <DataGridTextColumn 
+            Header="成交均价" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_AveragePrice"
+            x:Shared="False">
+            <DataGridTextColumn.Binding>
+                <MultiBinding Mode="OneWay" Converter="{StaticResource OutterContractProp2NullConverter}" TargetNullValue="{StaticResource NullValueDataDefaultDisplayText}">
+                    <Binding Path="Quotation.AveragePrice"/>
+                    <Binding Path="ContractDetailContainer.ExchangeDetail.ExchangeMic"/>
+                    <Binding Path="DataContext.ExchangeDataService" ElementName="ViewRoot"/>
+                </MultiBinding>
+            </DataGridTextColumn.Binding>
+        </DataGridTextColumn>
+
+        <DataGridTextColumn 
+            Binding="{Binding TradeStatus, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            Header="交易状态" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_TradeStatus"
+            x:Shared="False"/>
+
+        <DataGridTextColumn 
+            Binding="{Binding ContractDetailContainer.ExchangeDetail.CnName, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            Header="交易所" MinWidth="60" CanUserSort="False"
+            x:Key="SubscribeContractListDisplayColumn_Exchange"
+            x:Shared="False"/>
+
+    </UserControl.Resources>
+
+    <DataGrid 
+        ItemsSource="{Binding ContractCollectionView}"
+        IsSynchronizedWithCurrentItem="True"
+        IsReadOnly="True"
+        RowHeaderWidth="0"
+        x:Name="ContractListDataGrid">
+        
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="SelectionChanged">
+                <i:InvokeCommandAction 
+                    Command="{Binding SelectedItemsOptCommands.ItemsSelectionChangedCmd}" 
+                    CommandParameter="{Binding SelectedItems, ElementName=ContractListDataGrid}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="配置列显示" Command="{Binding Path=Data.ToConfigureListDisplayColumnsCmd, Source={StaticResource RootDataContextProxy}}"/>
+                <MenuItem Header="应用默认列显示" Command="{Binding Path=Data.ToApplyListDefaultDisplayColumnsCmd, Source={StaticResource RootDataContextProxy}}"/>
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+        
+        <DataGrid.ItemContainerStyle>
+            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource DataGridRowDefault}">
+                <Setter Property="Tag" Value="{Binding Data, Source={StaticResource RootDataContextProxy}}"/>
+                
+                <!--ListViewItem has no LeftDoubleClick event, but has MouseDoubleClick event-->
+                <!--
+                <Setter Property="acb:CommandBehavior.Event" Value="MouseDoubleClick" />
+                <Setter Property="acb:CommandBehavior.Command" Value="{Binding Data.OpenInAssociatedPlaceOrderCmd, Source={StaticResource RootDataContextProxy}}" />
+                <Setter Property="acb:CommandBehavior.CommandParameter" Value="{Binding}" />
+                -->
+                <Setter Property="ContextMenu">
+                    <Setter.Value>
+                        <ContextMenu DataContext="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}"
+                                     Tag="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                            <MenuItem
+                                Header="查看合约信息"
+                                Command="{Binding Path=Tag.SelectedItemsOptCommands.ShowContractInfoCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                />
+                            <MenuItem 
+                                Header="订阅行情"
+                                Command="{Binding Path=Tag.SelectedItemsOptCommands.SubscribeQuotationCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                />
+                            <MenuItem 
+                                Header="退订行情"
+                                Command="{Binding Path=Tag.SelectedItemsOptCommands.UnsubscribeQuotationCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                />
+                            <MenuItem 
+                                Header="删除合约"
+                                Command="{Binding Path=Tag.SelectedItemsOptCommands.RemoveItemCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                CommandParameter="{Binding Source={StaticResource RootDataContextProxy}, Path=Data.GroupTab}">
+                            </MenuItem>
+
+                            <Separator/>
+
+                            <MenuItem 
+                                Header="添加到分组" 
+                                ItemsSource="{Binding Path=Tag.AddibleCustomGroups, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                IsEnabled="{Binding Path=Tag.ExistAddibleCustomGroups, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                <MenuItem.ItemContainerStyle>
+                                    <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemDefault}">
+                                        <Setter Property="Header" Value="{Binding Path=Group.GroupName}"/>
+                                        <Setter Property="CommandParameter" Value="{Binding Path=Group}"/>
+                                        <Setter Property="Command" Value="{Binding Path=AddToGroupCmd, Mode=OneWay}"/>
+                                    </Style>
+                                </MenuItem.ItemContainerStyle>
+                            </MenuItem>
+                            <MenuItem 
+                                Header="从分组中移除"
+                                Command="{Binding Path=Tag.SelectedItemsOptCommands.RemoveFromGroupCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                CommandParameter="{Binding Source={StaticResource RootDataContextProxy}, Path=Data.GroupTab}">
+                            </MenuItem>
+                            <MenuItem 
+                                Header="打开下单组件"
+                                Command="{Binding Path=Tag.SelectedItemsOptCommands.OpenPlaceOrderComponentCmd, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                />
+
+                            <Separator/>
+
+                            <MenuItem Header="配置列显示" Command="{Binding Data.ToConfigureListDisplayColumnsCmd, Source={StaticResource RootDataContextProxy}}"/>
+                            <MenuItem Header="应用默认列显示" Command="{Binding Data.ToApplyListDefaultDisplayColumnsCmd, Source={StaticResource RootDataContextProxy}}"/>
+                        </ContextMenu>
+                    </Setter.Value>
+                </Setter>
+                
+                <Setter Property="Foreground" Value="{DynamicResource ContentBrush1}"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsXqTargetExpired}" Value="True">
+                        <Setter Property="Foreground" Value="{DynamicResource ContentBrush4}"/>
+                        <Setter Property="ToolTip" Value="该合约已过期"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </DataGrid.ItemContainerStyle>
+    </DataGrid>
+</UserControl>

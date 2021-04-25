@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="XueQiaoFoundation.UI.Components.TextEditor.XueQiaoReadonlyTextEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Border Background="{DynamicResource PanelHeaderBgBrush1}"/>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox x:Name="CmbFontFamily" Margin="10,4,0,4"
+                      MinWidth="100"
+                      SelectionChanged="CmbFontFamily_SelectionChanged"/>
+                <ComboBox x:Name="CmbFontSize" Margin="15,4,0,4"
+                      Width="50"
+                      IsEditable="True" 
+                      InputMethod.IsInputMethodEnabled="False"
+                      PreviewTextInput="CmbFontSize_PreviewTextInput"
+                      TextBoxBase.TextChanged="CmbFontSize_TextChanged"/>
+                <StackPanel Orientation="Horizontal" Margin="15,0,0,0" VerticalAlignment="Center">
+                    <RepeatButton Content="放大" Style="{StaticResource FlatContentButtonPrimary3}"
+                              x:Name="ZoomInButton"
+                              Click="ZoomInButton_Click"/>
+                    <TextBlock x:Name="ZoomTextBlock" Margin="8,0" Text="100%" VerticalAlignment="Center"/>
+                    <RepeatButton Content="缩小" Style="{StaticResource FlatContentButtonPrimary3}"
+                              x:Name="ZoomOutButton"
+                              Click="ZoomOutButton_Click"/>
+                </StackPanel>
+
+                <Separator Margin="15,4" VerticalAlignment="Center"/>
+                <Button x:Name="OpenInNotepadButton" 
+                    VerticalAlignment="Center"
+                    Content="在记事本打开" Style="{StaticResource FlatContentButtonPrimary3}"
+                    Click="OpenInNotepadButton_Click"/>
+            </StackPanel>
+        </Grid>
+        <RichTextBox Grid.Row="1" x:Name="rtbEditor" IsReadOnly="True" 
+                     BorderThickness="0"
+                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                     Style="{StaticResource GeneralControlStyle}"
+                     FontSize="{DynamicResource SecondaryContentFontSize}"
+                     Background="{x:Null}">
+        </RichTextBox>
+    </Grid>
+</UserControl>

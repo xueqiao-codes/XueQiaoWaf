@@ -1,0 +1,834 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{847F66C7-04FD-4E9B-A632-CC92A31C8F8E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XueQiaoWaf.Trade.Modules.Presentation</RootNamespace>
+    <AssemblyName>XueQiaoWaf.Trade.Modules.Presentation</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="GongSolutions.Wpf.DragDrop, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\gong-wpf-dragdrop.1.1.0\lib\net45\GongSolutions.Wpf.DragDrop.dll</HintPath>
+    </Reference>
+    <Reference Include="Gu.Wpf.Adorners, Version=1.5.1.0, Culture=neutral, PublicKeyToken=6dfb64f9972bd31d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Gu.Wpf.Adorners.1.5.1.0\lib\net45\Gu.Wpf.Adorners.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\..\ThirdFramework\ThirdDLL\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="ParallelExtensionsExtras, Version=1.2.3.0, Culture=neutral, PublicKeyToken=665f4d61f853b5a9, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ParallelExtensionsExtras.1.2.0.0\lib\net40\ParallelExtensionsExtras.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="websocket-sharp, Version=1.0.4.0, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WebSocketSharpFork.1.0.4.0\lib\net35\websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\ClosedProfitOfCurrencyConverter.cs" />
+    <Compile Include="Converters\ContractMarginDisplayConverter.cs" />
+    <Compile Include="Converters\ContractQuoteUnitDisplayConverter.cs" />
+    <Compile Include="Converters\ContractSizeDisplayConverter.cs" />
+    <Compile Include="Converters\ContractTradeTimeSpan2TextConverter.cs" />
+    <Compile Include="Converters\MarketSubscribeState2NameConverter.cs" />
+    <Compile Include="Converters\OrderListColumnCondition2NameConverter.cs" />
+    <Compile Include="Converters\OrderListColumnParked2NameConverter.cs" />
+    <Compile Include="Converters\OrderListColumnEntrusted2NameConverter.cs" />
+    <Compile Include="Converters\OutterContractProp2NullConverter.cs" />
+    <Compile Include="Converters\PositionAssistantContentType2NameConverter.cs" />
+    <Compile Include="Converters\SubscribeComposeDisplayColumn2DisplayNameConverter.cs" />
+    <Compile Include="Converters\SubscribeContractDisplayColumn2DisplayNameConverter.cs" />
+    <Compile Include="Converters\SubscribeDataGroupHeaderSizeConverter.cs" />
+    <Compile Include="Converters\SubscribeDataGroupNameConverter.cs" />
+    <Compile Include="Converters\TargetComposeLegTradeSummaryTextAssembler.cs" />
+    <Compile Include="Converters\TradeComponentTypeToNameConverter.cs" />
+    <Compile Include="Converters\TradeListColumn2DisplayNameConverter.cs" />
+    <Compile Include="Converters\XqComposeOrderLegExecParamsDM2DescConverter.cs" />
+    <Compile Include="Converters\XqOrderDetailContentTabType2NameConverter.cs" />
+    <Compile Include="Converters\XqTargetPositionContentTabType2NameConverter.cs" />
+    <Compile Include="Converters\XqTradeDetailDMType2NameConverter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Selector\ComposePositionPriceInputItemDTS.cs" />
+    <Compile Include="Selector\CPMergePriceInputItemDTS.cs" />
+    <Compile Include="Services\PresentationService.cs" />
+    <Compile Include="Views\BlankContentView.xaml.cs">
+      <DependentUpon>BlankContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccountComponentHeaderView.xaml.cs">
+      <DependentUpon>AccountComponentHeaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BindingProxy.cs" />
+    <Compile Include="Views\ChildrenContractDetailView.xaml.cs">
+      <DependentUpon>ChildrenContractDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChooseLegPositions2MergeView.xaml.cs">
+      <DependentUpon>ChooseLegPositions2MergeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComponentHeaderLayoutView.xaml.cs">
+      <DependentUpon>ComponentHeaderLayoutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComponentTabListSelectionView.xaml.cs">
+      <DependentUpon>ComponentTabListSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComposeSearchPopupView.xaml.cs">
+      <DependentUpon>ComposeSearchPopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractBasicInfoView.xaml.cs">
+      <DependentUpon>ContractBasicInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractInfoContentView.xaml.cs">
+      <DependentUpon>ContractInfoContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractOrderBasicInfoView.xaml.cs">
+      <DependentUpon>ContractOrderBasicInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractTooltipView.xaml.cs">
+      <DependentUpon>ContractTooltipView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditComposeViewPrecisionNumberView.xaml.cs">
+      <DependentUpon>EditComposeViewPrecisionNumberView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderConditionListHeader.xaml.cs">
+      <DependentUpon>OrderConditionListHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderOperateConfirmView.xaml.cs">
+      <DependentUpon>OrderOperateConfirmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderParkedListHeader.xaml.cs">
+      <DependentUpon>OrderParkedListHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlaceOrderConfirmView.xaml.cs">
+      <DependentUpon>PlaceOrderConfirmView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PositionAssignHistoryView.xaml.cs">
+      <DependentUpon>PositionAssignHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PositionOfComposeMergeView.xaml.cs">
+      <DependentUpon>PositionOfComposeMergeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RelatedOrderView.xaml.cs">
+      <DependentUpon>RelatedOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XQComposeOrderEPTManView.xaml.cs">
+      <DependentUpon>XQComposeOrderEPTManView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqComposeOrderExecParamsView.xaml.cs">
+      <DependentUpon>XqComposeOrderExecParamsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XQComposeOrderBasicInfoView.xaml.cs">
+      <DependentUpon>XQComposeOrderBasicInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XQComposeOrderParallelLegEPTContentView.xaml.cs">
+      <DependentUpon>XQComposeOrderParallelLegEPTContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XQComposeOrderSerialLegEPTContentView.xaml.cs">
+      <DependentUpon>XQComposeOrderSerialLegEPTContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqOrderExecDetailView.xaml.cs">
+      <DependentUpon>XqOrderExecDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderHistoryConditionListView.xaml.cs">
+      <DependentUpon>OrderHistoryConditionListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderHistoryParkedListView.xaml.cs">
+      <DependentUpon>OrderHistoryParkedListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderHistoryEntrustedListView.xaml.cs">
+      <DependentUpon>OrderHistoryEntrustedListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderHistoryContainerView.xaml.cs">
+      <DependentUpon>OrderHistoryContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqOrderExecTradeListView.xaml.cs">
+      <DependentUpon>XqOrderExecTradeListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqOrderXqTradeDetailView.xaml.cs">
+      <DependentUpon>XqOrderXqTradeDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PositionAssistantComponentContainer.xaml.cs">
+      <DependentUpon>PositionAssistantComponentContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PositionOfComposeAddView.xaml.cs">
+      <DependentUpon>PositionOfComposeAddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PositionOfComposeView.xaml.cs">
+      <DependentUpon>PositionOfComposeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PositionOfContractView.xaml.cs">
+      <DependentUpon>PositionOfContractView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubscribeDataGroupEditDialogContentView.xaml.cs">
+      <DependentUpon>SubscribeDataGroupEditDialogContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubscribeDataGroupListContainerView.xaml.cs">
+      <DependentUpon>SubscribeDataGroupListContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComposeListView.xaml.cs">
+      <DependentUpon>ComposeListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubscribeDataComponentHeaderView.xaml.cs">
+      <DependentUpon>SubscribeDataComponentHeaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractListView.xaml.cs">
+      <DependentUpon>ContractListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateComposeWithSameTemplateView.xaml.cs">
+      <DependentUpon>CreateComposeWithSameTemplateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddComposeDialogContentView.xaml.cs">
+      <DependentUpon>AddComposeDialogContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisplayColumnsOrderListConditionConfigItemsContainerView.xaml.cs">
+      <DependentUpon>DisplayColumnsOrderListConditionConfigItemsContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisplayColumnsOrderListEntrustedConfigItemsContainerView.xaml.cs">
+      <DependentUpon>DisplayColumnsOrderListEntrustedConfigItemsContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisplayColumnsOrderListParkedConfigItemsContainerView.xaml.cs">
+      <DependentUpon>DisplayColumnsOrderListParkedConfigItemsContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisplayColumnsTradeListConfigItemsContainerView.xaml.cs">
+      <DependentUpon>DisplayColumnsTradeListConfigItemsContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditComposeNameDialogContentView.xaml.cs">
+      <DependentUpon>EditComposeNameDialogContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FundPageView.xaml.cs">
+      <DependentUpon>FundPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListDisplayColumnsConfigDialogContentView.xaml.cs">
+      <DependentUpon>ListDisplayColumnsConfigDialogContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisplayColumnsComposeListConfigItemsContainerView.xaml.cs">
+      <DependentUpon>DisplayColumnsComposeListConfigItemsContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisplayColumnsSubContractListConfigItemsContainerView.xaml.cs">
+      <DependentUpon>DisplayColumnsSubContractListConfigItemsContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderListConditionPageView.xaml.cs">
+      <DependentUpon>OrderListConditionPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderListParkedPageView.xaml.cs">
+      <DependentUpon>OrderListParkedPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderListEntrustedPageView.xaml.cs">
+      <DependentUpon>OrderListEntrustedPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlaceOrderComponentContentView.xaml.cs">
+      <DependentUpon>PlaceOrderComponentContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlaceOrderCreateConditionView.xaml.cs">
+      <DependentUpon>PlaceOrderCreateConditionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlaceOrderCreateMainView.xaml.cs">
+      <DependentUpon>PlaceOrderCreateMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlaceOrderHangingOrdersAreaView.xaml.cs">
+      <DependentUpon>PlaceOrderHangingOrdersAreaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PositionDiscreteListPageView.xaml.cs">
+      <DependentUpon>PositionDiscreteListPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PositionDiscreteTradeDetailContentView.xaml.cs">
+      <DependentUpon>PositionDiscreteTradeDetailContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TargetChartView.xaml.cs">
+      <DependentUpon>TargetChartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TradeHistoryListView.xaml.cs">
+      <DependentUpon>TradeHistoryListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TradeWorkspaceTemplateEditDialogContentView.xaml.cs">
+      <DependentUpon>TradeWorkspaceTemplateEditDialogContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWorkspaceComponentLayoutView.xaml.cs">
+      <DependentUpon>MainWorkspaceComponentLayoutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlaceOrderComponentHeaderView.xaml.cs">
+      <DependentUpon>PlaceOrderComponentHeaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TradeListPageView.xaml.cs">
+      <DependentUpon>TradeListPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TradeModuleRootView.xaml.cs">
+      <DependentUpon>TradeModuleRootView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TradeWorkspaceView.xaml.cs">
+      <DependentUpon>TradeWorkspaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TradeWorkspaceTemplateManageDialogContentView.xaml.cs">
+      <DependentUpon>TradeWorkspaceTemplateManageDialogContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqOrderDetailView.xaml.cs">
+      <DependentUpon>XqOrderDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetClosePositionHistoryView.xaml.cs">
+      <DependentUpon>XqTargetClosePositionHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetClosePositionSearchView.xaml.cs">
+      <DependentUpon>XqTargetClosePositionSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetConditionOrdersView.xaml.cs">
+      <DependentUpon>XqTargetConditionOrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetParkedOrdersView.xaml.cs">
+      <DependentUpon>XqTargetParkedOrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetPositionDetailContentView.xaml.cs">
+      <DependentUpon>XqTargetPositionDetailContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetPositionDetailView.xaml.cs">
+      <DependentUpon>XqTargetPositionDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetPositionTradeDetailView.xaml.cs">
+      <DependentUpon>XqTargetPositionTradeDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetPositionItemDialogTitleView.xaml.cs">
+      <DependentUpon>XqTargetPositionItemDialogTitleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetPositionSplitView.xaml.cs">
+      <DependentUpon>XqTargetPositionSplitView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetQuickClosePositionView.xaml.cs">
+      <DependentUpon>XqTargetQuickClosePositionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqTargetSelectStopLostOrProfitView.xaml.cs">
+      <DependentUpon>XqTargetSelectStopLostOrProfitView.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\GroupItemNoneBg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Resources\ModuleResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\OrderConditionListColumnRes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\OrderParkedListColumnRes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\OrderEntrustedListColumnRes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\TradeListColumnRes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\XqTargetDetailPositionColumnRes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BlankContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AccountComponentHeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChildrenContractDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChooseLegPositions2MergeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComponentHeaderLayoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComponentTabListSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComposeSearchPopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractBasicInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractInfoContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractOrderBasicInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractTooltipView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditComposeViewPrecisionNumberView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderConditionListHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderOperateConfirmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderParkedListHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlaceOrderConfirmView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PositionAssignHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PositionOfComposeMergeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RelatedOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XQComposeOrderEPTManView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqComposeOrderExecParamsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XQComposeOrderBasicInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XQComposeOrderParallelLegEPTContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XQComposeOrderSerialLegEPTContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqOrderExecDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderHistoryConditionListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OrderHistoryParkedListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OrderHistoryEntrustedListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OrderHistoryContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqOrderExecTradeListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqOrderXqTradeDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PositionAssistantComponentContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PositionOfComposeAddView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PositionOfComposeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PositionOfContractView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubscribeDataGroupEditDialogContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubscribeDataGroupListContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComposeListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubscribeDataComponentHeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateComposeWithSameTemplateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddComposeDialogContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DisplayColumnsOrderListConditionConfigItemsContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DisplayColumnsOrderListEntrustedConfigItemsContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DisplayColumnsOrderListParkedConfigItemsContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DisplayColumnsTradeListConfigItemsContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditComposeNameDialogContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FundPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListDisplayColumnsConfigDialogContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DisplayColumnsComposeListConfigItemsContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DisplayColumnsSubContractListConfigItemsContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderListConditionPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderListParkedPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderListEntrustedPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlaceOrderComponentContentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlaceOrderCreateConditionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlaceOrderCreateMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlaceOrderHangingOrdersAreaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PositionDiscreteListPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PositionDiscreteTradeDetailContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TargetChartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TradeHistoryListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TradeWorkspaceTemplateEditDialogContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWorkspaceComponentLayoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlaceOrderComponentHeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TradeListPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TradeModuleRootView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TradeWorkspaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TradeWorkspaceTemplateManageDialogContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqOrderDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetClosePositionHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetClosePositionSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetConditionOrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetParkedOrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetPositionDetailContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetPositionDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetPositionTradeDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetPositionItemDialogTitleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetPositionSplitView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetQuickClosePositionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqTargetSelectStopLostOrProfitView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppAssembler\NativeModel\NativeModel.csproj">
+      <Project>{017d3c55-d3af-4f0f-91d9-249ab6a15371}</Project>
+      <Name>NativeModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.BusinessResources\XueQiaoFoundation.BusinessResources.csproj">
+      <Project>{7c429834-fd64-4cba-a742-c798ecc5a58b}</Project>
+      <Name>XueQiaoFoundation.BusinessResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.Interfaces\XueQiaoFoundation.Interfaces.csproj">
+      <Project>{B31A5E02-2467-4119-A690-7D542965E2BB}</Project>
+      <Name>XueQiaoFoundation.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\AttachedCommandBehavior\AttachedCommandBehavior.csproj">
+      <Project>{50c6d92d-132d-409e-a85f-944ca466ad2a}</Project>
+      <Name>AttachedCommandBehavior</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\CustomChromeLibrary\CustomChromeLibrary.csproj">
+      <Project>{25990f61-a27b-4edf-a402-b31bf952153f}</Project>
+      <Name>CustomChromeLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\Dragablz\Dragablz.net45.csproj">
+      <Project>{7b11011c-7fd7-4ab0-a1ad-04e940b026de}</Project>
+      <Name>Dragablz.net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\ItemsFilter\ItemsFilter.csproj">
+      <Project>{aab57bb1-a448-457c-ad53-16b32a1c1f1d}</Project>
+      <Name>ItemsFilter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660C2-8155-4769-991D-08AFBA69A302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
+      <Name>System.Waf.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\Thrift\Thrift.45.csproj">
+      <Project>{ebce35da-cf6a-42bc-a357-a9c09b534299}</Project>
+      <Name>Thrift.45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\IDLAutoGenerated\IDLAutoGenerated.csproj">
+      <Project>{e9b131ca-a3da-4a12-9c9e-235957b0f139}</Project>
+      <Name>IDLAutoGenerated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.Shared\XueQiaoFoundation.Shared.csproj">
+      <Project>{2497225a-7dbd-4901-bddd-3f8b37996769}</Project>
+      <Name>XueQiaoFoundation.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI.Extra\XueQiaoFoundation.UI.Extra.csproj">
+      <Project>{2f323e88-fadd-47d6-92a7-c3149e301f06}</Project>
+      <Name>XueQiaoFoundation.UI.Extra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI\XueQiaoFoundation.UI.csproj">
+      <Project>{a811ca2b-99b3-4688-9175-5cfcffae88b5}</Project>
+      <Name>XueQiaoFoundation.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trade.Interfaces\Trade.Interfaces.csproj">
+      <Project>{1FCF2AE6-4881-4DC9-8377-AA128791B8AA}</Project>
+      <Name>Trade.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trade.Modules.Applications\Trade.Modules.Applications.csproj">
+      <Project>{63d97f3e-df6d-4758-bf2a-6fb5ee2d5a28}</Project>
+      <Name>Trade.Modules.Applications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trade.Modules.Domain\Trade.Modules.Domain.csproj">
+      <Project>{e504ff99-3354-43c2-a803-c0064769f271}</Project>
+      <Name>Trade.Modules.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

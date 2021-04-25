@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.OrderOperateConfirmView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="450">
+    
+    <UserControl.Resources>
+        <uiconvert:IsStringConverter x:Key="IsStringConverter"/>
+        <sys:Boolean x:Key="TrueValue">True</sys:Boolean>
+        <sys:Boolean x:Key="FalseValue">False</sys:Boolean>
+    </UserControl.Resources>
+    
+    <Grid Margin="{Binding ViewContentMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ContentControl HorizontalAlignment="Center">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding NeedConfirmMessage, Converter={StaticResource IsStringConverter}}" Value="{StaticResource FalseValue}">
+                            <Setter Property="Content" Value="{Binding Message}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding  NeedConfirmMessage, Converter={StaticResource IsStringConverter}}" Value="{StaticResource TrueValue}">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <TextBlock Text="{Binding NeedConfirmMessage}" TextWrapping="Wrap"/>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+
+        <CheckBox Grid.Row="1" Margin="0,20,0,0"
+                  IsChecked="{Binding NotConfirmNextTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  Content="不再提示（可在系统设置中再次打开）"
+                  Foreground="{DynamicResource ContentBrush3}"/>
+    </Grid>
+</UserControl>

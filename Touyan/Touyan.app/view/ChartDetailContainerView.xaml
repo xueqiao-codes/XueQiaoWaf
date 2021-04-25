@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="Touyan.app.view.ChartDetailContainerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:actb="clr-namespace:XueQiaoFoundation.UI.Controls.AutoCompleteTextBox;assembly=XueQiaoFoundation.UI"
+             xmlns:moduleconvert="clr-namespace:Touyan.app.converter"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:CefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="ViewRoot"
+             Background="{DynamicResource RootBgBrush}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="True2Visible"/>
+        <moduleconvert:ChartType2NameConverter x:Key="ChartType2NameConverter"/>
+        <uiconvert:IsStringNullOrEmptyConverter x:Key="IsStringNullOrEmptyConverter"/>
+        <sys:Boolean x:Key="TrueValue">True</sys:Boolean>
+
+        <GroupStyle x:Key="ChartSearchACTBGroupStyle">
+            <GroupStyle.ContainerStyle>
+                <Style TargetType="{x:Type GroupItem}">
+                    <!-- GroupItem datacontext is CollectionViewGroup -->
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <HeaderedContentControl>
+                                    <HeaderedContentControl.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel
+                                                Orientation="Horizontal" Margin="8,15,8,2"
+                                                DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type GroupItem}}, Path=DataContext.Items[0]}">
+                                                <StackPanel.Resources>
+                                                    <Style TargetType="{x:Type TextBlock}">
+                                                        <Setter Property="Foreground" Value="{DynamicResource ContentBrush3}"/>
+                                                        <Setter Property="FontSize" Value="{DynamicResource SecondaryContentFontSize}"/>
+                                                    </Style>
+                                                </StackPanel.Resources>
+                                                <TextBlock Text="{Binding ChartType, Converter={StaticResource ChartType2NameConverter}}"/>
+                                                <TextBlock Text="{Binding Plate}" Margin="15,0,0,0"
+                                                           x:Name="PlateUIElement"
+                                                           Visibility="Visible"/>
+                                                <TextBlock Text="{Binding CommodityName}" Margin="15,0,0,0"
+                                                           x:Name="CommodityNameUIElement"
+                                                           Visibility="Visible"/>
+                                            </StackPanel>
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=PlateUIElement, Path=Text, Converter={StaticResource IsStringNullOrEmptyConverter}}"
+                                                             Value="{StaticResource TrueValue}">
+                                                    <Setter TargetName="PlateUIElement" Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=CommodityNameUIElement, Path=Text, Converter={StaticResource IsStringNullOrEmptyConverter}}"
+                                                             Value="{StaticResource TrueValue}">
+                                                    <Setter TargetName="CommodityNameUIElement" Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </HeaderedContentControl.HeaderTemplate>
+
+                                    <ItemsPresenter />
+
+                                </HeaderedContentControl>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </GroupStyle.ContainerStyle>
+        </GroupStyle>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MaxWidth="500"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <actb:AutoCompleteTextBox
+                Grid.Column="0" 
+                Margin="10"
+                Watermark="搜索投研图表，空格分割多个关键字"
+                IconPlacement="Left"
+                IconVisibility="Collapsed"
+                DisplayMember="ChartName"
+                Provider="{Binding ChartSearchSuggestionProvider}"
+                GroupStyle="{StaticResource ChartSearchACTBGroupStyle}"
+                SelectedItem="{Binding SelectedSuggestionChart, Mode=TwoWay}">
+                <actb:AutoCompleteTextBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Margin="8,0,0,0" Text="{Binding ChartName}"/>
+                    </DataTemplate>
+                </actb:AutoCompleteTextBox.ItemTemplate>
+                <actb:AutoCompleteTextBox.LoadingContent>
+                    <TextBlock Text="加载..."
+                               Margin="5"
+                               FontSize="14" />
+                </actb:AutoCompleteTextBox.LoadingContent>
+            </actb:AutoCompleteTextBox>
+            
+            <Button Grid.Column="1" HorizontalAlignment="Left" Margin="15,0,8,0" 
+                    Style="{StaticResource FlatContentButtonStyle}" Padding="4"
+                    VerticalAlignment="Center"
+                    Command="{Binding ToggleChartFavoriteCmd}">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <DataTemplate.Resources>
+                            <PathGeometry x:Key="NotFavorIconGeometry" Figures="M546.133333 819.2l-320.989866 168.7552 61.303466-357.444267L26.760533 377.378133l358.877867-52.155733L546.133333 0l160.494934 325.2224 358.877866 52.155733-259.6864 253.1328 61.303467 357.444267L546.133333 819.2z m-230.331733 43.963733L546.133333 742.058667l230.331734 121.105066-43.963734-256.477866 186.368-181.589334-257.570133-37.546666L546.133333 154.282667 430.967467 387.618133l-257.501867 37.410134 186.368 181.589333-44.032 256.546133z"/>
+                            <PathGeometry x:Key="HasFavorIconGeometry" Figures="M546.133333 819.2l-320.989866 168.7552 61.303466-357.444267L26.760533 377.378133l358.877867-52.155733L546.133333 0l160.494934 325.2224 358.877866 52.155733-259.6864 253.1328 61.303467 357.444267z"/>
+                        </DataTemplate.Resources>
+                        <StackPanel Orientation="Horizontal">
+                            <Viewbox Width="16" Height="16" VerticalAlignment="Center">
+                                <Path Data="{StaticResource NotFavorIconGeometry}"
+                                      Fill="{DynamicResource ContentBrush1}"
+                                      x:Name="Icon"/>
+                            </Viewbox>
+                            <TextBlock Text="收藏" VerticalAlignment="Center" Margin="4,0,0,0"
+                                       x:Name="Text"/>
+                        </StackPanel>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ViewRoot, Path=DataContext.ChartIsFavorited}" Value="True">
+                                <Setter TargetName="Icon" Property="Data" Value="{StaticResource HasFavorIconGeometry}"/>
+                                <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource MinorBrush1}"/>
+                                <Setter TargetName="Text" Property="Text" Value="已收藏"/>
+                                <Setter TargetName="Text" Property="Foreground" Value="{DynamicResource MinorBrush1}"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </Grid>
+
+        <Rectangle Grid.Row="1" Height="1" HorizontalAlignment="Stretch" Fill="{DynamicResource BorderBrush2}"/>
+
+        <CefSharp:ChromiumWebBrowser 
+            Grid.Row="2"
+            x:Name="ChartWebBrowser"/>
+
+        <Grid Background="{DynamicResource RootBgBrush}" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+              Visibility="{Binding IsLoadingPageData, Converter={StaticResource True2Visible}}">
+            <ProgressBar 
+                Margin="30"
+                Style="{StaticResource CircularProgressBarDefault}"
+                Width="30" Height="30"
+                Foreground="{DynamicResource PrimaryBrush3}"         
+                IsIndeterminate="True"
+                Value="0"/>
+        </Grid>
+    </Grid>
+</UserControl>

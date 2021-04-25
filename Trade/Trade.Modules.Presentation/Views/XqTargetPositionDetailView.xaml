@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.XqTargetPositionDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:moduleconvert="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Converters"
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Type vm:XqTargetPositionDetailVM}"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <uiconvert:EqualityToBooleanConverter x:Key="Equal2TrueConverter"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2VisibleConverter" CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <moduleconvert:XqTargetPositionContentTabType2NameConverter x:Key="XqTargetPositionContentTabType2NameConverter"/>
+
+        <x:Array x:Key="ViewContentTabTypes" Type="{x:Type vm:XqTargetPositionContentTabType}">
+            <vm:XqTargetPositionContentTabType>PositionDetailTab</vm:XqTargetPositionContentTabType>
+            <vm:XqTargetPositionContentTabType>HistoryClosePositionTab</vm:XqTargetPositionContentTabType>
+        </x:Array>
+    </UserControl.Resources>
+    
+    <Grid Margin="20,20,20,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0"
+                 SelectionMode="Single"
+                 Style="{StaticResource ListBoxTabStyle}"
+                 BorderThickness="0,0,0,1"
+                 BorderBrush="{DynamicResource BorderBrush3}"
+                 ItemContainerStyle="{StaticResource ListBoxItemTabStyle}"
+                 ItemsSource="{StaticResource ViewContentTabTypes}"
+                 SelectedItem="{Binding SelectedContentTabType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 IsSynchronizedWithCurrentItem="True">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource XqTargetPositionContentTabType2NameConverter}}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ContentControl Grid.Row="1" Content="{Binding ContentTabContentView}"/>
+    </Grid>
+</UserControl>

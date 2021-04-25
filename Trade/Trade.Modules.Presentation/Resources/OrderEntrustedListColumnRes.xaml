@@ -1,0 +1,238 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+                    xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+                    xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+                    xmlns:ItemsFilter="clr-namespace:BolapanControl.ItemsFilter;assembly=ItemsFilter"
+                    xmlns:FilterInitializer="clr-namespace:BolapanControl.ItemsFilter.Initializer;assembly=ItemsFilter"
+                    xmlns:res_filters="clr-namespace:XueQiaoFoundation.BusinessResources.ItemsFilters;assembly=XueQiaoFoundation.BusinessResources"
+                    xmlns:styles="clr-namespace:XueQiaoFoundation.UI.Styles;assembly=XueQiaoFoundation.UI"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <uiconvert:EqualityToBooleanConverter x:Key="EqualityToBooleanConverter"/>
+    <convert:ClientXQOrderState2NameConverter x:Key="OrderState2NameConverter"/>
+    <convert:XQComposeOrderExecParamsSendType2NameConverter x:Key="XQComposeOrderExecParamsSendType2NameConverter"/>
+    <uiextra_convert:Timestamp2StringConverter x:Key="EffectEndTime2StrConverter" Convert2StringFormatType="DateTime" ValueType="Millisecond"/>
+    <convert:HostingXQEffectDateType2NameConverter x:Key="HostingXQEffectDateType2NameConverter"/>
+
+    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource DataGridColumnHeaderUseItemsFilterFramework}"
+               x:Key="HeaderStyle_OrderListColumn_Entrusted_OrderState">
+        <Setter Property="styles:DataGridColumnHeaderHelper.ColumnFilterItemTemplate" Value="{StaticResource ClientEntrustedOrderStateFilterViewDataTemplate}"/>
+        <Setter Property="styles:DataGridColumnHeaderHelper.ColumnFilterItemTemplateSelector" Value="{x:Null}"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource DataGridColumnHeaderUseItemsFilterFramework}"
+               x:Key="HeaderStyle_OrderListColumn_Entrusted_Direction">
+        <Setter Property="styles:DataGridColumnHeaderHelper.ColumnFilterItemTemplate" Value="{StaticResource TradeDirectionFilterViewDataTemplate}"/>
+        <Setter Property="styles:DataGridColumnHeaderHelper.ColumnFilterItemTemplateSelector" Value="{x:Null}"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource DataGridColumnHeaderUseItemsFilterFramework}"
+               x:Key="HeaderStyle_OrderListColumn_Entrusted_TargetType">
+        <Setter Property="styles:DataGridColumnHeaderHelper.ColumnFilterItemTemplate" Value="{StaticResource ClientXQOrderTargetTypeFilterViewDataTemplate}"/>
+        <Setter Property="styles:DataGridColumnHeaderHelper.ColumnFilterItemTemplateSelector" Value="{x:Null}"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource DataGridColumnHeaderUseItemsFilterFramework}"
+               x:Key="HeaderStyle_OrderListColumn_Entrusted_Name">
+        <Setter Property="styles:DataGridColumnHeaderHelper.ColumnFilterItemTemplate" Value="{StaticResource OrderTargetKeyFilterViewDataTemplate}"/>
+        <Setter Property="styles:DataGridColumnHeaderHelper.ColumnFilterItemTemplateSelector" Value="{x:Null}"/>
+    </Style>
+
+    <DataGridTextColumn Header="状态"
+                        Binding="{Binding OrderState, Converter={StaticResource OrderState2NameConverter}}"
+                        CanUserSort="True"
+                        SortMemberPath="OrderState"
+                        x:Key="OrderListColumn_Entrusted_OrderState"
+                        x:Shared="False">
+        <ItemsFilter:ColumnFilter.BindingPath>
+            <sys:String>OrderState</sys:String>
+        </ItemsFilter:ColumnFilter.BindingPath>
+        <ItemsFilter:ColumnFilter.Initializers>
+            <FilterInitializer:FilterInitializersManager>
+                <FilterInitializer:EnumFilterInitializer/>
+            </FilterInitializer:FilterInitializersManager>
+        </ItemsFilter:ColumnFilter.Initializers>
+    </DataGridTextColumn>
+
+    <!-- 订单列表列 -->
+    <DataGridTemplateColumn 
+            Header="方向" 
+            CellTemplate="{StaticResource OrderListDirectionDataTemplate}"
+            CanUserSort="True"
+            SortMemberPath="Direction"
+            x:Key="OrderListColumn_Entrusted_Direction"
+            x:Shared="False">
+        <ItemsFilter:ColumnFilter.BindingPath>
+            <sys:String>Direction</sys:String>
+        </ItemsFilter:ColumnFilter.BindingPath>
+        <ItemsFilter:ColumnFilter.Initializers>
+            <FilterInitializer:FilterInitializersManager>
+                <res_filters:OrderTradeDirectionFilterInitializer/>
+            </FilterInitializer:FilterInitializersManager>
+        </ItemsFilter:ColumnFilter.Initializers>
+    </DataGridTemplateColumn>
+
+    <DataGridTemplateColumn 
+            Header="合约/组合" 
+            CellTemplate="{StaticResource OrderListTargetTypeDataTemplate}"
+            CanUserSort="True"
+            SortMemberPath="TargetType"
+            x:Key="OrderListColumn_Entrusted_TargetType"
+            x:Shared="False">
+        <ItemsFilter:ColumnFilter.BindingPath>
+            <sys:String>TargetType</sys:String>
+        </ItemsFilter:ColumnFilter.BindingPath>
+        <ItemsFilter:ColumnFilter.Initializers>
+            <FilterInitializer:FilterInitializersManager>
+                <FilterInitializer:EnumFilterInitializer/>
+            </FilterInitializer:FilterInitializersManager>
+        </ItemsFilter:ColumnFilter.Initializers>
+    </DataGridTemplateColumn>
+
+    <DataGridTextColumn Header="价格" 
+                            MinWidth="50" 
+                            Binding="{Binding Price}"
+                            CanUserSort="False"
+                            x:Key="OrderListColumn_Entrusted_Price"
+                            x:Shared="False"/>
+
+    <DataGridTextColumn Header="数量" 
+                            MinWidth="50" 
+                            Binding="{Binding Quantity}"
+                            CanUserSort="False"
+                            x:Key="OrderListColumn_Entrusted_Quantity"
+                            x:Shared="False"/>
+
+    <DataGridTextColumn Header="已成交量" 
+                            Binding="{Binding TradeVolume}" 
+                            CanUserSort="False"
+                            x:Key="OrderListColumn_Entrusted_TradeVolume"
+                            x:Shared="False"/>
+
+    <DataGridTextColumn Header="成交均价" 
+                            Binding="{Binding TradeAvgPrice}" 
+                            CanUserSort="False"
+                            x:Key="OrderListColumn_Entrusted_TradeAvgPrice"
+                            x:Shared="False"/>
+
+    <DataGridTemplateColumn 
+            Header="订单类型" 
+            CellTemplate="{StaticResource OrderListOrderTypeDataTemplate}"   
+            CanUserSort="True"
+            SortMemberPath="OrderType"
+            x:Key="OrderListColumn_Entrusted_OrderType"
+            x:Shared="False"/>
+
+    <DataGridTemplateColumn
+            Header="下单时间"
+            CellTemplate="{StaticResource OrderListOrderTimeDataTemplate}"    
+            CanUserSort="True"
+            SortMemberPath="OrderTimestampMs"
+            x:Key="OrderListColumn_Entrusted_CreateTime"
+            x:Shared="False"/>
+
+    <DataGridTextColumn 
+        Header="有效期类型"
+        Binding="{Binding EffectDate.Type, Converter={StaticResource HostingXQEffectDateType2NameConverter}}"
+        CanUserSort="False"
+        x:Key="OrderListColumn_Entrusted_EffectDateType"
+        x:Shared="False"/>
+
+    <DataGridTextColumn 
+        Header="有效结束时间"
+        Binding="{Binding OrderEffectEndTimestampMs, Converter={StaticResource EffectEndTime2StrConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+        CanUserSort="False"
+        x:Key="OrderListColumn_Entrusted_EffectEndTime"
+        x:Shared="False"/>
+
+    <DataGridTextColumn
+            Header="状态信息" 
+            Binding="{Binding OrderStateDetail.StateMsg, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_StateMsg"
+            x:Shared="False"/>
+
+    <DataGridTemplateColumn 
+            Header="订单ID" 
+            CellTemplate="{StaticResource OrderListOrderIdDataTemplate}"
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_OrderId"
+            x:Shared="False">
+    </DataGridTemplateColumn>
+
+    <DataGridTemplateColumn 
+            Header="父订单"
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_ParentOrder"
+            x:Shared="False">
+        <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+                <Button Command="{Binding}"/>
+            </DataTemplate>
+        </DataGridTemplateColumn.CellTemplate>
+    </DataGridTemplateColumn>
+
+    <DataGridTemplateColumn
+            CellTemplate="{StaticResource OrderListCreatorUserNameDataTemplate}"
+            Header="用户"
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_CreatorUserName"
+            x:Shared="False"/>
+
+    <DataGridTemplateColumn
+            CellTemplate="{StaticResource OrderListSubAccountNameDataTemplate}"
+            Header="操作账户" 
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_SubAccountName"
+            x:Shared="False"/>
+
+    <DataGridTemplateColumn
+            CellTemplate="{StaticResource OrderListUpdateTimeDataTemplate}"
+            Header="更新时间" 
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_UpdateTime"
+            x:Shared="False"/>
+    
+    <DataGridTemplateColumn
+            CellTemplate="{StaticResource OrderListCreatorUserIdDataTemplate}"
+            Header="用户ID" 
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_CreatorUserId"
+            x:Shared="False"/>
+
+    <DataGridTemplateColumn
+            CellTemplate="{StaticResource OrderListSubAccountIdDataTemplate}"
+            Header="操作账户ID" 
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_SubAccountId"
+            x:Shared="False"/>
+
+    <DataGridTemplateColumn
+            CellTemplate="{StaticResource OrderListDataVersionDataTemplate}"
+            Header="数据版本"
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_DataVersion"
+            x:Shared="False"/>
+
+    <DataGridTemplateColumn 
+            Header="组合腿成交概要"
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_ComposeLegTradeSummary"
+            x:Shared="False">
+        <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+                <ContentControl Content="{Binding TargetComposeLegTradeSummarysContainer}" 
+                                ContentTemplate="{StaticResource TargetComposeLegTradeSummarysTextDT}"/>
+            </DataTemplate>
+        </DataGridTemplateColumn.CellTemplate>
+    </DataGridTemplateColumn>
+
+    <DataGridTextColumn
+            Header="触发执行方式" 
+            Binding="{Binding ComposeOrderSendType, Converter={StaticResource XQComposeOrderExecParamsSendType2NameConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            CanUserSort="False"
+            x:Key="OrderListColumn_Entrusted_ComposeOrderSendType"
+            x:Shared="False"/>
+
+</ResourceDictionary>

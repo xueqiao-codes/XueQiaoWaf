@@ -1,0 +1,113 @@
+﻿<Window x:Class="TouyanAssembler.app.view.ContainerShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Styles="clr-namespace:XueQiaoFoundation.UI.Styles;assembly=XueQiaoFoundation.UI"
+        xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Microsoft.Windows.Shell"
+        xmlns:shared_model="clr-namespace:XueQiaoFoundation.Shared.Model;assembly=XueQiaoFoundation.Shared"
+        mc:Ignorable="d"
+        MinWidth="380" MinHeight="200" d:DesignWidth="800" d:DesignHeight="800"
+        Style="{StaticResource WindowCustomByWindowChromeStyleDefault}">
+
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome
+            CornerRadius="0" CaptionHeight="{Binding WindowCaptionDataHolder.CaptionHeight}" GlassFrameThickness="0" UseAeroCaptionButtons="False" NonClientFrameEdges="None" />
+    </shell:WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Style TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource FlatBgButtonStyle}"
+               x:Key="ShellTabMenuButton">
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundInPrimaryBgBrush}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Padding" Value="12, 12"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="MaxHeight" Value="48"/>
+            <Setter Property="Styles:StylesHelper.HoverBrush" Value="{DynamicResource PrimaryBrush1Sel}"/>
+            <Setter Property="Styles:StylesHelper.PressedBrush" Value="{DynamicResource PrimaryBrush1Sel}"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="48"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Margin="-1,-1,0,-1"
+                Background="{DynamicResource PrimaryBrush1}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0" Width="30" Height="30" Margin="0,20" HorizontalAlignment="Center">
+                    <Path Data="{StaticResource LogoIconGeometry}" Fill="{DynamicResource ForegroundInPrimaryBgBrush}"/>
+                </Viewbox>
+
+                <ListBox 
+                    Margin="0,0,0,20"
+                    Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource PrimaryBrush1Sel}"
+                    Background="{x:Null}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                    SelectionMode="Single"
+                    ItemsSource="{Binding TabNodes}"
+                    SelectedItem="{Binding SelectedTabNode, Mode=TwoWay}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type shared_model:AppModuleTabNode}">
+                            <StackPanel Orientation="Vertical">
+                                <ContentControl Content="{Binding NodeIconGeometry}"
+                                                Width="26" Height="26"
+                                                Margin="0,0,0,6" 
+                                                HorizontalAlignment="Center"
+                                                Style="{StaticResource GeometryContentCheckedStyle}"
+                                                Foreground="{DynamicResource ForegroundInPrimaryBgBrush}"/>
+                                <TextBlock Text="{Binding NodeTitle}"
+                                           HorizontalAlignment="Center"
+                                           FontSize="{DynamicResource SecondaryContentFontSize}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListBoxItemStyleDefault}">
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundInPrimaryBgBrush}"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="0, 12, 0, 12"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Styles:StylesHelper.HoverBrush" Value="{DynamicResource PrimaryBrush1Sel}"/>
+                            <Setter Property="Styles:StylesHelper.SelectedBrush" Value="{DynamicResource PrimaryBrush1Sel}"/>
+                            <Setter Property="Styles:StylesHelper.SelectedActiveBrush" Value="{DynamicResource PrimaryBrush1Sel}"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+                <Button 
+                    Grid.Row="2" Margin="0,15,0,15" 
+                    Command="{Binding ShowAppInfoCmd}"
+                    Style="{StaticResource ShellTabMenuButton}">
+                    <Button.Content>
+                        <PathGeometry Figures="M512 39.384615C250.092308 39.384615 39.384615 250.092308 39.384615 512s210.707692 472.615385 472.615385 472.615385 472.615385-210.707692 472.615385-472.615385S773.907692 39.384615 512 39.384615z m0 238.276923c33.476923 0 59.076923 25.6 59.076923 59.076924s-25.6 59.076923-59.076923 59.076923-59.076923-25.6-59.076923-59.076923 25.6-59.076923 59.076923-59.076924z m98.461538 413.538462c0 9.846154-7.876923 17.723077-19.692307 17.723077h-157.538462c-9.846154 0-19.692308-5.907692-19.692307-17.723077v-39.384615c0-9.846154 7.876923-21.661538 19.692307-21.661539 9.846154 0 19.692308-5.907692 19.692308-17.723077v-78.769231c0-9.846154-7.876923-21.661538-19.692308-21.661538-9.846154 0-19.692308-5.907692-19.692307-17.723077v-39.384615c0-9.846154 7.876923-21.661538 19.692307-21.661539h118.153846c9.846154 0 19.692308 9.846154 19.692308 21.661539v157.538461c0 9.846154 7.876923 17.723077 19.692308 17.723077 9.846154 0 19.692308 9.846154 19.692307 21.661539v39.384615z"/>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- 所选 tab 内容区域 -->
+        <ContentControl Content="{Binding TabNodeContentView}" 
+                        Focusable="False"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"/>
+    </Grid>
+</Window>

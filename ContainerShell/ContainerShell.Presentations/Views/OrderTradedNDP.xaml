@@ -1,0 +1,35 @@
+﻿<core:NotificationDisplayPart 
+    x:Class="ContainerShell.Presentations.Views.OrderTradedNDP"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:core="clr-namespace:ToastNotifications.Core;assembly=ToastNotifications"
+    xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+    xmlns:local="clr-namespace:ContainerShell.Presentations.Views"
+    mc:Ignorable="d" d:DesignWidth="360"
+    Foreground="{DynamicResource ContentBrush1}"
+    FontSize="{DynamicResource PrimaryContentFontSize}">
+    <core:NotificationDisplayPart.Resources>
+        <uiextra_convert:Timestamp2StringConverter x:Key="Ms2DateTimeStringConverter" ValueType="Millisecond" 
+                                        Convert2StringFormatType="DateTime"/>
+    </core:NotificationDisplayPart.Resources>
+    <Border BorderBrush="{DynamicResource PrimaryBrush3}" BorderThickness="1" Background="{DynamicResource RootBgBrush}">
+        <StackPanel Margin="15">
+            <DockPanel LastChildFill="False">
+                <TextBlock Text="订单成交" FontSize="{DynamicResource RegularTitleFontSize}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center">
+                    <Button Content="关闭" Style="{StaticResource FlatContentButtonPrimary3}" Margin="10,0,0,0" VerticalAlignment="Center"
+                            Command="{Binding CloseCmd}"/>
+                </StackPanel>
+            </DockPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="成交时间："/>
+                <TextBlock Text="{Binding Trade.CreateTimestampMs, Converter={StaticResource Ms2DateTimeStringConverter}}" TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <local:TradeInfoBaseViewForNDP DataContext="{Binding Trade}" Margin="0,6,0,0"/>
+        </StackPanel>
+    </Border>
+</core:NotificationDisplayPart>

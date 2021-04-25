@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Manage.Presentations.Views.ModuleLockedByOtherUserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dm="clr-namespace:Manage.Applications.DataModels;assembly=Manage.Applications"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Type dm:ModuleLockStatusDM}"
+             d:DesignHeight="600" d:DesignWidth="600">
+    <!-- View's DataContext is ModuleLockStatusDM -->
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,30,20,0">
+            <TextBlock FontSize="{DynamicResource ExtraLargeContentFontSize}" TextWrapping="Wrap">
+                    <Run>用户</Run>
+                    <Run Text="{Binding ModuleLockedUser.LoginName}" FontWeight="Bold"/>
+                    <Run>正在使用，您无法进入此页面。如需进入请联系该用户退出该页面。</Run>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

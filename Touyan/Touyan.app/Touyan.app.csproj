@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props" Condition="Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props')" />
+  <Import Project="..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props" Condition="Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props')" />
+  <Import Project="..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props" Condition="Exists('..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props')" />
+  <Import Project="..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props" Condition="Exists('..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1563C865-81BE-4DD0-AEFC-10A6A64BD7EA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Touyan.app</RootNamespace>
+    <AssemblyName>Touyan.app</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\..\ThirdFramework\ThirdDLL\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ParallelExtensionsExtras, Version=1.2.3.0, Culture=neutral, PublicKeyToken=665f4d61f853b5a9, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ParallelExtensionsExtras.1.2.0.0\lib\net40\ParallelExtensionsExtras.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ToastNotifications, Version=2.5.0.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="controller\ChartViewHistoryListViewCtrl.cs" />
+    <Compile Include="controller\MoveFavoriteItemDialogCtrl.cs" />
+    <Compile Include="controller\AddFavoriteItemDialogCtrl.cs" />
+    <Compile Include="controller\RenameFavoriteItemDialogCtrl.cs" />
+    <Compile Include="controller\ChartDetailContainerViewCtrl.cs" />
+    <Compile Include="controller\ChartFavoriateListViewCtrl.cs" />
+    <Compile Include="controller\ChartFolderSubItemListViewCtrl.cs" />
+    <Compile Include="controller\ChartFolderListContainerViewCtrl.cs" />
+    <Compile Include="controller\QuotationChartContainerViewCtrl.cs" />
+    <Compile Include="controller\TouyanModuleRootViewCtrl.cs" />
+    <Compile Include="converter\ChartType2NameConverter.cs" />
+    <Compile Include="converter\CheckConverter_ChartFolderListTreeNode_Folder.cs" />
+    <Compile Include="datamodel\ChartFavoriteListTreeNodeBase.cs" />
+    <Compile Include="datamodel\ChartFavoriteListTreeNode_Chart.cs" />
+    <Compile Include="datamodel\ChartFavoriteListTreeNode_Folder.cs" />
+    <Compile Include="datamodel\ChartFolderListTreeNodeBase.cs" />
+    <Compile Include="datamodel\ChartFolderListTreeNode_Folder.cs" />
+    <Compile Include="datamodel\ChartFolderListTreeNode_Chart.cs" />
+    <Compile Include="datamodel\ChartFavoriteListItemKey.cs" />
+    <Compile Include="datamodel\ChartFavoriteNodeTree.cs" />
+    <Compile Include="datamodel\TopChartFolderTabItem.cs" />
+    <Compile Include="helper\DMConstructHelper.cs" />
+    <Compile Include="helper\DMDataLoadHelper.cs" />
+    <Compile Include="ITouyanModuleServiceCtrl.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="selector\ChartFolderListItemDTS.cs" />
+    <Compile Include="servicecontroller\TouyanChartCacheCtrl.cs" />
+    <Compile Include="servicecontroller\TouyanChartFavoriteServiceCtrl.cs" />
+    <Compile Include="servicecontroller\TouyanChartFolderServiceCtrl.cs" />
+    <Compile Include="servicecontroller\TouyanChartQueryCtrl.cs" />
+    <Compile Include="servicecontroller\TouyanChartViewHistoryServiceCtrl.cs" />
+    <Compile Include="service\PresentationService.cs" />
+    <Compile Include="service\TouyanChartViewHistoryService.cs" />
+    <Compile Include="TouyanModuleController.cs" />
+    <Compile Include="viewmodel\AddFavoriteItemVM.cs" />
+    <Compile Include="viewmodel\ChartDetailContainerVM.cs" />
+    <Compile Include="viewmodel\ChartFavoriateListVM.cs" />
+    <Compile Include="viewmodel\ChartFolderSubItemListVM.cs" />
+    <Compile Include="viewmodel\ChartFolderContainerVM.cs" />
+    <Compile Include="viewmodel\ChartViewHistoryListVM.cs" />
+    <Compile Include="viewmodel\EditNameFavoriteItemVM.cs" />
+    <Compile Include="viewmodel\MoveFavoriteItemVM.cs" />
+    <Compile Include="viewmodel\QuotationChartContainerVM.cs" />
+    <Compile Include="viewmodel\TouyanModuleRootVM.cs" />
+    <Compile Include="view\ChartViewHistoryListView.xaml.cs">
+      <DependentUpon>ChartViewHistoryListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\EditNameFavoriteItemView.xaml.cs">
+      <DependentUpon>EditNameFavoriteItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\AddFavoriteItemView.xaml.cs">
+      <DependentUpon>AddFavoriteItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\BindingProxy.cs" />
+    <Compile Include="view\ChartDetailContainerView.xaml.cs">
+      <DependentUpon>ChartDetailContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\ChartFavoriateListView.xaml.cs">
+      <DependentUpon>ChartFavoriateListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\ChartFavoriteNodeTreeView.xaml.cs">
+      <DependentUpon>ChartFavoriteNodeTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\ChartFolderContainerView.xaml.cs">
+      <DependentUpon>ChartFolderContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\ChartFolderSubItemListView.xaml.cs">
+      <DependentUpon>ChartFolderSubItemListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\MoveFavoriteItemView.xaml.cs">
+      <DependentUpon>MoveFavoriteItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\QuotationChartContainerView.xaml.cs">
+      <DependentUpon>QuotationChartContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\TouyanModuleRootView.xaml.cs">
+      <DependentUpon>TouyanModuleRootView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ThirdFramework\CustomChromeLibrary\CustomChromeLibrary.csproj">
+      <Project>{25990f61-a27b-4edf-a402-b31bf952153f}</Project>
+      <Name>CustomChromeLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\Dragablz\Dragablz.net45.csproj">
+      <Project>{7b11011c-7fd7-4ab0-a1ad-04e940b026de}</Project>
+      <Name>Dragablz.net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660C2-8155-4769-991D-08AFBA69A302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Project>{27B67DFE-0BF1-4435-B036-E4C083EAEA03}</Project>
+      <Name>System.Waf.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_configuration\lib_configuration.csproj">
+      <Project>{83B10C13-C2AE-42CB-AFB4-CFA150407F61}</Project>
+      <Name>lib_configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_xqclient_base\lib_xqclient_base.csproj">
+      <Project>{251D71EE-27E6-46E8-BB87-2B2120564CD8}</Project>
+      <Name>lib_xqclient_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\Thrift\Thrift.45.csproj">
+      <Project>{EBCE35DA-CF6A-42BC-A357-A9C09B534299}</Project>
+      <Name>Thrift.45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\business_foundation_lib\business_foundation_lib.csproj">
+      <Project>{8380879B-9396-4095-8D2D-C721E20DA632}</Project>
+      <Name>business_foundation_lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\IDLAutoGenerated\IDLAutoGenerated.csproj">
+      <Project>{E9B131CA-A3DA-4A12-9C9E-235957B0F139}</Project>
+      <Name>IDLAutoGenerated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.Shared\XueQiaoFoundation.Shared.csproj">
+      <Project>{2497225A-7DBD-4901-BDDD-3F8B37996769}</Project>
+      <Name>XueQiaoFoundation.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI.Extra\XueQiaoFoundation.UI.Extra.csproj">
+      <Project>{2f323e88-fadd-47d6-92a7-c3149e301f06}</Project>
+      <Name>XueQiaoFoundation.UI.Extra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI\XueQiaoFoundation.UI.csproj">
+      <Project>{a811ca2b-99b3-4688-9175-5cfcffae88b5}</Project>
+      <Name>XueQiaoFoundation.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Touyan.Interface\Touyan.Interface.csproj">
+      <Project>{550B51B0-8903-4C0D-AA38-A8E93E1E75D2}</Project>
+      <Name>Touyan.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="resource\ChartFolderListTreeNodeDTs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="resource\ChartFavoriteListTreeNodeDTs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="resource\module_res.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="view\ChartViewHistoryListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\EditNameFavoriteItemView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="view\AddFavoriteItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\ChartDetailContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\ChartFavoriateListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\ChartFavoriteNodeTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\ChartFolderContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\ChartFolderSubItemListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\MoveFavoriteItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\QuotationChartContainerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\TouyanModuleRootView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets" Condition="Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets')" />
+  <Import Project="..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets" Condition="Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets')" />
+</Project>

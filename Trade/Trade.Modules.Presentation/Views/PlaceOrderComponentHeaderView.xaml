@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.PlaceOrderComponentHeaderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+             xmlns:local="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Views"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="600"
+             MinHeight="30"
+             d:DataContext="{x:Type vm:PlaceOrderComponentHeaderVM}"
+             x:Name="ViewRoot">
+    <UserControl.Resources>
+        <local:BindingProxy x:Key="RootDataContextProxy" Data="{Binding}"/>
+        
+        <uiconvert:EqualityToVisibilityConverter x:Key="equal2VisibleConverter"
+                                                 CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <sys:Boolean x:Key="FalseValue">False</sys:Boolean>
+        <sys:Boolean x:Key="TrueValue">True</sys:Boolean>
+
+        <ContextMenu x:Key="SelectXqTargetContextMenu">
+            <MenuItem Header="选择合约" 
+                      Command="{Binding Path=Data.TriggerSelectContractCmd, Source={StaticResource RootDataContextProxy}}"
+                      CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}"/>
+            <MenuItem Header="选择组合" 
+                      Command="{Binding Path=Data.TriggerSelectComposeCmd, Source={StaticResource RootDataContextProxy}}"
+                      CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}"/>
+        </ContextMenu>
+    </UserControl.Resources>
+    <DockPanel  Grid.Row="0" LastChildFill="True">
+        <Button Content="下单"
+                Style="{StaticResource FlatContentButtonPrimary3}"
+                DockPanel.Dock="Right"
+                Margin="4,0,0,0"
+                Command="{Binding ShowOrHidePlaceOrderPartCommand}"/>
+        <Button Content="图表"
+                Style="{StaticResource FlatContentButtonPrimary3}"
+                DockPanel.Dock="Right"
+                Command="{Binding ShowOrHideChartPartCommand}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                FontSize="{DynamicResource LargeTitleFontSize}"
+                Text="{Binding ComponentInfo.ComponentDescTitle}" 
+                Visibility="{Binding ExistAttachTarget, Converter={StaticResource equal2VisibleConverter}, ConverterParameter={StaticResource TrueValue}}"/>
+
+            <TextBlock 
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Text="还没有标的哦~"
+                Visibility="{Binding ExistAttachTarget, Converter={StaticResource equal2VisibleConverter}, ConverterParameter={StaticResource FalseValue}}"/>
+
+            <!--you should provide your own Thumb, which will be used to monitor dragging-->
+            <Thumb Style="{StaticResource InvisibleThumbStyle}"
+                   dragablz:DragablzItem.IsCustomThumb="True"
+                   Grid.ColumnSpan="2">
+            </Thumb>
+
+            <Button Grid.Column="0" Margin="0, 0, 10, 0"
+                    ContextMenu="{StaticResource SelectXqTargetContextMenu}"
+                    VerticalAlignment="Center"
+                    x:Name="SelectXqTargetButton"
+                    Click="SelectXqTargetButton_Click">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource FlatContentButtonPrimary3}">
+                        <Setter Property="Content" Value="换标的"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ExistAttachTarget}" Value="False">
+                                <Setter Property="Content" Value="选标的"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+    </DockPanel>
+</UserControl>

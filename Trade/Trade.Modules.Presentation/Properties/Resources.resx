@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MarketSubscribeState_Subscribed" xml:space="preserve">
+    <value>已订阅</value>
+  </data>
+  <data name="MarketSubscribeState_Subscribing" xml:space="preserve">
+    <value>订阅中</value>
+  </data>
+  <data name="MarketSubscribeState_Unkown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="MarketSubscribeState_Unsubscribed" xml:space="preserve">
+    <value>未订阅</value>
+  </data>
+  <data name="MarketSubscribeState_Unsubscribing" xml:space="preserve">
+    <value>退订中</value>
+  </data>
+  <data name="OrderListColumn_Condition_1" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="OrderListColumn_Condition_10" xml:space="preserve">
+    <value>有效期类型</value>
+  </data>
+  <data name="OrderListColumn_Condition_11" xml:space="preserve">
+    <value>订单号</value>
+  </data>
+  <data name="OrderListColumn_Condition_12" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="OrderListColumn_Condition_13" xml:space="preserve">
+    <value>操作账户</value>
+  </data>
+  <data name="OrderListColumn_Condition_14" xml:space="preserve">
+    <value>状态信息</value>
+  </data>
+  <data name="OrderListColumn_Condition_3" xml:space="preserve">
+    <value>合约/组合</value>
+  </data>
+  <data name="OrderListColumn_Condition_4" xml:space="preserve">
+    <value>类型标签</value>
+  </data>
+  <data name="OrderListColumn_Condition_40" xml:space="preserve">
+    <value>更新时间</value>
+  </data>
+  <data name="OrderListColumn_Condition_41" xml:space="preserve">
+    <value>用户ID</value>
+  </data>
+  <data name="OrderListColumn_Condition_42" xml:space="preserve">
+    <value>操作账户ID</value>
+  </data>
+  <data name="OrderListColumn_Condition_43" xml:space="preserve">
+    <value>数据版本</value>
+  </data>
+  <data name="OrderListColumn_Condition_44" xml:space="preserve">
+    <value>子订单</value>
+  </data>
+  <data name="OrderListColumn_Condition_45" xml:space="preserve">
+    <value>有效结束时间</value>
+  </data>
+  <data name="OrderListColumn_Condition_5" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="OrderListColumn_Condition_6" xml:space="preserve">
+    <value>条件信息</value>
+  </data>
+  <data name="OrderListColumn_Condition_8" xml:space="preserve">
+    <value>数量</value>
+  </data>
+  <data name="OrderListColumn_Condition_9" xml:space="preserve">
+    <value>下单时间</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_1" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_10" xml:space="preserve">
+    <value>订单类型</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_11" xml:space="preserve">
+    <value>下单时间</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_12" xml:space="preserve">
+    <value>有效期类型</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_13" xml:space="preserve">
+    <value>状态信息</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_14" xml:space="preserve">
+    <value>订单号</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_15" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_16" xml:space="preserve">
+    <value>操作账户</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_2" xml:space="preserve">
+    <value>方向</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_3" xml:space="preserve">
+    <value>合约/组合</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_4" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_40" xml:space="preserve">
+    <value>更新时间</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_41" xml:space="preserve">
+    <value>用户ID</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_42" xml:space="preserve">
+    <value>操作账户ID</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_43" xml:space="preserve">
+    <value>数据版本</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_44" xml:space="preserve">
+    <value>组合腿成交概要</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_45" xml:space="preserve">
+    <value>父订单</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_46" xml:space="preserve">
+    <value>触发执行方式</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_47" xml:space="preserve">
+    <value>有效结束时间</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_5" xml:space="preserve">
+    <value>价格</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_6" xml:space="preserve">
+    <value>数量</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_7" xml:space="preserve">
+    <value>成交数量</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_8" xml:space="preserve">
+    <value>成交均价</value>
+  </data>
+  <data name="OrderListColumn_Entrusted_9" xml:space="preserve">
+    <value>执行详情</value>
+  </data>
+  <data name="OrderListColumn_Parked_1" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="OrderListColumn_Parked_10" xml:space="preserve">
+    <value>订单号</value>
+  </data>
+  <data name="OrderListColumn_Parked_11" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="OrderListColumn_Parked_12" xml:space="preserve">
+    <value>操作账户</value>
+  </data>
+  <data name="OrderListColumn_Parked_13" xml:space="preserve">
+    <value>状态信息</value>
+  </data>
+  <data name="OrderListColumn_Parked_2" xml:space="preserve">
+    <value>方向</value>
+  </data>
+  <data name="OrderListColumn_Parked_3" xml:space="preserve">
+    <value>合约/组合</value>
+  </data>
+  <data name="OrderListColumn_Parked_4" xml:space="preserve">
+    <value>订单类型</value>
+  </data>
+  <data name="OrderListColumn_Parked_40" xml:space="preserve">
+    <value>更新时间</value>
+  </data>
+  <data name="OrderListColumn_Parked_41" xml:space="preserve">
+    <value>用户ID</value>
+  </data>
+  <data name="OrderListColumn_Parked_42" xml:space="preserve">
+    <value>操作账户ID</value>
+  </data>
+  <data name="OrderListColumn_Parked_43" xml:space="preserve">
+    <value>数据版本</value>
+  </data>
+  <data name="OrderListColumn_Parked_44" xml:space="preserve">
+    <value>子订单</value>
+  </data>
+  <data name="OrderListColumn_Parked_5" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="OrderListColumn_Parked_6" xml:space="preserve">
+    <value>触发订单价格</value>
+  </data>
+  <data name="OrderListColumn_Parked_7" xml:space="preserve">
+    <value>数量</value>
+  </data>
+  <data name="OrderListColumn_Parked_8" xml:space="preserve">
+    <value>下单时间</value>
+  </data>
+  <data name="OrderListColumn_Parked_9" xml:space="preserve">
+    <value>触发时间</value>
+  </data>
+  <data name="PositionAssistantContentType_COMPOSE" xml:space="preserve">
+    <value>组合持仓</value>
+  </data>
+  <data name="PositionAssistantContentType_CONTRACT" xml:space="preserve">
+    <value>投机持仓</value>
+  </data>
+  <data name="SubscribeComposeListDisplayColumn_1" xml:space="preserve">
+    <value>组合名称</value>
+  </data>
+  <data name="SubscribeComposeListDisplayColumn_2" xml:space="preserve">
+    <value>买量</value>
+  </data>
+  <data name="SubscribeComposeListDisplayColumn_3" xml:space="preserve">
+    <value>买价</value>
+  </data>
+  <data name="SubscribeComposeListDisplayColumn_30" xml:space="preserve">
+    <value>订阅状态信息</value>
+  </data>
+  <data name="SubscribeComposeListDisplayColumn_31" xml:space="preserve">
+    <value>组合ID</value>
+  </data>
+  <data name="SubscribeComposeListDisplayColumn_4" xml:space="preserve">
+    <value>卖价</value>
+  </data>
+  <data name="SubscribeComposeListDisplayColumn_5" xml:space="preserve">
+    <value>卖量</value>
+  </data>
+  <data name="SubscribeComposeListDisplayColumn_6" xml:space="preserve">
+    <value>更新时间</value>
+  </data>
+  <data name="SubscribeComposeListDisplayColumn_7" xml:space="preserve">
+    <value>订阅状态</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_1" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_10" xml:space="preserve">
+    <value>成交量</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_11" xml:space="preserve">
+    <value>持仓量</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_12" xml:space="preserve">
+    <value>日增量</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_13" xml:space="preserve">
+    <value>更新时间</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_14" xml:space="preserve">
+    <value>订阅状态</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_2" xml:space="preserve">
+    <value>最新价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_3" xml:space="preserve">
+    <value>最新量</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_30" xml:space="preserve">
+    <value>订阅状态信息</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_31" xml:space="preserve">
+    <value>开盘价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_32" xml:space="preserve">
+    <value>最高价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_33" xml:space="preserve">
+    <value>最低价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_34" xml:space="preserve">
+    <value>收盘价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_35" xml:space="preserve">
+    <value>昨结算价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_36" xml:space="preserve">
+    <value>昨持仓量</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_37" xml:space="preserve">
+    <value>昨收盘价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_38" xml:space="preserve">
+    <value>成交额</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_39" xml:space="preserve">
+    <value>涨停价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_4" xml:space="preserve">
+    <value>买量</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_40" xml:space="preserve">
+    <value>跌停价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_41" xml:space="preserve">
+    <value>成交均价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_43" xml:space="preserve">
+    <value>交易所</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_5" xml:space="preserve">
+    <value>买价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_6" xml:space="preserve">
+    <value>卖价</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_7" xml:space="preserve">
+    <value>卖量</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_8" xml:space="preserve">
+    <value>涨跌</value>
+  </data>
+  <data name="SubscribeContractListDisplayColumn_9" xml:space="preserve">
+    <value>涨幅</value>
+  </data>
+  <data name="SubscribeDataGroupType_All" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="SubscribeDataGroupType_ComposeRelated" xml:space="preserve">
+    <value>组合相关</value>
+  </data>
+  <data name="SubscribeDataGroupType_Custom" xml:space="preserve">
+    <value>自定义</value>
+  </data>
+  <data name="SubscribeDataGroupType_ExistPosition" xml:space="preserve">
+    <value>持仓行情</value>
+  </data>
+  <data name="SubscribeDataGroupType_IsExpired" xml:space="preserve">
+    <value>已过期</value>
+  </data>
+  <data name="SubscribeDataGroupType_OnTrading" xml:space="preserve">
+    <value>挂单行情</value>
+  </data>
+  <data name="TradeListColumn_1" xml:space="preserve">
+    <value>方向</value>
+  </data>
+  <data name="TradeListColumn_10" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="TradeListColumn_11" xml:space="preserve">
+    <value>操作账户</value>
+  </data>
+  <data name="TradeListColumn_2" xml:space="preserve">
+    <value>合约/组合</value>
+  </data>
+  <data name="TradeListColumn_3" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="TradeListColumn_30" xml:space="preserve">
+    <value>用户ID</value>
+  </data>
+  <data name="TradeListColumn_31" xml:space="preserve">
+    <value>操作账户ID</value>
+  </data>
+  <data name="TradeListColumn_4" xml:space="preserve">
+    <value>成交价格</value>
+  </data>
+  <data name="TradeListColumn_5" xml:space="preserve">
+    <value>成交数量</value>
+  </data>
+  <data name="TradeListColumn_6" xml:space="preserve">
+    <value>来源</value>
+  </data>
+  <data name="TradeListColumn_7" xml:space="preserve">
+    <value>成交时间</value>
+  </data>
+  <data name="TradeListColumn_8" xml:space="preserve">
+    <value>成交ID</value>
+  </data>
+  <data name="TradeListColumn_9" xml:space="preserve">
+    <value>订单ID</value>
+  </data>
+  <data name="XqOrderDetailContentTabType_ExecuteDetailTab" xml:space="preserve">
+    <value>执行详情</value>
+  </data>
+  <data name="XqOrderDetailContentTabType_TradeDetailTab" xml:space="preserve">
+    <value>成交详情</value>
+  </data>
+  <data name="XqTargetPositionContentTabType_HistoryClosePositionTab" xml:space="preserve">
+    <value>配对记录</value>
+  </data>
+  <data name="XqTargetPositionContentTabType_PositionDetailTab" xml:space="preserve">
+    <value>持仓明细</value>
+  </data>
+  <data name="XqTradeDetailDMType_ComposeLameTraded" xml:space="preserve">
+    <value>已成交（瘸腿）</value>
+  </data>
+  <data name="XqTradeDetailDMType_NormalTraded" xml:space="preserve">
+    <value>已成交</value>
+  </data>
+  <data name="XqTradeDetailDMType_WaitingTrade" xml:space="preserve">
+    <value>待成交</value>
+  </data>
+</root>

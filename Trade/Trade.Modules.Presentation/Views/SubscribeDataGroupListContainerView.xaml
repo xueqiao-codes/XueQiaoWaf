@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.SubscribeDataGroupListContainerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:moduleconvert="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Converters"
+             xmlns:local="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Views"
+             xmlns:dm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.DataModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             xmlns:DragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="450"
+             d:DataContext="{x:Type vm:SubscribeDataGroupListContainerVM}"
+             x:Name="ViewRoot">
+    <UserControl.Resources>
+        <local:BindingProxy x:Key="RootDataContextProxy" Data="{Binding}"/>
+        <moduleconvert:SubscribeDataGroupNameConverter x:Key="SubscribeDataGroupNameConverter"/>
+        <moduleconvert:SubscribeDataGroupHeaderSizeConverter x:Key="SubscribeDataGroupHeaderSizeConverter"/>
+    </UserControl.Resources>
+
+    <TabControl ItemsSource="{Binding DataGroupListViews}"
+                SelectedItem="{Binding SelectedGroupListViewItem, Mode=TwoWay}"
+                IsSynchronizedWithCurrentItem="True"
+                DragDrop:DragDrop.IsDragSource="True"
+                DragDrop:DragDrop.IsDropTarget="True"
+                DragDrop:DragDrop.DragDropContext="{Binding GroupListViewsDragDropContextId}"
+                DragDrop:DragDrop.DragHandler="{Binding GroupListViewsDragHandler}"
+                DragDrop:DragDrop.DropHandler="{Binding GroupListViewsDropHandler}"
+                x:Name="DataGroupListViewsTabControl">
+        <TabControl.ItemContainerStyle>
+            <Style TargetType="TabItem" BasedOn="{StaticResource XqTabItemStyle}">
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock FontSize="{DynamicResource RegularTitleFontSize}">
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource SubscribeDataGroupNameConverter}">
+                                        <Binding Path="Group.GroupType" Mode="OneWay"/>
+                                        <Binding Path="Group.GroupName" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate DataType="{x:Type dm:SubscribeDataGroupListViewDM}">
+                            <ContentControl Content="{Binding ListView}"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Tag" Value="{Binding Source={StaticResource RootDataContextProxy}, Path=Data}"/>
+                <Setter Property="ContextMenu">
+                    <Setter.Value>
+                        <ContextMenu 
+                            DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.DataContext}"
+                            Tag="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.Tag}">
+                            <MenuItem 
+                                Header="添加分组"
+                                Command="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=Tag.ToNewGroupTabCmd}"
+                                CommandParameter="{Binding}"/>
+                            <MenuItem 
+                                Header="删除分组"
+                                Command="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=Tag.ToRemoveGroupTabCmd}"
+                                CommandParameter="{Binding}"/>
+                            <MenuItem 
+                                Header="重命名分组"
+                                Command="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=Tag.ToRenameGroupTabCmd}"
+                                CommandParameter="{Binding}"/>
+                        </ContextMenu>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </TabControl.ItemContainerStyle>
+
+        <TabControl.Template>
+            <ControlTemplate TargetType="{x:Type TabControl}">
+                <Grid Background="{DynamicResource PanelHeaderBgBrush2}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" MinWidth="76"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1">
+                            <Grid x:Name="AddGroupButtonContainer"
+                                  HorizontalAlignment="Left">
+                                <Button 
+                                    x:Name="AddGroupButton"
+                                    Margin="10,0"
+                                    Style="{StaticResource IconButton1}"
+                                    Width="14"
+                                    Height="14"
+                                    Padding="1"
+                                    ToolTip="添加分组"
+                                    Command="{Binding ElementName=ViewRoot, Path=DataContext.ToNewGroupTabCmd}">
+                                    <PathGeometry Figures="M1024 460.795057H563.204943V0h-102.409886v460.795057H0v102.409886h460.795057v460.795057h102.409886V563.204943h460.795057v-102.409886z"/>
+                                </Button>
+                            </Grid>
+                        </Grid>
+                        <ScrollViewer
+                            Grid.Column="0"
+                            Template="{StaticResource SmartScrollViewerControlTemplate}"
+                            HorizontalScrollBarVisibility="Auto"
+                            VerticalScrollBarVisibility="Hidden">
+                            <ScrollViewer.MaxWidth>
+                                <MultiBinding Converter="{StaticResource SubscribeDataGroupHeaderSizeConverter}"
+                                              Mode="OneWay">
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="ActualWidth" />
+                                    <Binding ElementName="AddGroupButtonContainer" Path="ActualWidth" />
+                                </MultiBinding>
+                            </ScrollViewer.MaxWidth>
+                            <TabPanel Panel.ZIndex ="1" IsItemsHost="True"/>
+                        </ScrollViewer>
+                    </Grid>
+                    <ContentPresenter
+                                Grid.Row="1"
+                                ContentSource="SelectedContent" 
+                                Name="PART_SelectedContentHost"/>
+                </Grid>
+            </ControlTemplate>
+        </TabControl.Template>
+    </TabControl>
+</UserControl>

@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="ContainerShell.Presentations.Views.TradeLameOptView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+             xmlns:uiextra_helper="clr-namespace:XueQiaoFoundation.UI.Extra.helper;assembly=XueQiaoFoundation.UI.Extra"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600"
+             x:Name="ViewRoot">
+    <!-- DataContext: ExceptionOrderPanelVM -->
+
+    <UserControl.Resources>
+        <convert:TradeDirection2NameConverter x:Key="TradeDirection2NameConverter"/>
+        <uiextra_convert:Timestamp2StringConverter x:Key="TimestampMs2DateTimeStringConverter" 
+                                        ValueType="Millisecond" 
+                                        Convert2StringFormatType="DateTime"/>
+    </UserControl.Resources>
+    
+    <DockPanel LastChildFill="True">
+        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap"
+                   Text="以下瘸腿成交需处理。若已处理，请在下方列表将它们标记为已处理，列表将不再显示该项瘸腿" />
+        <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,10,0,0" Orientation="Horizontal">
+            <Button 
+                    Content="全选" 
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    Click="SelectAllItems"/>
+            <Button 
+                    Margin="20,0,0,0"
+                    Content="标记处理" ToolTip="标记为已处理，标记后将不再显示该项瘸腿"
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    Command="{Binding SelectedTradeLameTNOptCommands.DeleteSelectedTNsCmd}"/>
+        </StackPanel>
+        <DataGrid 
+            DockPanel.Dock="Bottom" Margin="0,8,0,0"
+            IsSynchronizedWithCurrentItem="{x:Null}"
+            ItemsSource="{Binding TradeLameTaskNoteCollectionView}"
+            MouseDown="ItemsDataGrid_MouseDown"
+            x:Name="ItemsDataGrid">
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction 
+                            Command="{Binding SelectedTradeLameTNOptCommands.TradeLameTNSelectionChangedCmd}" 
+                            CommandParameter="{Binding SelectedItems, ElementName=ItemsDataGrid}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn 
+                    Header="名称" 
+                    MinWidth="100"
+                    CanUserSort="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding TradeInfo}" ContentTemplateSelector="{StaticResource XqTargetNameWithTooltipDTSelector}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn 
+                    Header="方向" Width="50"
+                    Binding="{Binding TradeInfo.Direction, Converter={StaticResource TradeDirection2NameConverter}}"
+                    CanUserSort="False"/>
+
+                <DataGridTextColumn 
+                    Header="成交价格" 
+                    Binding="{Binding TradeInfo.TradePrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+                    CanUserSort="False"/>
+
+                <DataGridTextColumn 
+                    Header="成交数量" 
+                    Binding="{Binding TradeInfo.TradeVolume, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+                    CanUserSort="False"/>
+
+                <DataGridTextColumn 
+                    Header="成交时间" 
+                    Binding="{Binding TradeInfo.CreateTimestampMs, Converter={StaticResource TimestampMs2DateTimeStringConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+                    CanUserSort="False"/>
+
+                <DataGridTemplateColumn 
+                    Header="成交ID" 
+                    CanUserSort="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox IsReadOnly="True" 
+                                Text="{Binding TradeInfo.TradeId, Mode=OneWay}"
+                                AutoWordSelection="True"
+                                Background="Transparent"
+                                Padding="0, 0"
+                                BorderThickness="0"
+                                ScrollViewer.CanContentScroll="False">
+                                <i:Interaction.Behaviors>
+                                    <uiextra_helper:TextBoxDoubleClickSelectAllTextBehavior/>
+                                </i:Interaction.Behaviors>
+                            </TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn 
+                    Header="订单ID"
+                    CanUserSort="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource FlatContentButtonPrimary3}"
+                                Content="{Binding TradeInfo.OrderId}"
+                                Command="{Binding Path=DataContext.ToShowOrderExecuteDetailCmd, ElementName=ViewRoot}"
+                                CommandParameter="{Binding TradeInfo}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn
+                    Binding="{Binding TradeInfo.SubAccountFields.SubAccountName}"
+                    Header="操作账户"
+                    CanUserSort="False"/>
+                
+                <DataGridTextColumn
+                    Binding="{Binding TradeInfo.SubAccountFields.SubUserName}"
+                    Header="用户"
+                    CanUserSort="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

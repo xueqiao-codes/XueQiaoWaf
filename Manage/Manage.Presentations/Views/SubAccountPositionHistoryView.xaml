@@ -1,0 +1,83 @@
+﻿<Page x:Class="Manage.Presentations.Views.SubAccountPositionHistoryView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:Manage.Applications.ViewModels;assembly=Manage.Applications"
+      xmlns:controls="clr-namespace:XueQiaoFoundation.UI.Controls;assembly=XueQiaoFoundation.UI"
+      xmlns:helper="clr-namespace:XueQiaoFoundation.Shared.Helper;assembly=XueQiaoFoundation.Shared"
+      mc:Ignorable="d" 
+      d:DataContext="{x:Type vm:SubAccountPositionHistoryVM}"
+      d:DesignHeight="300" d:DesignWidth="600"
+      Background="{DynamicResource RootBgBrush}"
+      Style="{StaticResource GeneralPageStyle}">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/PositionManageListColumnRes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <Grid Height="40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" x:Name="NavbarFirstColumn"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="{Binding ElementName=NavbarFirstColumn, Path=ActualWidth}"/>
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding PageGoBackCmd}" Style="{StaticResource FlatContentButtonPrimary3}"
+                    VerticalAlignment="Center">
+                    <TextBlock>
+                        <Run Text="〈 返回" FontSize="{DynamicResource RegularTitleFontSize}"/>
+                    </TextBlock>
+                </Button>
+                <TextBlock Grid.Column="1" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center" 
+                           Margin="10,0"
+                           FontSize="{DynamicResource LargeTitleFontSize}">
+                    <Run>操作账户</Run>
+                    <Run Text="{Binding SubAccount.SubAccountName}"/>
+                    <Run>的历史持仓</Run>
+                </TextBlock>
+            </Grid>
+            <Rectangle Height="1" Fill="{DynamicResource BorderBrush3}"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="15,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">日期：</TextBlock>
+                <controls:DayDatePicker
+                    MinWidth="120"
+                    VerticalAlignment="Center"
+                    Padding="2,2"
+                    Watermark="选择日期"
+                    IsTodayHighlighted="True"
+                    SelectedDateFormat="Long"
+                    Culture="{x:Static helper:DateHelper.DefaultDateTimePickerCulture}"
+                    SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            
+            <DataGrid Grid.Row="1" Margin="0,10,0,0"
+                  ItemsSource="{Binding PositionItems}"
+                  x:Name="PositionItemsDataGrid">
+                <!-- Note: 在CodeBehind 设置列显示 -->
+            </DataGrid>
+
+            <ContentControl Grid.Row="2" Content="{Binding PositionItemsPagerView}"/>
+        </Grid>
+    </Grid>
+</Page>

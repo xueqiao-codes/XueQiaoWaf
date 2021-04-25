@@ -1,0 +1,106 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+                    xmlns:uiextra_helper="clr-namespace:XueQiaoFoundation.UI.Extra.helper;assembly=XueQiaoFoundation.UI.Extra"
+                    xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra">
+    <convert:TradeDirection2NameConverter x:Key="TradeDirection2NameConverter"/>
+    <uiextra_convert:Timestamp2StringConverter x:Key="TimestampMs2DateTimeStringConverter" 
+                                        ValueType="Millisecond" 
+                                        Convert2StringFormatType="DateTime"/>
+    <convert:ClientXQOrderTargetType2NameConverter x:Key="ClientXQOrderTargetType2NameConverter"/>
+    <convert:ClientTradeItemSourceType2NameConverter x:Key="ClientTradeItemSourceType2NameConverter"/>
+
+    <DataGridTextColumn 
+            Header="方向" Width="50"
+            Binding="{Binding Direction, Converter={StaticResource TradeDirection2NameConverter}}"
+            CanUserSort="True"
+            x:Key="TradeListColumn_Direction"
+            x:Shared="False"/>
+
+    <DataGridTextColumn 
+            Header="合约/组合" 
+            Binding="{Binding TargetType, Converter={StaticResource ClientXQOrderTargetType2NameConverter}}" 
+            CanUserSort="False"
+            x:Key="TradeListColumn_TargetType"
+            x:Shared="False"/>
+
+    <DataGridTextColumn 
+            Header="成交价格" 
+            Binding="{Binding TradePrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            CanUserSort="False"
+            x:Key="TradeListColumn_TradePrice"
+            x:Shared="False"/>
+
+    <DataGridTextColumn 
+            Header="成交数量" 
+            Binding="{Binding TradeVolume, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            CanUserSort="False"
+            x:Key="TradeListColumn_TradeVolume"
+            x:Shared="False"/>
+
+    <DataGridTextColumn 
+            Header="来源" 
+            Binding="{Binding SourceType, Converter={StaticResource ClientTradeItemSourceType2NameConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            CanUserSort="False"
+            x:Key="TradeListColumn_SourceType"
+            x:Shared="False"/>
+
+    <DataGridTextColumn 
+            Header="成交时间" 
+            Binding="{Binding CreateTimestampMs, Converter={StaticResource TimestampMs2DateTimeStringConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+            CanUserSort="False"
+            x:Key="TradeListColumn_CreateTime"
+            x:Shared="False"/>
+
+    <DataGridTemplateColumn 
+            Header="成交ID" 
+            CanUserSort="False"
+            x:Key="TradeListColumn_TradeId"
+            x:Shared="False">
+        <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+                <TextBox IsReadOnly="True" 
+                        Text="{Binding TradeId, Mode=OneWay}"
+                        AutoWordSelection="True"
+                        Background="Transparent"
+                        Padding="0, 0"
+                        BorderThickness="0"
+                        ScrollViewer.CanContentScroll="False">
+                    <i:Interaction.Behaviors>
+                        <uiextra_helper:TextBoxDoubleClickSelectAllTextBehavior/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+            </DataTemplate>
+        </DataGridTemplateColumn.CellTemplate>
+    </DataGridTemplateColumn>
+
+    <DataGridTextColumn
+            Binding="{Binding SubAccountFields.SubUserName}"
+            Header="用户"
+            CanUserSort="False"
+            x:Key="TradeListColumn_CreatorUserName"
+            x:Shared="False"/>
+
+    <DataGridTextColumn
+            Binding="{Binding SubAccountFields.SubAccountName}"
+            Header="操作账户"
+            CanUserSort="False"
+            x:Key="TradeListColumn_SubAccountName"
+            x:Shared="False"/>
+
+    <DataGridTextColumn
+            Binding="{Binding SubAccountFields.SubUserId}"
+            Header="用户ID"
+            CanUserSort="False"
+            x:Key="TradeListColumn_SubUserId"
+            x:Shared="False"/>
+
+    <DataGridTextColumn
+            Binding="{Binding SubAccountFields.SubAccountId}"
+            Header="操作账户ID"
+            CanUserSort="False"
+            x:Key="TradeListColumn_SubAccountId"
+            x:Shared="False"/>
+    
+</ResourceDictionary>

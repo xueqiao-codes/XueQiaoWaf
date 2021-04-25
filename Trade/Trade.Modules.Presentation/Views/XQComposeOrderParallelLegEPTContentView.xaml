@@ -1,0 +1,167 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.XQComposeOrderParallelLegEPTContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:controls="clr-namespace:XueQiaoFoundation.UI.Controls;assembly=XueQiaoFoundation.UI"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:local="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Views"
+             xmlns:Styles="clr-namespace:XueQiaoFoundation.UI.Styles;assembly=XueQiaoFoundation.UI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500">
+    <!-- DataContext is XQComposeOrderExecParamsTemplate -->
+    <UserControl.Resources>
+        <sys:Boolean x:Key="TrueValue">True</sys:Boolean>
+        <uiconvert:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
+        <convert:MultiplicationValueConverter x:Key="PercentValueConverter" Multiplier="0.01"/>
+        <convert:MultiplicationValueConverter x:Key="MillesimalValueConverter" Multiplier="0.001"/>
+
+        <local:BindingProxy x:Key="DataProxy_IsActiveEPTNotInEditMode" 
+                            Data="{Binding IsInEditMode, Converter={StaticResource BooleanReverseConverter}, TargetNullValue={StaticResource TrueValue}, Mode=OneWay}"/>
+
+        <Style TargetType="{x:Type controls:NumericUpDown}" BasedOn="{StaticResource NumericUpDownStyleDefault}">
+            <Setter Property="Padding" Value="4,2"/>
+            <Setter Property="MinWidth" Value="50"/>
+            <Setter Property="InputMethod.IsInputMethodEnabled" Value="False"/>
+            <Setter Property="HideUpDownButtons" Value="True"/>
+            <Setter Property="IsReadOnly" Value="{Binding Source={StaticResource DataProxy_IsActiveEPTNotInEditMode}, Path=Data}"/>
+        </Style>
+
+        <convert:XQComposeOrderExecParamsSendType2NameConverter x:Key="XQComposeOrderExecParamsSendType2NameConverter"/>
+        
+        <Style TargetType="Rectangle">
+            <Setter Property="Fill" Value="{DynamicResource BorderBrush3}"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Height" Value="1"/>
+        </Style>
+
+        <Style TargetType="HeaderedContentControl" BasedOn="{StaticResource HorizonalOrientationFieldHeaderedStyle}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Styles:HeaderedContentControlHelper.HorizonalColumnSpacing" Value="12"/>
+            <Setter Property="Styles:HeaderedContentControlHelper.HorizonalHeaderColumnSharedSizeGroup" Value="ThisHeaderColumn"/>
+            <Setter Property="Padding" Value="0,15"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <StackPanel Grid.IsSharedSizeScope="True">
+        <HeaderedContentControl
+                Header="发单方式">
+            <TextBlock Text="市价并发，以市价同时发送各腿指令。"/>
+        </HeaderedContentControl>
+
+        <Rectangle/>
+        <HeaderedContentControl
+                Header="执行特点">
+            <TextBlock Text="触发后，快速成交，滑价幅度大小受当时市场流动性预参数设置影响。"/>
+        </HeaderedContentControl>
+
+        <Rectangle/>
+        <HeaderedContentControl
+                Header="触发价格条件">
+            <TextBlock Text="以市场（对手价）计算价差，并判断是否满足发送条件。"/>
+        </HeaderedContentControl>
+        
+        <Rectangle/>
+        <HeaderedContentControl
+                Header="触发量条件">
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock 
+                        VerticalAlignment="Center"
+                        Text="各腿挂单量不超过当前盘口量的"/>
+                <controls:NumericUpDown
+                    Margin="6,0"
+                    VerticalAlignment="Center"
+                    SnapToMultipleOfInterval="False"
+                    Value="{Binding ParallelLegTypeParams.LegSendOrderParam_QuantityRatio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                            Converter={StaticResource PercentValueConverter}}"/>
+                <TextBlock VerticalAlignment="Center" Text="%（百分之）。"/>
+                <Button Style="{StaticResource OrderExecuteParam_SendQuantityTipButton}"/>
+            </WrapPanel>
+        </HeaderedContentControl>
+        
+        <Rectangle/>
+        <HeaderedContentControl
+                Header="每次追价价位">
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock 
+                        VerticalAlignment="Center"
+                        Text="对手价格 加"/>
+                <controls:NumericUpDown
+                    Margin="6,0"
+                    VerticalAlignment="Center"
+                    SnapToMultipleOfInterval="True"
+                    Interval="1"
+                    Value="{Binding ParallelLegTypeParams.LegChaseParam_Ticks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock VerticalAlignment="Center" Text="个价位（Tick）。"/>
+            </WrapPanel>
+        </HeaderedContentControl>
+        
+        <Rectangle/>
+        <HeaderedContentControl
+                Header="最大滑价上限">
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock 
+                            VerticalAlignment="Center"
+                            Text="追价价格不超过初次触发价格的"/>
+                <controls:NumericUpDown
+                        Margin="6,0"
+                        VerticalAlignment="Center"
+                        SnapToMultipleOfInterval="False"
+                        Value="{Binding ParallelLegTypeParams.LegChaseProtectPriceRatio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                                   Converter={StaticResource MillesimalValueConverter}}"/>
+                <TextBlock VerticalAlignment="Center" Text="‰（千分之）。"/>
+                <Button Style="{StaticResource OrderExecuteParam_LegChaseProtectPriceRatioTipButton}"/>
+            </WrapPanel>
+        </HeaderedContentControl>
+
+        <Rectangle/>
+        <HeaderedContentControl>
+            <HeaderedContentControl.Header>
+                <StackPanel>
+                    <TextBlock Text="每次触发执行"/>
+                    <TextBlock Text="撤单次数上限"/>
+                </StackPanel>
+            </HeaderedContentControl.Header>
+
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center"
+                            Text="（国内）各腿每次触发后撤单次数不超过"/>
+                <controls:NumericUpDown
+                        Margin="6,0"
+                        VerticalAlignment="Center"
+                        SnapToMultipleOfInterval="True"
+                        Interval="1"
+                        Minimum="0"
+                        Value="{Binding ParallelLegTypeParams.InnerLegChaseTimes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock VerticalAlignment="Center" Text="次。"/>
+            </WrapPanel>
+        </HeaderedContentControl>
+
+        <Rectangle/>
+        <HeaderedContentControl>
+            <HeaderedContentControl.Header>
+                <StackPanel>
+                    <TextBlock Text="提前收市暂停"/>
+                    <TextBlock Text="时间"/>
+                </StackPanel>
+            </HeaderedContentControl.Header>
+
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center"
+                            Text="交易时间范围内，提前"/>
+                <controls:NumericUpDown
+                        Margin="6,0"
+                        VerticalAlignment="Center"
+                        SnapToMultipleOfInterval="True"
+                        Interval="1"
+                        Minimum="0"
+                        Value="{Binding ParallelLegTypeParams.EarlySuspendedForMarketSeconds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock VerticalAlignment="Center" Text="秒收市暂停。"/>
+                <Button Style="{StaticResource OrderExecuteParam_EarlySuspendedForMarketSecondsTipButton}"/>
+            </WrapPanel>
+        </HeaderedContentControl>
+    </StackPanel>
+</UserControl>

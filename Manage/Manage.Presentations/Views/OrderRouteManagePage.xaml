@@ -1,0 +1,163 @@
+﻿<Page x:Class="Manage.Presentations.Views.OrderRouteManagePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+        xmlns:convert2="clr-namespace:Manage.Presentations.Converters"
+        xmlns:dm="clr-namespace:Manage.Applications.DataModels;assembly=Manage.Applications"
+        mc:Ignorable="d" 
+        d:DesignHeight="300"
+        Background="{DynamicResource RootBgBrush}"
+        Style="{StaticResource GeneralPageStyle}"
+        KeepAlive="True">
+    <Page.Resources>
+        <convert:CommodityType2NameConverter x:Key="CommodityType2NameConverter"/>
+        <convert:BooleanToDisplayNameConverter x:Key="BooleanReverseToDisplayNameConverter" TrueDisplayText="否" FalseDisplayText="是"/>
+        <convert:CommodityToDisplayNameConverter x:Key="CommodityToDisplayNameConverter"/>
+        <convert2:OrderRouteRuleLevelTypeToDisplayNameConverter x:Key="OrderRouteRuleLevelTypeToDisplayNameConverter"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical">
+            <Grid Height="40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" x:Name="NavbarFirstColumn"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="{Binding ElementName=NavbarFirstColumn, Path=ActualWidth}"/>
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding GoBackCmd}" Style="{StaticResource FlatContentButtonPrimary3}"
+                    VerticalAlignment="Center">
+                    <TextBlock>
+                        <Run Text="〈 返回" FontSize="{DynamicResource RegularTitleFontSize}"/>
+                    </TextBlock>
+                </Button>
+                <TextBlock Grid.Column="1" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center" 
+                           Margin="10,0"
+                           FontSize="{DynamicResource LargeTitleFontSize}">
+                    <Run>
+                        <Run.Text>
+                            <MultiBinding StringFormat="操作账户{0}({1})">
+                                <Binding Path="SubAccount.SubAccountId"/>
+                                <Binding Path="SubAccount.SubAccountName"/>
+                            </MultiBinding>
+                        </Run.Text>
+                    </Run>
+                    <Run>的路由管理</Run>
+                </TextBlock>
+            </Grid>
+            <Rectangle Height="1" Fill="{DynamicResource BorderBrush3}"/>
+        </StackPanel>
+        <DockPanel Grid.Row="1" LastChildFill="True"
+                   Margin="15,8,15,0">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="+添加路由"
+                    Command="{Binding ToAddRouteRuleCmd}"
+                    Style="{StaticResource FlatBgButtonPrimary3}"
+                    VerticalAlignment="Center"/>
+                <Button Margin="8,0,0,0" 
+                    Content="刷新"
+                    Style="{StaticResource FlatBgButtonPrimary3}"
+                    VerticalAlignment="Center"
+                    Command="{Binding ToRefreshListCmd}"/>
+            </StackPanel>
+
+            <DataGrid DockPanel.Dock="Top"
+                  Margin="0,8,0,8"
+                  ItemsSource="{Binding OrderRouteRuleItems}"
+                  IsReadOnly="True"
+                  SelectionUnit="FullRow"
+                  Tag="{Binding}">
+                <!-- item data type: OrderRouteRuleListItemModel -->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="交易所" 
+                                    Binding="{Binding RouteExchangeName}"
+                                    MinWidth="100"/>
+                    <DataGridTextColumn Header="商品类型"
+                                    Binding="{Binding RouteCommodityType, Converter={StaticResource CommodityType2NameConverter}}"
+                                    MinWidth="100"/>
+                    <DataGridTemplateColumn Header="商品"
+                                        MinWidth="150"
+                                        MaxWidth="400"
+                                        Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock x:Name="AllCommoditiesIndicateTextBlock" Visibility="Collapsed">*</TextBlock>
+                                    <ItemsControl x:Name="ContaintCommoditiesItemsControl"
+                                              Visibility="Collapsed"
+                                              ItemsSource="{Binding GroupedCommodities}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                <Run x:Name="Comma" Text=","/>
+                                                <Run Text="{Binding Mode=OneWay, Converter={StaticResource CommodityToDisplayNameConverter}}"/>
+                                                </TextBlock>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                        <Setter TargetName="Comma" Property="Text" Value="{x:Null}"/>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding RouteLevelType}" Value="{x:Static dm:OrderRouteRuleLevelType.CommodityType}">
+                                        <Setter TargetName="AllCommoditiesIndicateTextBlock" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding RouteLevelType}" Value="{x:Static dm:OrderRouteRuleLevelType.Commodity}">
+                                        <Setter TargetName="ContaintCommoditiesItemsControl" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="路由层级" Binding="{Binding RouteLevelType, Converter={StaticResource OrderRouteRuleLevelTypeToDisplayNameConverter}}"
+                                    MinWidth="100"/>
+                    <DataGridTextColumn Header="允许交易" 
+                                    Binding="{Binding IsForbiddenTradeRule, Converter={StaticResource BooleanReverseToDisplayNameConverter}}"
+                                    MinWidth="100"/>
+                    <DataGridTextColumn Header="路由目标(资金账号)"
+                                    Binding="{Binding RouteToTradeAccountName}"
+                                    MinWidth="150"/>
+                    <DataGridTextColumn Width="2*"/>
+                    <DataGridTemplateColumn Header="编辑" CanUserSort="False" 
+                                        HeaderStyle="{StaticResource DataGridColumnHeader_HorizontalAlignCenter}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource FlatContentButtonPrimary3}"
+                                    Margin="10,0"
+                                    Content="编辑"
+                                    Command="{Binding Path=Tag.ToEditRouteRuleCmd, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="删除" CanUserSort="False" 
+                                        HeaderStyle="{StaticResource DataGridColumnHeader_HorizontalAlignCenter}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource FlatContentButtonPrimary3}"
+                                    Margin="10,0"
+                                    Content="删除"
+                                    Command="{Binding Path=Tag.ToRmRouteRuleCmd, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</Page>

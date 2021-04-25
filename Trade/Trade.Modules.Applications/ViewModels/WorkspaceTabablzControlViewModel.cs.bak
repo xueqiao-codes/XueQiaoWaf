@@ -1,0 +1,78 @@
+﻿using Dragablz;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Waf.Applications;
+using System.Windows.Input;
+using XueQiaoWaf.Trade.Modules.Applications.DataModels;
+using XueQiaoWaf.Trade.Modules.Applications.Views;
+
+namespace XueQiaoWaf.Trade.Modules.Applications.ViewModels
+{
+    [Export, PartCreationPolicy(CreationPolicy.NonShared)]
+    public class WorkspaceTabablzControlViewModel : ViewModel<IWorkspaceTabablzControl>
+    {
+        private TabWorkspaceItemDataModel activeWorkspace;
+        private IInterTabClient interTabClient;
+        private ICommand newCommand;
+
+        [ImportingConstructor]
+        public WorkspaceTabablzControlViewModel(IWorkspaceTabablzControl view) : base(view)
+        {
+<<<<<<< HEAD:Trade.Modules.Applications/ViewModels/WorkspaceTabablzControlViewModel.cs
+            Workspaces = new ObservableCollection<TabWorkspaceItemDataModel>();
+        }
+        
+        public ObservableCollection<TabWorkspaceItemDataModel> Workspaces { get; private set; }
+
+        public TabWorkspaceItemDataModel ActiveWorkspace
+=======
+            view.Closing += ViewClosing;
+            view.Closed += ViewClosed;
+
+            WorkspaceViews = new ObservableCollection<object>();
+            CollectionChangedEventManager.AddHandler(this.WorkspaceViews, WorkspaceViewsChanged);
+        }
+
+        private void WorkspaceViewsChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            Console.WriteLine("WorkspaceInterTabViewModel,WorkspaceViewsChanged, e:{0}", e);
+        }
+
+        public ObservableCollection<object> WorkspaceViews { get; }
+        
+        public object ActiveWorkspaceView
+>>>>>>> f9684e27a45598c8e59f591462da9f603cfc7984:Trade.Modules.Applications/ViewModels/WorkspaceInterTabViewModel.cs
+        {
+            get { return activeWorkspace; }
+            set { SetProperty(ref activeWorkspace, value); }
+        }
+
+        public IInterTabClient InterTabClient
+        {
+            get { return interTabClient; }
+            set { SetProperty(ref interTabClient, value); }
+        }
+
+        public ICommand NewCommand
+        {
+            get { return newCommand; }
+            set { SetProperty(ref newCommand, value); }
+        }
+
+        public event Action<object, CancelEventArgs> WorkspaceItemClosing;
+        
+        public object WorkspaceTabControl => ViewCore.WorkspaceTabControl;
+
+        public void InvokeWorkspaceItemClosing(object closingWorkspaceView, CancelEventArgs e)
+        {
+            WorkspaceItemClosing?.Invoke(closingWorkspaceView, e);
+        }
+    }
+}

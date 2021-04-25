@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Manage.Presentations.Views.SettlementBillsCompareView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:XueQiaoFoundation.UI.Controls;assembly=XueQiaoFoundation.UI"
+             xmlns:helper="clr-namespace:XueQiaoFoundation.Shared.Helper;assembly=XueQiaoFoundation.Shared"
+             xmlns:TextEditor="clr-namespace:XueQiaoFoundation.UI.Components.TextEditor;assembly=XueQiaoFoundation.UI"
+             xmlns:vm="clr-namespace:Manage.Applications.ViewModels;assembly=Manage.Applications"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Type vm:SettlementBillsCompareViewModel}"
+             d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource BorderBrush3}">
+            <StackPanel Height="40" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Margin="10,0,0,0" VerticalAlignment="Center" FontWeight="Bold">交易结算单</TextBlock>
+                <Button 
+                Style="{StaticResource FlatContentButtonPrimary3}"
+                Width="20" Height="20" Padding="1"
+                Margin="15,0,0,0"
+                ToolTip="打开新窗口进行查看"
+                Command="{Binding ToOpenInAnotherWindowCmd}"
+                Visibility="{Binding ShowOpenInAnotherWindowButton, Converter={StaticResource bool2VisibilityConverter}}">
+                    <PathGeometry Figures="M170.65984 42.65984l298.65984 0q17.67424 0 30.16704 12.4928t12.4928 30.16704-12.4928 30.16704-30.16704 12.4928l-298.65984 0q-17.67424 0-30.16704 12.4928t-12.4928 30.16704l0 682.65984q0 17.67424 12.4928 30.16704t30.16704 12.4928l682.65984 0q17.67424 0 30.16704-12.4928t12.4928-30.16704l0-298.65984q0-17.67424 12.4928-30.16704t30.16704-12.4928 30.16704 12.4928 12.4928 30.16704l0 298.65984q0 53.00224-37.49888 90.50112t-90.50112 37.49888l-682.65984 0q-53.00224 0-90.50112-37.49888t-37.49888-90.50112l0-682.65984q0-53.00224 37.49888-90.50112t90.50112-37.49888zM682.65984 42.65984l256 0q17.67424 0 30.16704 12.4928t12.4928 30.16704l0 256q0 17.67424-12.4928 30.16704t-30.16704 12.4928-30.16704-12.4928-12.4928-30.16704l0-153.00608-353.9968 353.9968q-12.32896 12.32896-30.0032 12.32896-18.3296 0-30.49472-12.16512t-12.16512-30.49472q0-17.67424 12.32896-30.0032l353.9968-353.9968-153.00608 0q-17.67424 0-30.16704-12.4928t-12.4928-30.16704 12.4928-30.16704 30.16704-12.4928z"/>
+                </Button>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource BorderBrush2}">
+            <StackPanel Height="40" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Margin="10,0,0,0" VerticalAlignment="Center">选择结算日期：</TextBlock>
+                <controls:DayDatePicker
+                    MinWidth="120"
+                    VerticalAlignment="Center"
+                    Padding="2,2"
+                    Watermark="选择日期"
+                    IsTodayHighlighted="True"
+                    SelectedDateFormat="Long"
+                    Culture="{x:Static helper:DateHelper.DefaultDateTimePickerCulture}"
+                    SelectedDate="{Binding SettlementCompareItem.SelectedSettlementDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </Border>
+        <TextEditor:XueQiaoReadonlyTextEditor Grid.Row="2" EditorText="{Binding SettlementCompareItem.SettlementBillsContent}"/>
+    </Grid>
+</UserControl>

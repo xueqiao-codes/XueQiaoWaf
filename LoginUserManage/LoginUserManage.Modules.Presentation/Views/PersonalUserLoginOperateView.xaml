@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="XueQiaoWaf.LoginUserManage.Modules.Presentation.Views.PersonalUserLoginOperateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:Controls="clr-namespace:XueQiaoFoundation.UI.Controls;assembly=XueQiaoFoundation.UI"
+             mc:Ignorable="d" 
+             d:DesignHeight="380" d:DesignWidth="260"
+             Margin="{Binding ViewMargin}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="True2Visible"/>
+        <uiconvert:EqualityToBooleanConverter x:Key="Equal2True"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2Visible" CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <sys:Boolean x:Key="TrueValue">True</sys:Boolean>
+        <sys:Boolean x:Key="FalseValue">False</sys:Boolean>
+        
+        <Style x:Key="TabStyleToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="IsThreeState" Value="False"/>
+            <Setter Property="Foreground" Value="{DynamicResource ContentBrush3}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <ContentPresenter SnapsToDevicePixels="True"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource ContentBrush1}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <ToggleButton 
+                Content="密码登录" Style="{StaticResource TabStyleToggleButton}"
+                IsChecked="{Binding IsLoginByVerifyCode, Mode=OneWay, Converter={StaticResource Equal2True}, ConverterParameter={StaticResource FalseValue}}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Checked">
+                        <i:InvokeCommandAction Command="{Binding IsLoginByVerifyCodeChangedCmd}" CommandParameter="{StaticResource FalseValue}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ToggleButton>
+            <Rectangle Width="1" VerticalAlignment="Stretch" Fill="{DynamicResource BorderBrush2}" Margin="20,0"/>
+            <ToggleButton 
+                Content="验证码登录" Style="{StaticResource TabStyleToggleButton}"
+                IsChecked="{Binding IsLoginByVerifyCode, Mode=OneWay, Converter={StaticResource Equal2True}, ConverterParameter={StaticResource TrueValue}}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Checked">
+                        <i:InvokeCommandAction Command="{Binding IsLoginByVerifyCodeChangedCmd}" CommandParameter="{StaticResource TrueValue}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ToggleButton>
+        </StackPanel>
+
+        <HeaderedContentControl IsTabStop="False" Header="手机号码" Margin="0,15,0,0">
+            <TextBox Text="{Binding TelNumber, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+        </HeaderedContentControl>
+
+        <HeaderedContentControl 
+            IsTabStop="False" Header="密码" Margin="0,16,0,0"
+            Visibility="{Binding IsLoginByVerifyCode, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource FalseValue}}">
+            <Controls:CustomPasswordBox
+                x:Name="PasswordBox">
+                <Controls:CustomPasswordBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                </Controls:CustomPasswordBox.InputBindings>
+            </Controls:CustomPasswordBox>
+            <!--
+            <PasswordBox 
+                PasswordChar="*"
+                x:Name="PasswordBox">
+                <PasswordBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                </PasswordBox.InputBindings>
+            </PasswordBox>
+            -->
+        </HeaderedContentControl>
+
+        <HeaderedContentControl 
+            IsTabStop="False" Header="验证码" Margin="0,16,0,0"
+            Visibility="{Binding IsLoginByVerifyCode, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource TrueValue}}">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding VerifyCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" HorizontalScrollBarVisibility="Hidden"
+                         Width="120" VerticalAlignment="Center">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding LoginCommand}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Button 
+                    Style="{StaticResource FlatContentButtonPrimary3}" Margin="10,0,0,0" VerticalAlignment="Center"
+                    Content="获取验证码"
+                    Command="{Binding ReqGetVerifyCodeCmd}"
+                    Visibility="{Binding IsCountingDownGetVerifyCodeEnabled, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource FalseValue}}"/>
+
+                <TextBlock 
+                    Margin="8,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="{Binding GetVerifyCodeEnabledCountDownSeconds, StringFormat=（{0} s）}"
+                    Visibility="{Binding IsCountingDownGetVerifyCodeEnabled, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource TrueValue}}"/>
+            </StackPanel>
+        </HeaderedContentControl>
+
+        <UniformGrid Columns="2" Margin="4,16,0,0">
+            <RadioButton 
+                        Content="实盘"
+                        IsChecked="{Binding IsSelectRealHostingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </RadioButton>
+            <RadioButton 
+                        Content="模拟盘"
+                        IsChecked="{Binding IsSelectSimulatorHostingMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            </RadioButton>
+        </UniformGrid>
+        
+        <Button Command="{Binding LoginCommand}" Margin="0,20,0,4" Style="{StaticResource FlatBgButtonPrimary2}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">立即登录</TextBlock>
+                <ProgressBar 
+                    Style="{StaticResource CircularProgressBarDefault}"
+                    Visibility="{Binding Path=IsLogining, Converter={StaticResource True2Visible}}"
+                    VerticalAlignment="Center"
+                    Foreground="{DynamicResource ForegroundInPrimaryBgBrush}"         
+                    IsIndeterminate="True"
+                    Value="0"
+                    Height="18"
+                    Width="18"
+                    Margin="8,0"/>
+            </StackPanel>
+        </Button>
+
+        <Button HorizontalAlignment="Left"
+                Style="{StaticResource FlatContentButtonPrimary3}"
+                Content="注册"
+                Command="{Binding RegisterCmd}"/>
+    </StackPanel>
+        
+</UserControl>

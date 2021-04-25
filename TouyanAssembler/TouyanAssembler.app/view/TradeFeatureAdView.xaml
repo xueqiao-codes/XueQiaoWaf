@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="TouyanAssembler.app.view.TradeFeatureAdView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TouyanAssembler.app.view"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:styles="clr-namespace:XueQiaoFoundation.UI.Styles;assembly=XueQiaoFoundation.UI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1800"
+             x:Name="ViewRoot"
+             Foreground="#FFFFFFFF">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="ViewContentBrush1" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ViewContentBrush2" Color="#FF909090"/>
+        <SolidColorBrush x:Key="ViewBorderBrush1" Color="#FF4D5E96"/>
+        <SolidColorBrush x:Key="ViewIconFillBrush1" Color="#FF3052C5"/>
+
+        <uiconvert:EqualityToBooleanConverter x:Key="Equal2True"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2Visible" CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <sys:Boolean x:Key="TrueValue">True</sys:Boolean>
+        <sys:Boolean x:Key="FalseValue">False</sys:Boolean>
+        
+        <Style x:Key="AdTabStyleToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="IsThreeState" Value="False"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="{StaticResource ViewContentBrush2}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <ContentPresenter SnapsToDevicePixels="True"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource ViewContentBrush1}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Image Source="../resource/trade_add_bg.jpg" Stretch="UniformToFill"/>
+        <ScrollViewer Foreground="#FFFFFFFF">
+            <StackPanel>
+                <TextBlock Text="雪橇——科学高效的投资工作流" Margin="0,50,0,0"  FontSize="36" HorizontalAlignment="Center"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,50,0,0" HorizontalAlignment="Center">
+                    <ToggleButton 
+                        Content="个人用户" Style="{StaticResource AdTabStyleToggleButton}"
+                        Checked="AdTabToggleButton_Checked"
+                        x:Name="PersonalUserAdTabToggleButton"
+                        IsChecked="{Binding ElementName=ViewRoot, Path=IsShowPersonalUserAdTab, Mode=OneWay, Converter={StaticResource Equal2True}, ConverterParameter={StaticResource TrueValue}}">
+                    </ToggleButton>
+                    <Rectangle Width="1" VerticalAlignment="Stretch" Fill="{StaticResource ViewBorderBrush1}" Margin="36,0"/>
+                    <ToggleButton 
+                        Content="企业用户" Style="{StaticResource AdTabStyleToggleButton}"
+                        Checked="AdTabToggleButton_Checked"
+                        x:Name="CompanyUserAdTabToggleButton"
+                        IsChecked="{Binding ElementName=ViewRoot, Path=IsShowPersonalUserAdTab, Mode=OneWay, Converter={StaticResource Equal2True}, ConverterParameter={StaticResource FalseValue}}">
+                    </ToggleButton>
+                </StackPanel>
+
+                <Grid Margin="0,50,0,0" Background="#40000000" MinHeight="600">
+                    <StackPanel 
+                        Margin="0,50,0,0" HorizontalAlignment="Center"
+                        Visibility="{Binding ElementName=ViewRoot, Path=IsShowPersonalUserAdTab, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource TrueValue}}">
+                        <TextBlock Text="— 个人版特色功能 —" HorizontalAlignment="Center" FontSize="24"/>
+                        <Border Margin="0,50,0,0" HorizontalAlignment="Center"
+                                BorderBrush="{StaticResource ViewBorderBrush1}" BorderThickness="1"
+                                Padding="20" CornerRadius="10" Width="600">
+                            <WrapPanel Orientation="Vertical">
+                                <WrapPanel.Resources>
+                                    <Style TargetType="{x:Type Label}">
+                                        <Setter Property="Padding" Value="10,10"/>
+                                        <Setter Property="FontWeight" Value="Light"/>
+                                        <Setter Property="FontSize" Value="20"/>
+                                        <Setter Property="Foreground" Value="{StaticResource ViewContentBrush1}"/>
+                                    </Style>
+                                </WrapPanel.Resources>
+                                <Label Content="1、云服务器托管"/>
+                                <Label Content="2、长期有效的订单"/>
+                                <Label Content="3、各类条件单"/>
+                                <Label>
+                                    <TextBlock Text="4、自定义套利组合交易（内置市价并发、市价逐腿、限价逐腿3种执行模式）" TextWrapping="Wrap"/>
+                                </Label>
+                                <Label Content="5、投机持仓、组合持仓分开管理"/>
+                                <Label Content="6、内外盘同一平台交易"/>
+                            </WrapPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel
+                        Orientation="Horizontal" Margin="100,50" HorizontalAlignment="Center"
+                        Visibility="{Binding ElementName=ViewRoot, Path=IsShowPersonalUserAdTab, Converter={StaticResource Equal2Visible}, ConverterParameter={StaticResource FalseValue}}">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Rectangle}" x:Key="LineRectangle">
+                                <Setter Property="Width" Value="1"/>
+                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                <Setter Property="Fill" Value="{StaticResource ViewBorderBrush1}"/>
+                            </Style>
+                            <Style TargetType="{x:Type TextBlock}" x:Key="FeatureItemTitleText">
+                                <Setter Property="FontSize" Value="24"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="0,40"/>
+                            </Style>
+                            <Style TargetType="{x:Type TextBlock}" x:Key="FeatureItemContentText">
+                                <Setter Property="FontSize" Value="20"/>
+                                <Setter Property="FontWeight" Value="Light"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                            <Style TargetType="{x:Type StackPanel}" x:Key="FeatureItemStackPanel">
+                                <Setter Property="Width" Value="248"/>
+                                <Setter Property="Margin" Value="40,0"/>
+                            </Style>
+                            <Style TargetType="{x:Type Image}" x:Key="FeatureItemIcon">
+                                <Setter Property="Width" Value="80"/>
+                                <Setter Property="Height" Value="80"/>
+                                <Setter Property="Stretch" Value="Fill"/>
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <Rectangle Style="{StaticResource LineRectangle}"/>
+
+                        <StackPanel Style="{StaticResource FeatureItemStackPanel}">
+                            <Image Source="../resource/adicon_24hour.png" Style="{StaticResource FeatureItemIcon}"/>
+                            <TextBlock Text="24小时托管服务" Style="{StaticResource FeatureItemTitleText}"/>
+                            <TextBlock Text="      不同于国内传统客户端交易产品，雪橇为每一个专业用户都配置了24小时托管服务，提供更稳定、更高效的交易支持。" Style="{StaticResource FeatureItemContentText}"/>
+                        </StackPanel>
+
+                        <Rectangle Style="{StaticResource LineRectangle}"/>
+
+                        <StackPanel Style="{StaticResource FeatureItemStackPanel}">
+                            <Image Source="../resource/adicon_global.png" Style="{StaticResource FeatureItemIcon}"/>
+                            <TextBlock Text="内外盘支持" Style="{StaticResource FeatureItemTitleText}"/>
+                            <TextBlock Text="      雪橇系统支持内外盘所有主流交易所，用户添加对应券商账户，即可进行专业的内外盘套利交易。" Style="{StaticResource FeatureItemContentText}"/>
+                        </StackPanel>
+
+                        <Rectangle Style="{StaticResource LineRectangle}"/>
+
+                        <StackPanel Style="{StaticResource FeatureItemStackPanel}">
+                            <Image Source="../resource/adicon_multi_account.png" Style="{StaticResource FeatureItemIcon}"/>
+                            <TextBlock Text="多账户系统" Style="{StaticResource FeatureItemTitleText}"/>
+                            <TextBlock Text="      通过设置多个操作帐号，可以将一个操作帐号分配给多人操作，通过限制授信额度和可交易合约来有效管理风险。" Style="{StaticResource FeatureItemContentText}"/>
+                        </StackPanel>
+
+                        <Rectangle Style="{StaticResource LineRectangle}"/>
+
+                        <StackPanel Style="{StaticResource FeatureItemStackPanel}">
+                            <Image Source="../resource/adicon_intelligent.png" Style="{StaticResource FeatureItemIcon}"/>
+                            <TextBlock Text="智能订单执行" Style="{StaticResource FeatureItemTitleText}"/>
+                            <TextBlock Text="      通过机器学习对5万个真实订单反复学习，雪橇目前可以提供国内唯一的智能订单执行程序，极大降低了复杂交易的交易成本。" Style="{StaticResource FeatureItemContentText}"/>
+                        </StackPanel>
+
+                        <Rectangle Style="{StaticResource LineRectangle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <Button Margin="0,50" HorizontalAlignment="Center" Content="了解更多"
+                        Width="220" Height="48"
+                        x:Name="OpenAdWebsiteButton"
+                        Click="OpenAdWebsiteButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource FlatBgButtonStyle}">
+                            <Setter Property="Foreground" Value="{StaticResource ViewContentBrush1}"/>
+                            <Setter Property="Background" Value="#FF4868DD"/>
+                            <Setter Property="styles:StylesHelper.HoverBrush" Value="#DD4868DD"/>
+                            <Setter Property="styles:StylesHelper.PressedBrush" Value="#DD4868DD"/>
+                            <Setter Property="FontSize" Value="24"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

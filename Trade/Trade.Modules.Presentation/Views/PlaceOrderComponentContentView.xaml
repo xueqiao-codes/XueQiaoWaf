@@ -1,0 +1,204 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.PlaceOrderComponentContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:MahAppsControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:native_trade="clr-namespace:NativeModel.Trade;assembly=NativeModel"
+             mc:Ignorable="d" Height="auto" d:DesignHeight="400"
+             Background="{DynamicResource RootBgBrush}">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <uiconvert:EqualityToBooleanConverter x:Key="EqualityToBooleanConverter"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2VisibleConverter" CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <sys:Boolean x:Key="TrueValue">True</sys:Boolean>
+    </UserControl.Resources>
+
+    <Grid x:Name="PageRootGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="ChartColumn">
+                <ColumnDefinition.Style>
+                    <Style TargetType="{x:Type ColumnDefinition}">
+                        <Setter Property="Width" Value="*" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=ChartPartShowing}" Value="False"/>
+                                    <Condition Binding="{Binding Path=PlaceOrderPartShowing}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Width" Value="Auto" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ColumnDefinition.Style>
+            </ColumnDefinition>
+            <ColumnDefinition x:Name="PartSeperaterColumn" Width="Auto">
+            </ColumnDefinition>
+            <ColumnDefinition x:Name="PlaceOrderColumn">
+                <ColumnDefinition.Style>
+                    <Style TargetType="{x:Type ColumnDefinition}">
+                        <Setter Property="Width" Value="Auto" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=ChartPartShowing}" Value="False"/>
+                                    <Condition Binding="{Binding Path=PlaceOrderPartShowing}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Width" Value="*" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ColumnDefinition.Style>
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                      Visibility="{Binding ChartPartShowing, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Margin="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Height="80">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="130"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="4" Text="{Binding LastPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"></TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0">
+                        <Run Text="最高价:"/>
+                        <Run Text="{Binding HighPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                    <TextBlock TextAlignment="Left" Grid.Row="1" Grid.Column="1">
+                        <Run Text="开盘价:"/>
+                        <Run Text="{Binding OpenPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                    <TextBlock TextAlignment="Left" Grid.Row="1" Grid.Column="2">
+                        <Run Text="成交量:"/>
+                        <Run Text="{Binding Volume, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                    <TextBlock TextAlignment="Left" Grid.Row="1" Grid.Column="3">
+                        <Run Text="涨停价:"/>
+                        <Run Text="{Binding UpperLimitPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                    <TextBlock TextAlignment="Left" Grid.Row="2" Grid.Column="0">
+                        <Run Text="最低价:"/>
+                        <Run Text="{Binding LowPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                    <TextBlock TextAlignment="Left" Grid.Row="2" Grid.Column="1">
+                        <Run Text="昨收价:"/>
+                        <Run Text="{Binding PreClosePrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                    <TextBlock TextAlignment="Left" Grid.Row="2" Grid.Column="2">
+                        <Run Text="成交额:"/>
+                        <Run Text="{Binding Turnover, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                    <TextBlock TextAlignment="Left" Grid.Row="2" Grid.Column="3">
+                        <Run Text="跌停价:"/>
+                        <Run Text="{Binding LowerLimitPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                </Grid>
+                
+                <ContentControl Grid.Row="1" Content="{Binding ChartView}"/>
+                <!--<Grid x:Name="ChartGrid" Grid.Row="1"/>-->
+                <!--<oxy:PlotView Grid.Row="1" Model="{Binding ChartPlotModel}" Controller="{Binding ChartPlotController}"/>-->
+            </Grid>
+        </ScrollViewer>
+        <Rectangle Fill="{DynamicResource BorderBrush2}" Width="1" Grid.Column="1" VerticalAlignment="Stretch">
+            <Rectangle.Visibility>
+                <MultiBinding Converter="{StaticResource Equal2VisibleConverter}">
+                    <Binding Source="{StaticResource TrueValue}"/>
+                    <Binding Path="ChartPartShowing"/>
+                    <Binding Path="PlaceOrderPartShowing"/>
+                </MultiBinding>
+            </Rectangle.Visibility>
+        </Rectangle>
+        <DockPanel Grid.Column="2" 
+                   LastChildFill="True"
+                   Visibility="{Binding PlaceOrderPartShowing, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <DockPanel.Style>
+                <Style TargetType="DockPanel">
+                    <Setter Property="Width" Value="369"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=ChartPartShowing}" Value="False"/>
+                                <Condition Binding="{Binding Path=PlaceOrderPartShowing}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Width" Value="Auto" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DockPanel.Style>
+            <Grid DockPanel.Dock="Top" Margin="4,4,4,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="216"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="136"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ContentControl Content="{Binding PlaceOrderCreateMainView}" Grid.Column="0" Grid.Row="0" Margin="0,0,4,0"/>
+                <ContentControl Content="{Binding PlaceOrderCreateConditionView}" Grid.Column="2" Grid.Row="0" Margin="4,0,0,0"/>
+                <Rectangle Fill="{DynamicResource BorderBrush2}" Width="1" VerticalAlignment="Stretch" Grid.RowSpan="2" Grid.Column="1"/>
+                <UniformGrid Columns="3" Grid.Column="0" Grid.Row="1" Margin="0,10,4,0">
+                    <TextBlock FontSize="{DynamicResource SecondaryContentFontSize}">
+                        <Run>持仓:</Run>
+                        <Run Text="{Binding TargetPositionVolume, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                    <TextBlock FontSize="{DynamicResource SecondaryContentFontSize}">
+                        <Run>盈亏:</Run>
+                        <Run Text="{Binding TargetProfitLoss, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                    <TextBlock FontSize="{DynamicResource SecondaryContentFontSize}"> 
+                        <Run>均价:</Run>
+                        <Run Text="{Binding TargetPositionAvgPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                    </TextBlock>
+                </UniformGrid>
+                <UniformGrid Columns="2" Grid.Column="2" Grid.Row="1" Margin="4,10,0,0">
+                    <MahAppsControls:Badged
+                        HorizontalAlignment="Left"
+                        Badge="{Binding TargetConditionOrders.Count}" BadgeBackground="{DynamicResource PrimaryBrush3}" BadgeForeground="{DynamicResource ForegroundInPrimaryBgBrush}">
+                        <Button 
+                            Style="{StaticResource FlatContentButtonPrimary3}"
+                            FontSize="{DynamicResource SecondaryContentFontSize}"
+                            Content="条件单"
+                            Command="{Binding ShowTargetConditionOrdersCmd}"/>
+                    </MahAppsControls:Badged>
+                    <!--<Button Style="{StaticResource FlatContentButtonPrimary3}" 
+                            FontSize="{DynamicResource SecondaryContentFontSize}"
+                            HorizontalAlignment="Left">
+                        条件单
+                    </Button>-->
+                    <!--<Button Style="{StaticResource FlatContentButtonPrimary3}"
+                            FontSize="{DynamicResource SecondaryContentFontSize}"
+                            HorizontalAlignment="Left">
+                        预埋单
+                    </Button>-->
+                    <MahAppsControls:Badged
+                        HorizontalAlignment="Left"
+                        Badge="{Binding TargetParkedOrders.Count}" BadgeBackground="{DynamicResource PrimaryBrush3}" BadgeForeground="{DynamicResource ForegroundInPrimaryBgBrush}"
+                        Visibility="{Binding TargetType, Converter={StaticResource Equal2VisibleConverter}, ConverterParameter={x:Static native_trade:ClientXQOrderTargetType.CONTRACT_TARGET}}">
+                        <Button 
+                            Style="{StaticResource FlatContentButtonPrimary3}"
+                            FontSize="{DynamicResource SecondaryContentFontSize}"
+                            Content="预埋单"
+                            Command="{Binding ShowTargetParkedOrdersCmd}"/>
+                    </MahAppsControls:Badged>
+                </UniformGrid>
+            </Grid>
+            <Rectangle DockPanel.Dock="Top" Fill="{DynamicResource BorderBrush2}" Height="1" HorizontalAlignment="Stretch" />
+            <ContentControl Content="{Binding HangingOrdersAreaView}" DockPanel.Dock="Bottom"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

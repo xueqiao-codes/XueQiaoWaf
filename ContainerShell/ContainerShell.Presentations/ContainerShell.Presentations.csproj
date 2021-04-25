@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props" Condition="Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props')" />
+  <Import Project="..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props" Condition="Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props')" />
+  <Import Project="..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props" Condition="Exists('..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props')" />
+  <Import Project="..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props" Condition="Exists('..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA3B7FC9-7ACD-4D99-BE05-348102E5E1B8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ContainerShell.Presentations</RootNamespace>
+    <AssemblyName>ContainerShell.Presentations</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Gu.Wpf.Adorners, Version=1.5.1.0, Culture=neutral, PublicKeyToken=6dfb64f9972bd31d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Gu.Wpf.Adorners.1.5.1.0\lib\net45\Gu.Wpf.Adorners.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\..\ThirdFramework\ThirdDLL\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ToastNotifications, Version=2.5.0.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ToastNotifications.2.5.0\lib\net40\ToastNotifications.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Services\PresentationService.cs" />
+    <Compile Include="Views\AmbiguousStateOrdersOptView.xaml.cs">
+      <DependentUpon>AmbiguousStateOrdersOptView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AppStatusBarView.xaml.cs">
+      <DependentUpon>AppStatusBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderCancelledNDP.xaml.cs">
+      <DependentUpon>OrderCancelledNDP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TradeLameOptView.xaml.cs">
+      <DependentUpon>TradeLameOptView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FeedbackView.xaml.cs">
+      <DependentUpon>FeedbackView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TradeLameNDP.xaml.cs">
+      <DependentUpon>TradeLameNDP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContainerShellWindow.xaml.cs">
+      <DependentUpon>ContainerShellWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractPreviewSelectPopupView.xaml.cs">
+      <DependentUpon>ContractPreviewSelectPopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractQuickSearchPopupView.xaml.cs">
+      <DependentUpon>ContractQuickSearchPopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExceptionOrderPanelView.xaml.cs">
+      <DependentUpon>ExceptionOrderPanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExceptionOrdersOptView.xaml.cs">
+      <DependentUpon>ExceptionOrdersOptView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MorePopupView.xaml.cs">
+      <DependentUpon>MorePopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderAmbiguousNDP.xaml.cs">
+      <DependentUpon>OrderAmbiguousNDP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderInfoBaseViewForNDP.xaml.cs">
+      <DependentUpon>OrderInfoBaseViewForNDP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderOccurExceptionNDP.xaml.cs">
+      <DependentUpon>OrderOccurExceptionNDP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderTradedNDP.xaml.cs">
+      <DependentUpon>OrderTradedNDP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderTriggeredNDP.xaml.cs">
+      <DependentUpon>OrderTriggeredNDP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TradeInfoBaseViewForNDP.xaml.cs">
+      <DependentUpon>TradeInfoBaseViewForNDP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserMessageContentView.xaml.cs">
+      <DependentUpon>UserMessageContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserMessagePanelView.xaml.cs">
+      <DependentUpon>UserMessagePanelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkspaceEditDialogContentView.xaml.cs">
+      <DependentUpon>WorkspaceEditDialogContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkspaceInterTabWindow.xaml.cs">
+      <DependentUpon>WorkspaceInterTabWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkspaceTabablzControl.xaml.cs">
+      <DependentUpon>WorkspaceTabablzControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqPreferenceSettingView.xaml.cs">
+      <DependentUpon>XqPreferenceSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqPreferenceSetting_Normal.xaml.cs">
+      <DependentUpon>XqPreferenceSetting_Normal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqPreferenceSetting_OperateConfirm.xaml.cs">
+      <DependentUpon>XqPreferenceSetting_OperateConfirm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\XqPreferenceSetting_Sounds.xaml.cs">
+      <DependentUpon>XqPreferenceSetting_Sounds.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Resources\ModuleResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AmbiguousStateOrdersOptView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AppStatusBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderCancelledNDP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TradeLameOptView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FeedbackView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TradeLameNDP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContainerShellWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractPreviewSelectPopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ContractQuickSearchPopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ExceptionOrderPanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExceptionOrdersOptView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MorePopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderAmbiguousNDP.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OrderInfoBaseViewForNDP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderOccurExceptionNDP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderTradedNDP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderTriggeredNDP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TradeInfoBaseViewForNDP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserMessageContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserMessagePanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WorkspaceEditDialogContentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WorkspaceInterTabWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WorkspaceTabablzControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\XqPreferenceSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqPreferenceSetting_Normal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqPreferenceSetting_OperateConfirm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\XqPreferenceSetting_Sounds.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppAssembler\XueQiaoFoundation.BusinessResources\XueQiaoFoundation.BusinessResources.csproj">
+      <Project>{7c429834-fd64-4cba-a742-c798ecc5a58b}</Project>
+      <Name>XueQiaoFoundation.BusinessResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\AttachedCommandBehavior\AttachedCommandBehavior.csproj">
+      <Project>{50c6d92d-132d-409e-a85f-944ca466ad2a}</Project>
+      <Name>AttachedCommandBehavior</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\CustomChromeLibrary\CustomChromeLibrary.csproj">
+      <Project>{25990f61-a27b-4edf-a402-b31bf952153f}</Project>
+      <Name>CustomChromeLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\Dragablz\Dragablz.net45.csproj">
+      <Project>{7b11011c-7fd7-4ab0-a1ad-04e940b026de}</Project>
+      <Name>Dragablz.net45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660C2-8155-4769-991D-08AFBA69A302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Project>{27b67dfe-0bf1-4435-b036-e4c083eaea03}</Project>
+      <Name>System.Waf.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\Thrift\Thrift.45.csproj">
+      <Project>{ebce35da-cf6a-42bc-a357-a9c09b534299}</Project>
+      <Name>Thrift.45</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\IDLAutoGenerated\IDLAutoGenerated.csproj">
+      <Project>{e9b131ca-a3da-4a12-9c9e-235957b0f139}</Project>
+      <Name>IDLAutoGenerated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.Shared\XueQiaoFoundation.Shared.csproj">
+      <Project>{2497225A-7DBD-4901-BDDD-3F8B37996769}</Project>
+      <Name>XueQiaoFoundation.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI.Extra\XueQiaoFoundation.UI.Extra.csproj">
+      <Project>{2f323e88-fadd-47d6-92a7-c3149e301f06}</Project>
+      <Name>XueQiaoFoundation.UI.Extra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\XueQiaoFoundation\XueQiaoFoundation.UI\XueQiaoFoundation.UI.csproj">
+      <Project>{a811ca2b-99b3-4688-9175-5cfcffae88b5}</Project>
+      <Name>XueQiaoFoundation.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContainerShell.Applications\ContainerShell.Applications.csproj">
+      <Project>{367BE265-1B67-409E-955B-C4A04470C69B}</Project>
+      <Name>ContainerShell.Applications</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x64.3.3578.1870\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x86.3.3578.1870\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets" Condition="Exists('..\..\packages\CefSharp.Common.71.0.2\build\CefSharp.Common.targets')" />
+  <Import Project="..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets" Condition="Exists('..\..\packages\CefSharp.Wpf.71.0.2\build\CefSharp.Wpf.targets')" />
+</Project>

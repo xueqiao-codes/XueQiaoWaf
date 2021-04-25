@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.PositionAssistantComponentContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:module_convert="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Converters"
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             xmlns:native_trade="clr-namespace:NativeModel.Trade;assembly=NativeModel"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Type vm:PositionAssistantComponentContainerModel}"
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="ViewRoot">
+    <UserControl.Resources>
+        <uiconvert:EqualityToBooleanConverter x:Key="Equal2TrueConverter"/>
+        <uiconvert:EqualityToVisibilityConverter 
+            x:Key="Equal2VisibleConverter"
+            CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <module_convert:PositionAssistantContentType2NameConverter x:Key="PositionAssistantContentType2NameConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="ToolGridPanel">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ListBox 
+                Grid.Column="0"
+                SelectionMode="Single"
+                Style="{StaticResource ListBoxTabStyle}"
+                ItemContainerStyle="{StaticResource ListBoxItemTabStyle}"
+                ItemsSource="{Binding AssistantContentTypes}"
+                SelectedItem="{Binding SelectedContentType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                x:Name="ContentTypeListBox">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource PositionAssistantContentType2NameConverter}}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel HorizontalAlignment="Right" Margin="10,0,6,0" Orientation="Horizontal" >
+                <!--
+                <Button 
+                    Content="组合持仓录入"
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    Command="{Binding ToInputComposePositionCmd}"
+                    Visibility="{Binding SelectedContentType, 
+                                         Converter={StaticResource Equal2VisibleConverter}, 
+                                         ConverterParameter={x:Static native_trade:ClientXQOrderTargetType.COMPOSE_TARGET}}"/>
+                -->
+                <Button
+                    Content="合并成组合"
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    Command="{Binding ToMerge2ComposePositionCmd}"
+                    Visibility="{Binding SelectedContentType,
+                                         Converter={StaticResource Equal2VisibleConverter}, 
+                                         ConverterParameter={x:Static vm:PositionAssistantContentType.CONTRACT}}"/>
+
+                <Button Margin="20,0,0,0" 
+                        Content="配对记录"
+                        Style="{StaticResource FlatContentButtonPrimary3}"
+                        Command="{Binding ShowClosePositionSearchPageCmd}"
+                        CommandParameter="{Binding SelectedContentType}"/>
+            </StackPanel>
+        </Grid>
+
+        <ContentControl Grid.Row="1" Content="{Binding AssistantContentView}"/>
+    </Grid>
+</UserControl>

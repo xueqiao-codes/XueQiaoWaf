@@ -1,0 +1,330 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.TradeWorkspaceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+             xmlns:business_dm="clr-namespace:XueQiaoFoundation.BusinessResources.DataModels;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:business_const="clr-namespace:XueQiaoFoundation.BusinessResources.Constants;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+             xmlns:shared_model="clr-namespace:XueQiaoFoundation.Shared.Model;assembly=XueQiaoFoundation.Shared"
+             xmlns:local="clr-namespace:XueQiaoWaf.Trade.Modules.Presentation.Views"
+             xmlns:res="clr-namespace:XueQiaoFoundation.BusinessResources.Resources;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1800"
+             d:DataContext="{x:Type vm:TradeWorkspaceViewModel}"
+             x:Name="ViewRoot">
+
+    <UserControl.Resources>
+
+        <uiconvert:EqualityToVisibilityConverter x:Key="Equal2CollapsedConverter" CollapsedWhenEquals="True" CollapsedWhenNotEquals="False"/>
+        <convert:TradeTabWorkspaceTemplateCheckConverter x:Key="TradeTabWorkspaceTemplateCheckConverter"/>
+        <uiextra_convert:DraggableComponentUIDMCheckConverter x:Key="DraggableComponentUIDMCheckConverter"/>
+        <convert:XqTargetMarketValueFormatConverter x:Key="XqTargetMarketValueFormatConverter"/>
+        <uiconvert:DoubleCompareConverter x:Key="DoubleCompareConverter"/>
+
+        <sys:Int32 x:Key="IntZero">0</sys:Int32>
+        <sys:Double x:Key="Double0">0.0</sys:Double>
+
+        <CollectionViewSource x:Key="WorkspaceTemplateCollectionViewSource" Source="{Binding Path=TradeWorkspaceTemplates}" />
+        <CollectionViewSource x:Key="ComponentCollectionViewSource" Source="{Binding DraggableComponentPanelContext.ComponentItems}"/>
+
+        <local:BindingProxy x:Key="ViewRootDataContextBindingProxy" Data="{Binding}"/>
+
+        <Style x:Key="WorkspaceTemplateMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemDefault}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource TradeTabWorkspaceTemplateCheckConverter}}" Value="true">
+                    <Setter Property="Command" Value="{Binding Data.OpenWorkspaceTemplateCommand, Source={StaticResource ViewRootDataContextBindingProxy}}"/>
+                    <Setter Property="CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ComponentListMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemDefault}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource DraggableComponentUIDMCheckConverter}}" Value="true">
+                    <Setter Property="Command" Value="{Binding Data.PickComponentCommand, Source={StaticResource ViewRootDataContextBindingProxy}}"/>
+                    <Setter Property="CommandParameter" Value="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ManageComponentMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemDefault}">
+            <Setter Property="Command" Value="{Binding Data.PickComponentCommand, Source={StaticResource ViewRootDataContextBindingProxy}}"/>
+            <Setter Property="CommandParameter" Value="{Binding Path=DataContext, RelativeSource={RelativeSource Self}}"/>
+        </Style>
+
+        <DataTemplate x:Key="ManageComponentItemTemplate" DataType="{x:Type shared_model:DraggableComponentUIDM}">
+            <DockPanel LastChildFill="True">
+                <Button DockPanel.Dock="Right"
+                        Style="{StaticResource ComponentCloseButtonStyle}"
+                        Command="{Binding Data.CloseComponentCommand, Source={StaticResource ViewRootDataContextBindingProxy}}"
+                        CommandParameter="{Binding}"
+                        Width="14"
+                        Height="14"
+                        Padding="2" 
+                        Margin="8,0,0,0">
+                </Button>
+                <TextBlock Text="{Binding Component.ComponentDescTitle}" MaxWidth="120" MinWidth="60"/>
+            </DockPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="{DynamicResource RootBgBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <HeaderedContentControl Header="操作账户:" Margin="8,4,0,4"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource HorizonalOrientationFieldHeaderedStyle}">
+                <ComboBox MinWidth="150"
+                          ItemsSource="{Binding UserRelatedSubAccountItems}" 
+                          SelectedItem="{Binding SelectedRelatedSubAccountItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding SubAccountName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </HeaderedContentControl>
+            
+            <StackPanel Grid.Column="1" Margin="16,0" VerticalAlignment="Center" Orientation="Horizontal">
+                <WrapPanel Orientation="Horizontal" Margin="0,0,0,0">
+                    <TextBlock Foreground="{DynamicResource ContentBrush3}">动态权益：</TextBlock>
+                    <TextBlock 
+                        MinWidth="100"
+                        Text="{Binding SubAccountBaseCurrencyFund.DynamicBenefit, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0,0.00}}"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock Foreground="{DynamicResource ContentBrush3}">可用资金：</TextBlock>
+                    <TextBlock 
+                        MinWidth="100"
+                        Text="{Binding SubAccountBaseCurrencyFund.AvailableFund, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0,0.00}}"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock Foreground="{DynamicResource ContentBrush3}">总盈亏：</TextBlock>
+                    <TextBlock MinWidth="100"
+                               Text="{Binding SubAccountBaseCurrencyFund.TotalProfit, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0,0.00}}"
+                               Style="{StaticResource RiseOrFallRelatedText}"
+                               res:QuotationAttachPropertiesProvider.IsXqTargetExpired="False"
+                               res:QuotationAttachPropertiesProvider.IsInteractive="False">
+                            <res:QuotationAttachPropertiesProvider.CompareResult1>
+                                <MultiBinding Converter="{StaticResource DoubleCompareConverter}" Mode="OneWay">
+                                    <Binding Path="SubAccountBaseCurrencyFund.TotalProfit"/>
+                                    <Binding Source="{StaticResource Double0}"/>
+                                </MultiBinding>
+                            </res:QuotationAttachPropertiesProvider.CompareResult1>
+                    </TextBlock>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock Foreground="{DynamicResource ContentBrush3}">风险度：</TextBlock>
+                    <TextBlock 
+                        MinWidth="100"
+                        Text="{Binding SubAccountBaseCurrencyFund.RiskRate, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00}%}"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock Foreground="{DynamicResource ContentBrush3}">货值：</TextBlock>
+                    <TextBlock 
+                        MinWidth="100"
+                        Text="{Binding SubAccountBaseCurrencyFund.GoodsValue, Converter={StaticResource XqTargetMarketValueFormatConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock Foreground="{DynamicResource ContentBrush3}">杠杆：</TextBlock>
+                    <TextBlock 
+                        MinWidth="100"
+                        Text="{Binding SubAccountBaseCurrencyFund.Leverage, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, StringFormat={}{0:0.00%}}"/>
+                </WrapPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" Orientation="Horizontal">
+                <Rectangle Margin="15,4,10,4" VerticalAlignment="Stretch" Width="1" Fill="{DynamicResource BorderBrush2}"/>
+                <Menu Margin="0,0,10,0">
+                    <MenuItem Header="窗口" ItemContainerStyle="{StaticResource ComponentListMenuItemStyle}">
+                        <MenuItem.Resources>
+                            <DataTemplate DataType="{x:Type shared_model:DraggableComponentUIDM}">
+                                <DockPanel LastChildFill="True">
+                                    <Button DockPanel.Dock="Right" Style="{StaticResource ComponentCloseButtonStyle}"
+                                        Command="{Binding Data.CloseComponentCommand, Source={StaticResource ViewRootDataContextBindingProxy}}"
+                                        CommandParameter="{Binding}"
+                                        Width="14"
+                                        Height="14"
+                                        Padding="2" 
+                                        Margin="8,0,0,0">
+                                    </Button>
+                                    <TextBlock Text="{Binding Component.ComponentDescTitle}" MaxWidth="120" MinWidth="60"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </MenuItem.Resources>
+                        <MenuItem.ItemsSource>
+                            <CompositeCollection>
+                                <MenuItem Header="添加窗口">
+                                    <MenuItem Header="合约列表" Command="{Binding AddComponentCommand}"
+                                              CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_CONTRACT_LIST}"/>
+                                    <MenuItem Header="组合列表" Command="{Binding AddComponentCommand}"
+                                              CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_COMPOSE_LIST}"/>
+                                    <Separator/>
+                                    <MenuItem Header="下单" Command="{Binding AddPlaceOrderComponentCmd}"/>
+                                    <MenuItem Header="图表" Command="{Binding AddChartComponentCmd}"/>
+                                    <MenuItem Header="图表和下单" Command="{Binding AddChartAndOrderComponentCmd}"/>
+                                    <Separator/>
+                                    <MenuItem Header="委托单" Command="{Binding AddComponentCommand}"
+                                        CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_ENTRUSTED_ORDER_LIST}"/>
+                                    <MenuItem Header="预埋单" Command="{Binding AddComponentCommand}"
+                                        CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_PARKED_ORDER_LIST}"/>
+                                    <MenuItem Header="条件单" Command="{Binding AddComponentCommand}"
+                                        CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_CONDITION_ORDER_LIST}"/>
+                                    <MenuItem Header="历史订单" Command="{Binding AddComponentCommand}"
+                                        CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_ORDER_HISTORY}"/>
+                                    <MenuItem Header="成交" Command="{Binding AddComponentCommand}"
+                                        CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_TRADE_LIST}"/>
+                                    <MenuItem Header="历史成交" Command="{Binding AddComponentCommand}"
+                                        CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_TRADE_HISTORY}"/>
+                                    <MenuItem Header="持仓" Command="{Binding AddComponentCommand}"
+                                        CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_POSITION_LIST}"/>
+                                    <MenuItem Header="持仓管理" Command="{Binding AddComponentCommand}"
+                                        CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_POSITION_ASSISTANT}"/>
+                                    <MenuItem Header="资金" Command="{Binding AddComponentCommand}"
+                                        CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_FUND}"/>
+                                    <MenuItem Header="历史分配" Command="{Binding AddComponentCommand}"
+                                        CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_POSITION_ASSIGN_HISTORY}"/>
+                                </MenuItem>
+                                <CollectionContainer Collection="{Binding Source={StaticResource ComponentCollectionViewSource}}"/>
+                            </CompositeCollection>
+                        </MenuItem.ItemsSource>
+                    </MenuItem>
+                    
+                    <MenuItem Header="模板" ItemContainerStyle="{StaticResource WorkspaceTemplateMenuItemStyle}">
+                        <MenuItem.ItemsSource>
+                            <CompositeCollection>
+                                <MenuItem Header="保存当前为模板" x:Name="SaveWorkspaceTemplateMenuItem"
+                                      Command="{Binding SaveCurrentWorkspaceCommand}"/>
+                                <MenuItem Header="模板管理"
+                                      Command="{Binding WorkspaceTemplateManageCommand}"/>
+                                <MenuItem Header="应用默认模板"
+                                      Command="{Binding ToApplyDefaultTemplateCmd}"/>
+                                <Separator Visibility="{Binding TradeWorkspaceTemplates.Count, Converter={StaticResource Equal2CollapsedConverter}, ConverterParameter={StaticResource IntZero}}"/>
+                                <CollectionContainer Collection="{Binding Source={StaticResource WorkspaceTemplateCollectionViewSource}}"/>
+                            </CompositeCollection>
+                        </MenuItem.ItemsSource>
+                        <MenuItem.Resources>
+                            <DataTemplate DataType="{x:Type business_dm:TradeTabWorkspaceTemplate}">
+                                <TextBlock Text="{Binding TemplateName}"/>
+                            </DataTemplate>
+                        </MenuItem.Resources>
+                    </MenuItem>
+
+                    <!--
+                    <MenuItem Header="窗口管理"
+                      VerticalContentAlignment="Center"
+                      ItemsSource="{Binding DraggableComponentPanelContext.ComponentItems}"
+                      ItemContainerStyle="{StaticResource ManageComponentMenuItemStyle}"
+                      ItemTemplate="{StaticResource ManageComponentItemTemplate}">
+                    </MenuItem>
+                    
+                    <MenuItem Header="添加窗口" x:Name="AddComponentMenuItem">
+                        <MenuItem Header="合约列表" x:Name="MySubscribeContractsMenuItem"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_CONTRACT_LIST}">
+                        </MenuItem>
+                        <MenuItem Header="组合列表" 
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_COMPOSE_LIST}">
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="图表"
+                          Command="{Binding AddChartComponentCmd}">
+                        </MenuItem>
+                        <MenuItem Header="下单" 
+                          Command="{Binding AddPlaceOrderComponentCmd}">
+                        </MenuItem>
+                        <MenuItem Header="图表和下单" 
+                          Command="{Binding AddChartAndOrderComponentCmd}">
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="委托单"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_ENTRUSTED_ORDER_LIST}"/>
+                        <MenuItem Header="预埋单"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_PARKED_ORDER_LIST}"/>
+                        <MenuItem Header="条件单"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_CONDITION_ORDER_LIST}"/>
+                        <MenuItem Header="成交"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_TRADE_LIST}">
+                        </MenuItem>
+                        <MenuItem Header="持仓"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_POSITION_LIST}">
+                        </MenuItem>
+                        <MenuItem Header="持仓管理"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_POSITION_ASSISTANT}">
+                        </MenuItem>
+                        <MenuItem Header="历史订单"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_ORDER_HISTORY}">
+                        </MenuItem>
+                        <MenuItem Header="历史成交"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_TRADE_HISTORY}">
+                        </MenuItem>
+                        <MenuItem Header="历史分配"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_POSITION_ASSIGN_HISTORY}">
+                        </MenuItem>
+                        <MenuItem Header="资金"
+                          Command="{Binding AddComponentCommand}"
+                          CommandParameter="{x:Static business_const:XueQiaoConstants.TradeCompType_FUND}">
+                        </MenuItem>
+                    </MenuItem>
+
+                    <MenuItem Header="工作区模板" x:Name="WorkspaceTemplateMenuItem"
+                      ItemContainerStyle="{StaticResource WorkspaceTemplateMenuItemStyle}">
+                        <MenuItem.ItemsSource>
+                            <CompositeCollection>
+                                <MenuItem Header="保存当前为模板" x:Name="SaveWorkspaceTemplateMenuItem"
+                                      Command="{Binding SaveCurrentWorkspaceCommand}"/>
+                                <MenuItem Header="模板管理"
+                                      Command="{Binding WorkspaceTemplateManageCommand}"/>
+                                <MenuItem Header="应用默认模板"
+                                      Command="{Binding ToApplyDefaultTemplateCmd}"/>
+                                <Separator Visibility="{Binding TradeWorkspaceTemplates.Count, Converter={StaticResource Equal2CollapsedConverter}, ConverterParameter={StaticResource IntZero}}"/>
+                                <CollectionContainer Collection="{Binding Source={StaticResource WorkspaceTemplateCollectionViewSource}}"/>
+                            </CompositeCollection>
+                        </MenuItem.ItemsSource>
+                        <MenuItem.Resources>
+                            <DataTemplate DataType="{x:Type business_dm:TradeTabWorkspaceTemplate}">
+                                <TextBlock Text="{Binding TemplateName}"/>
+                            </DataTemplate>
+                        </MenuItem.Resources>
+                    </MenuItem>
+                    
+                    -->
+                </Menu>
+            </StackPanel>
+        </Grid>
+
+        <dragablz:DragablzItemsControl
+            ItemsSource="{Binding DraggableComponentPanelContext.ComponentItems}"
+            Grid.Row="1"
+            Style="{StaticResource ComponentDragablzItemsControlStyle}"
+            x:Name="ComponentDragablzItemsControl">
+            <dragablz:DragablzItemsControl.ItemContainerStyle>
+                <Style TargetType="{x:Type dragablz:DragablzItem}" BasedOn="{StaticResource DraggableComponentContainerStyle}">
+                    <EventSetter Event="MouseDownWithin" Handler="MouseDownWithinComponent"/>
+                </Style>
+            </dragablz:DragablzItemsControl.ItemContainerStyle>
+        </dragablz:DragablzItemsControl>
+    </Grid>
+</UserControl>

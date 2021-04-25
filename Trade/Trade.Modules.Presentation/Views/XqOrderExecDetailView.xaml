@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.XqOrderExecDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+	         xmlns:vm="clr-namespace:XueQiaoWaf.Trade.Modules.Applications.ViewModels;assembly=XueQiaoWaf.Trade.Modules.Applications"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Type vm:XqOrderExecDetailVM}"
+             d:DesignHeight="300" d:DesignWidth="600">
+
+    <UserControl.Resources>
+        <uiextra_convert:Timestamp2StringConverter x:Key="Ms2StringConverter"
+                                           ValueType="Millisecond"
+                                           Convert2StringFormatType="DateTime"/>
+        <convert:TradeDirection2NameConverter x:Key="TradeDirection2NameConverter"/>
+        <convert:ClientXQOrderState2NameConverter x:Key="OrderState2NameConverter"/>
+        
+        <!-- 执行订单 columns, begin -->
+        <DataGridTextColumn Header="腿" MinWidth="30"
+                            Binding="{Binding XqComposeLegMeta.VariableName, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"                            
+                            x:Key="ExecOrderColumn_ComposeLeg"
+                            x:Shared="False"/>
+        <DataGridTextColumn Header="状态" MinWidth="80"
+                            CanUserSort="False"
+                            Binding="{Binding MappedOrderState, Converter={StaticResource OrderState2NameConverter}, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"                            
+                            x:Key="ExecOrderColumn_State"
+                            x:Shared="False"/>
+
+        <DataGridTextColumn Header="方向"  MinWidth="50"
+                            CanUserSort="False"
+                            Binding="{Binding Direction, Converter={StaticResource TradeDirection2NameConverter}}"
+                            x:Key="ExecOrderColumn_Direction"
+                            x:Shared="False"/>
+
+        <DataGridTextColumn Header="名称"  MinWidth="100"
+                            CanUserSort="False"
+                            Binding="{Binding ContractDetailContainer.CnDisplayName}"
+                            x:Key="ExecOrderColumn_Name"
+                            x:Shared="False"/>
+
+        <DataGridTextColumn Header="价格" MinWidth="80"
+                            Binding="{Binding Price}"
+                            x:Key="ExecOrderColumn_Price"
+                            x:Shared="False"/>
+
+        <DataGridTextColumn Header="数量" MinWidth="80"
+                            Binding="{Binding Quantity}"
+                            x:Key="ExecOrderColumn_Quantity"
+                            x:Shared="False"/>
+
+        <DataGridTextColumn Header="成交数量" MinWidth="80"
+                            Binding="{Binding TradeVolume, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"
+                            x:Key="ExecOrderColumn_TradeVolume"
+                            x:Shared="False"/>
+
+        <DataGridTextColumn Header="成交均价" MinWidth="80"
+                            Binding="{Binding TradeAvgPrice, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}, FallbackValue={StaticResource NullValueDataDefaultDisplayText}}"
+                            x:Key="ExecOrderColumn_TradeAvgPrice"
+                            x:Shared="False"/>
+
+        <DataGridTextColumn Header="下单时间" MinWidth="100"
+                            Binding="{Binding CreateTimestampMs, Converter={StaticResource Ms2StringConverter}}"
+                            x:Key="ExecOrderColumn_CreateTime"
+                            x:Shared="False"/>
+
+        <DataGridTextColumn Header="状态信息" MinWidth="100"
+                            Binding="{Binding ExecStateMsg, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}"
+                            CanUserSort="False"
+                            x:Key="ExecOrderColumn_StateMsg"
+                            x:Shared="False"/>
+
+        <DataGridTextColumn Header="订单ID" MinWidth="60"
+                            Binding="{Binding ExecOrderId}"
+                            CanUserSort="False"
+                            x:Key="ExecOrderColumn_ExecOrderId"
+                            x:Shared="False"/>
+        <!-- 执行订单 columns, end -->
+    </UserControl.Resources>
+    
+    <Grid Margin="0,15,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <DataGrid 
+            Grid.Row="0"
+            ItemsSource="{Binding ExecOrderItems}"
+            x:Name="ExecOrderItemsDataGrid">
+            <!-- Note:Columns 在 CodeBehind 设置 -->
+        </DataGrid>
+
+        <GridSplitter Grid.Row="1" Style="{StaticResource GridSplitterHorizon}"/>
+        
+        <ContentControl Grid.Row="2" Content="{Binding ExecTradeItemsView}"/>
+    </Grid>
+</UserControl>

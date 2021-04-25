@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Manage.Presentations.Views.WinzardStepView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContextChanged="View_DataContextChanged"
+             x:Name="ViewRoot">
+    <!-- DataContext: WizardStepItem -->
+    <UserControl.Resources>
+        <convert:EqualityToBooleanConverter x:Key="EqualityToBooleanConverter"/>
+    </UserControl.Resources>
+    <ItemsControl x:Name="WizardStepItemsControl">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <UniformGrid IsItemsHost="True" Rows="1"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type sys:Int32}">
+                <Rectangle Height="3"
+                           x:Name="ProcessRect" 
+                           Fill="{DynamicResource BorderBrush2}"/>
+                <DataTemplate.Triggers>
+                    <DataTrigger Value="True">
+                        <DataTrigger.Binding>
+                            <MultiBinding Converter="{StaticResource EqualityToBooleanConverter}">
+                                <Binding Path="DataContext.CurrentStepIndex" ElementName="ViewRoot"/>
+                                <Binding/>
+                            </MultiBinding>
+                        </DataTrigger.Binding>
+                        <Setter TargetName="ProcessRect" Property="Fill" Value="{DynamicResource PrimaryBrush3}"/>
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

@@ -1,0 +1,187 @@
+﻿<UserControl x:Class="ContainerShell.Presentations.Views.AppStatusBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:MahAppsControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:Styles="clr-namespace:XueQiaoFoundation.UI.Styles;assembly=XueQiaoFoundation.UI"
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="800"
+             Background="{DynamicResource RootBgBrush}"
+             Style="{StaticResource GeneralControlStyle}">
+    <UserControl.Resources>
+        <convert:HostingRunningMode2DisplayConverter x:Key="HostingRunningMode2DisplayConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="0,8,0,8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition MinWidth="90" Width="Auto"/>
+            <ColumnDefinition MinWidth="130" Width="Auto"/>
+            <ColumnDefinition Width="36"/>
+            <ColumnDefinition MinWidth="90" Width="Auto"/>
+            <ColumnDefinition MinWidth="80" Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Grid.Column="0" Text="{Binding ApiLibEnvironmentInfo}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+        
+        <Grid Grid.Column="1" Margin="10,0,0,0">
+            <Button Style="{StaticResource FlatBgButtonStyle}" Padding="4,2" HorizontalContentAlignment="Left"
+                    x:Name="LoginUserNameButton"
+                    Click="LoginUserNameButton_Click">
+                <StackPanel Orientation="Horizontal" ToolTip="登录用户信息">
+                    <ContentControl Width="14" Height="14"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource GeometryContentCheckedStyle}">
+                        <PathGeometry Figures="M511.998 576c94.334 0 181.402-82.411 191.162-202.94C713.365 246.947 629.612 128 511.998 128c-117.61 0-201.368 118.947-191.155 245.06C330.599 493.589 417.669 576 511.998 576z m-1.709 65.055C299.156 641.055 128 725.014 128 828.584 128 864 160.558 877.651 256.311 888c74.022 8 162.397 8 255.689 8 95.561 0 190.333 0 257.006-8C863.323 876.683 896 864 896 828.584c0-103.57-174.585-187.529-385.711-187.529z"/>
+                    </ContentControl>
+                    <TextBlock Margin="6,0,0,0" 
+                       Text="{Binding LoginUserName}"
+                       VerticalAlignment="Center"/>
+                    <ContentControl 
+                        Margin="4,0,0,0"
+                        Width="6" Height="6"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource GeometryContentCheckedStyle}">
+                        <PathGeometry Figures="M819.192105 1024L1638.384211 0H0l819.192105 1024z"/>
+                    </ContentControl>
+                </StackPanel>
+            </Button>
+            <Popup PlacementTarget="{Binding ElementName=LoginUserNameButton}" x:Name="LoginUserExtraInfoPopup"
+                   AllowsTransparency="True"
+                   StaysOpen="False"
+                   IsOpen="False"
+                   MinWidth="150" Height="Auto">
+                <Grid 
+                    Margin="4" 
+                    Effect="{DynamicResource BossyControlShadowEffect}"
+                    Background="{DynamicResource RootBgBrush}">
+                    <ContentControl Style="{StaticResource GeneralControlStyle}">
+                        <Grid Margin="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="公司：" Grid.Row="0" Grid.Column="0"/>
+                            <TextBlock Text="{Binding LoginCompanyName}" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1"/>
+                            <TextBlock Text="云服务：" Grid.Row="1" Grid.Column="0"/>
+                            <TextBlock Text="{Binding LoginCompanyGroupName}" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1"/>
+                        </Grid>
+                    </ContentControl>
+                </Grid>
+            </Popup>
+        </Grid>
+        
+        <StackPanel Grid.Column="2" Orientation="Horizontal"  Margin="10,0,0,0">
+            <Rectangle Width="1" VerticalAlignment="Stretch" Fill="{DynamicResource BorderBrush2}"/>
+            <TextBlock Margin="10,0,0,0"
+                       Text="交易环境："
+                       VerticalAlignment="Center"/>
+            <TextBlock Margin="0,0,0,0"
+                       VerticalAlignment="Center"
+                       Text="{Binding HostingRunningMode, Converter={StaticResource HostingRunningMode2DisplayConverter}}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="3" Orientation="Horizontal" ToolTip="查看应用占用资源" Margin="10,0,0,0">
+            <Rectangle Width="1" VerticalAlignment="Stretch" Fill="{DynamicResource BorderBrush2}"/>
+            <Button Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    Width="14" Height="14" 
+                    Padding="0"
+                    x:Name="AppResourceShowButn"
+                    Click="AppResourceShowButn_Click">
+                <GeometryGroup FillRule="Nonzero">
+                    <PathGeometry Figures="M546.133333 546.133333h341.333334v136.533334H546.133333zM546.133333 341.333333h341.333334v136.533334H546.133333zM546.133333 750.933333h341.333334v136.533334H546.133333zM136.533333 546.133333h341.333334v136.533334H136.533333z"/>
+                    <PathGeometry Figures="M0 0v1024h1024V0H0z m955.733333 955.733333H68.266667V68.266667h887.466666v887.466666z"/>
+                    <PathGeometry Figures="M136.533333 750.933333h341.333334v136.533334H136.533333z"/>
+                </GeometryGroup>
+            </Button>
+            <Popup PlacementTarget="{Binding ElementName=AppResourceShowButn}" x:Name="AppResourcePopup"
+                   AllowsTransparency="True"
+                   StaysOpen="False"
+                   IsOpen="False"
+                   MinWidth="180" Height="Auto">
+                <Grid 
+                    Margin="4" 
+                    Effect="{DynamicResource BossyControlShadowEffect}"
+                    Background="{DynamicResource RootBgBrush}">
+                    <ContentControl Style="{StaticResource GeneralControlStyle}">
+                        <Grid Margin="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="雪橇占用CPU："/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding AppCpuUsage, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="CPU使用率："/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding TotalCpuUsage, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="雪橇占用内存："/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding AppMemoryUsage, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="剩余内存："/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding RestAvailableMemory, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="线程："/>
+                            <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding AppThreadCount, TargetNullValue={StaticResource NullValueDataDefaultDisplayText}}" />
+                        </Grid>
+                    </ContentControl>
+                </Grid>
+            </Popup>
+        </StackPanel>
+
+        <StackPanel Grid.Column="4" Orientation="Horizontal" ToolTip="交易推送服务状态" Margin="10,0,0,0">
+            <Rectangle Width="1" VerticalAlignment="Stretch" Fill="{DynamicResource BorderBrush2}"/>
+            <ContentControl Width="14" Height="14"
+                            Margin="10,0,0,0" 
+                            VerticalAlignment="Center"
+                            Style="{StaticResource GeometryContentCheckedStyle}">
+                <PathGeometry Figures="M768 0h256v1024H768zM0 512h256v512H0zM384.006159 256h256v768H384.006159z"/>
+            </ContentControl>
+            <TextBlock Margin="6,0,0,0" 
+                       VerticalAlignment="Center"
+                       Text="{Binding QuotationPushStateMsg}"/>
+        </StackPanel>
+
+        <Grid Grid.Column="5" ToolTip="交易异常消息盒子" Margin="10,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Width="1" VerticalAlignment="Stretch" Fill="{DynamicResource BorderBrush2}"/>
+            <Button Grid.Column="1" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource FlatContentButtonStyle}"
+                    Padding="4,4"
+                    Styles:StylesHelper.HoverBrush="{DynamicResource BossyControlBgBrushHover}"
+                    Styles:StylesHelper.PressedBrush="{DynamicResource BossyControlBgBrushHover}"
+                    Command="{Binding OpenOrHideExceptionOrderPanelCmd}">
+                <MahAppsControls:Badged
+                    Badge="{Binding TradeExceptionItemCount}" 
+                    BadgeBackground="{DynamicResource ErrorBrush1}" 
+                    BadgeForeground="{DynamicResource ForegroundInErrorBrush1}"
+                    BadgePlacementMode="TopRight">
+                    <ContentControl Width="14" Height="14" Margin="0,0,5,0"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource GeometryContentCheckedStyle}">
+                        <PathGeometry Figures="M943.992581 725.883151l-0.215074-0.92004a23.012948 23.012948 0 0 1-1.42188-1.947617 124.551905 124.551905 0 0 0-10.646177-14.421926c-59.229067-82.253964-111.71914-181.618281-111.71914-310.913768-0.203126-155.331424-93.712643-284.614964-234.490708-318.274089v-4.6002a73.866067 73.866067 0 1 0-147.720185 0v4.6002C296.846021 113.064836 203.336504 242.479809 203.181172 397.632005c0 138.113533-59.742856 241.361136-123.787196 326.769523l-0.609378 2.389714C71.053873 740.209488 66.967462 754.32075 66.967462 768.754624v2.246331c2.963246 99.651083 200.927172 139.439825 444.630228 139.439825 245.531188 0 444.61828-40.30253 444.618279-141.686156 0-14.732588-4.193948-29.166462-12.223388-42.871473zM356.600825 940.622871a184.462041 184.462041 0 0 0 309.981781-2.150743c-51.665621 4.910863-108.242106 7.264731-167.471173 7.264731-49.789696 0-97.811003-1.529417-142.510608-5.113988z"/>
+                    </ContentControl>
+                </MahAppsControls:Badged>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

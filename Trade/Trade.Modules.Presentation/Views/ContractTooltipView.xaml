@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="XueQiaoWaf.Trade.Modules.Presentation.Views.ContractTooltipView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dm="clr-namespace:XueQiaoFoundation.BusinessResources.DataModels;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiextra_convert="clr-namespace:XueQiaoFoundation.UI.Extra.converter;assembly=XueQiaoFoundation.UI.Extra"
+             mc:Ignorable="d" 
+             d:DesignWidth="200"
+             d:DataContext="{x:Type dm:TargetContract_TargetContractDetail}">
+    <UserControl.Resources>
+        <uiextra_convert:Timestamp2StringConverter x:Key="Timestamp2DateStringConverter" 
+                                           ValueType="Second"
+                                           Convert2StringFormatType="Date"/>
+    </UserControl.Resources>
+    <StackPanel Grid.IsSharedSizeScope="True">
+        <HeaderedContentControl 
+            Style="{StaticResource HorizonalOrientationFieldHeaderedStyle}"
+            Header="商品名称："
+            Content="{Binding CommodityDetail.CnAcronym}"/>
+        <HeaderedContentControl 
+            Style="{StaticResource HorizonalOrientationFieldHeaderedStyle}"
+            Header="最小变动价位："
+            Margin="0,8,0,0"
+            Content="{Binding CommodityDetail.TickSize}"/>
+        <HeaderedContentControl 
+            Style="{StaticResource HorizonalOrientationFieldHeaderedStyle}"
+            Header="最后交易日："
+            Margin="0,8,0,0"
+            Content="{Binding ContractDetail.LastTradeDate, Converter={StaticResource Timestamp2DateStringConverter}}"/>
+        <HeaderedContentControl 
+            Style="{StaticResource HorizonalOrientationFieldHeaderedStyle}"
+            Header="到期日："
+            Margin="0,8,0,0"
+            Content="{Binding ContractDetail.ContractExpDate, Converter={StaticResource Timestamp2DateStringConverter}}"/>
+        <HeaderedContentControl 
+            Style="{StaticResource HorizonalOrientationFieldHeaderedStyle}"
+            Header="交易所："
+            Margin="0,8,0,0"
+            Content="{Binding ExchangeDetail.CnName}"/>
+    </StackPanel>
+</UserControl>

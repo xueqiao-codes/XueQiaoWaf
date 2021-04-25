@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="ContainerShell.Presentations.Views.FeedbackView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Width="510">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <StackPanel Margin="15">
+        <TextBlock Text="联系人：" Margin="0,0,0,5"/>
+        <TextBox Text="{Binding ContractPersonName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <TextBlock Text="联系方式：" Margin="0,15,0,5"/>
+        <TextBox Text="{Binding ContractInformation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Text="我的反馈和建议：" Margin="0,15,0,5"/>
+        <TextBox Text="{Binding FeedbackContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 VerticalContentAlignment="Top"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Auto"
+                 Height="200"/>
+        <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+            <TextBlock Text="反馈截图：" VerticalAlignment="Center"/>
+            <Button VerticalAlignment="Center"
+                    Style="{StaticResource FlatContentButtonPrimary3}"
+                    Content="选择图片"
+                    Command="{Binding SelectPictureCmd}"/>
+            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" VerticalAlignment="Center"
+                        Visibility="{Binding IsSelectedPicture, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock Text="{Binding SelectedPictureName}" VerticalAlignment="Center"/>
+                <Button Style="{StaticResource FlatContentButtonPrimary3}"
+                        VerticalAlignment="Center"
+                        Content="删除" Margin="5,0,0,0"
+                        Command="{Binding DeletePictureCmd}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <CheckBox Margin="0,15,0,0" 
+                  IsChecked="{Binding IsUploadLogChecked}"
+                  Content="上传日志（反馈 bug 建议勾选）"/>
+
+        <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Style="{StaticResource BordedButtonPrimary3}"
+                    Command="{Binding SubmitCmd}" Width="80">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>提交</TextBlock>
+                    <ProgressBar Style="{StaticResource CircularProgressBarDefault}"
+                            Visibility="{Binding Path=IsSubmiting, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            VerticalAlignment="Center"
+                            Foreground="{DynamicResource ContentBrush1}"         
+                            IsIndeterminate="True"
+                            Value="0"
+                            Height="14"
+                            Width="14"
+                            Margin="6,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button Content="取消" Style="{StaticResource BordedButtonStyle}"
+                    Command="{Binding CancelCmd}" Width="80"
+                    Margin="10,0,0,0"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

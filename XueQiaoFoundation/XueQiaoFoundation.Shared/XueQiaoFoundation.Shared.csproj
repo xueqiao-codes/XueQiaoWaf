@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2497225A-7DBD-4901-BDDD-3F8B37996769}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>XueQiaoFoundation.Shared</RootNamespace>
+    <AssemblyName>XueQiaoFoundation.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.4.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\..\packages\BouncyCastle.1.8.4\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControllerBase\SwitchablePageControllerBase.cs" />
+    <Compile Include="Helper\AES.cs" />
+    <Compile Include="Helper\DeviceSystemInfomationHelper.cs" />
+    <Compile Include="Helper\EmailClient.cs" />
+    <Compile Include="Helper\EnumHelper.cs" />
+    <Compile Include="Helper\PathHelper.cs" />
+    <Compile Include="Helper\StringHelper.cs" />
+    <Compile Include="Helper\ResourceDictionaryHelper.cs" />
+    <Compile Include="Helper\RSA.cs" />
+    <Compile Include="Helper\ThriftHelper.cs" />
+    <Compile Include="Helper\UIHelper.cs" />
+    <Compile Include="Helper\UUIDHelper.cs" />
+    <Compile Include="Helper\WeakDelegate\ActionDelegateReference.cs" />
+    <Compile Include="Helper\AppVersionHelper.cs" />
+    <Compile Include="Helper\CommonConvert.cs" />
+    <Compile Include="Helper\CollectionExtensions.cs" />
+    <Compile Include="Helper\DateHelper.cs" />
+    <Compile Include="Helper\WeakDelegate\DelegateReference.cs" />
+    <Compile Include="Helper\DirectoryHelper.cs" />
+    <Compile Include="Helper\DispatcherHelper.cs" />
+    <Compile Include="Helper\ExceptionExtensions.cs" />
+    <Compile Include="Helper\IDIncreaser.cs" />
+    <Compile Include="Helper\MathHelper.cs" />
+    <Compile Include="Helper\ObjectCopier.cs" />
+    <Compile Include="Helper\QueryAllItemsByPageHelper.cs" />
+    <Compile Include="Helper\WafExtensions.cs" />
+    <Compile Include="Helper\WpfElementSizeObserver.cs" />
+    <Compile Include="Helper\WpfUITreeHelper.cs" />
+    <Compile Include="Interface\ICacheController.cs" />
+    <Compile Include="Interface\IController.cs" />
+    <Compile Include="Interface\IPresentationService.cs" />
+    <Compile Include="Interface\IShutdownObject.cs" />
+    <Compile Include="Model\AppModuleTabNode.cs" />
+    <Compile Include="Model\ChromeWindowCaptionDataHolder.cs" />
+    <Compile Include="Model\LocalDataRefreshResultWrapper.cs" />
+    <Compile Include="Model\ServerDataRefreshResultWrapper.cs" />
+    <Compile Include="Model\DataRefreshState.cs" />
+    <Compile Include="Model\DraggableComponentPanelContext.cs" />
+    <Compile Include="Model\DraggableComponentUIDM.cs" />
+    <Compile Include="Model\IDraggableComponentPanelViewBase.cs" />
+    <Compile Include="Model\LimitedSizeStack.cs" />
+    <Compile Include="Model\NodeWithChildren.cs" />
+    <Compile Include="Model\SimpleTabItem.cs" />
+    <Compile Include="Model\ValidationModel.cs" />
+    <Compile Include="Model\XQCompareResult.cs" />
+    <Compile Include="Model\XQComponentBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Core\System.Waf.Core.csproj">
+      <Project>{242660c2-8155-4769-991d-08afba69a302}</Project>
+      <Name>System.Waf.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\System.Waf\System.Waf.Wpf\System.Waf.Wpf.csproj">
+      <Project>{27b67dfe-0bf1-4435-b036-e4c083eaea03}</Project>
+      <Name>System.Waf.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\lib_xqclient_base\lib_xqclient_base.csproj">
+      <Project>{251D71EE-27E6-46E8-BB87-2B2120564CD8}</Project>
+      <Name>lib_xqclient_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdFramework\xqclient_libs\Thrift\Thrift.45.csproj">
+      <Project>{ebce35da-cf6a-42bc-a357-a9c09b534299}</Project>
+      <Name>Thrift.45</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

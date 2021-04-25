@@ -1,0 +1,101 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ccl="clr-namespace:CustomChromeLibrary;assembly=CustomChromeLibrary"
+                    xmlns:controls="clr-namespace:XueQiaoFoundation.UI.Controls"
+                    xmlns:actb="clr-namespace:XueQiaoFoundation.UI.Controls.AutoCompleteTextBox"
+                    xmlns:MahAppsMetroControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Themes/ControlPreferences.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/ContentControlStyles.xaml"/>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/ButtonStyles.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/TextBoxStyles.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/ListBoxStyles.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/MenuStyles.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/ScrollBarStyles.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/CustomChromeLibraryStyles.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/DataGridStyles.xaml"/>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/HeaderedContentControlStyles.xaml"/>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/CheckBoxStyles.xaml"/>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/RadioButtonStyles.xaml"/>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/WindowStyles.xaml"/>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/ProgressBarStyles.xaml"/>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/TreeViewStyles.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/ComboBoxStyles.xaml"/>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/CalendarStyles.xaml"/>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/DatePickerStyles.xaml"/>
+        
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/DateTimePickerStyles.xaml"/>
+
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/GridSplitterStyles.xaml"/>
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/ItemsControlStyles.xaml" />
+        
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/ItemsFilterStyles.xaml" />
+        
+        <!-- Custom control -->
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/DayDatePickerStyles.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/NumericUpDownStyles.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/AutoCompleteTextBoxStyles.xaml" />
+
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/BadgedStyles.xaml" />
+        <ResourceDictionary Source="/XueQiaoFoundation.UI;component/Styles/ToggleSwitchStyles.xaml" />
+
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--  控件的默认样式，如果需要使用其他样式则使用 StaticResource 引用该样式即可  -->
+    <Style TargetType="Button" BasedOn="{StaticResource BordedButtonStyle}"/>
+    <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyleDefault}"/>
+    <Style TargetType="PasswordBox" BasedOn="{StaticResource PasswordBoxStyleDefault}"/>
+    <Style TargetType="{x:Type controls:CustomPasswordBox}" BasedOn="{StaticResource CustomPasswordBoxDefault}"/>
+    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemStyleDefault}"/>
+    <Style TargetType="ListBox" BasedOn="{StaticResource ListBoxDefault}"/>
+    <Style TargetType="ContextMenu" BasedOn="{StaticResource ContextMenuDefault}"/>
+    <Style TargetType="Menu" BasedOn="{StaticResource MenuDefault}"/>
+    <Style TargetType="MenuItem" BasedOn="{StaticResource MenuItemDefault}"/>
+    <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarDefault}"/>
+    <Style TargetType="ScrollViewer" BasedOn="{StaticResource ScrollViewerDefault}"/>
+    
+    <Style TargetType="ccl:MinimizeButton" BasedOn="{StaticResource WindowMinimizeButtonStyleDefault}"/>
+    <Style TargetType="ccl:MaximizeButton" BasedOn="{StaticResource WindowMaximizeButtonStyleDefault}"/>
+    <Style TargetType="ccl:CloseButton" BasedOn="{StaticResource WindowCloseButtonStyleDefault}"/>
+    <Style TargetType="controls:CustomHeaderedWindowHeader" BasedOn="{StaticResource DialogWindowHeaderStyleDefault}"/>
+    
+    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DataGridColumnHeaderDefault}"/>
+    <Style TargetType="DataGrid" BasedOn="{StaticResource DataGridDefault}"/>
+    <Style TargetType="DataGridRow" BasedOn="{StaticResource DataGridRowDefault}"/>
+    <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellDefault}"/>
+    <Style TargetType="CheckBox" BasedOn="{StaticResource CheckBoxDefault}"/>
+    <Style TargetType="RadioButton" BasedOn="{StaticResource RadioButtonDefault}"/>
+    <Style TargetType="ComboBox" BasedOn="{StaticResource ComboBoxDefault}"/>
+    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemDefault}"/>
+    <Style TargetType="TreeViewItem" BasedOn="{StaticResource TreeViewItemDefault}"/>
+    <Style TargetType="TreeView" BasedOn="{StaticResource TreeViewDefault}"/>
+
+    <Style TargetType="Calendar" BasedOn="{StaticResource MahApps.Metro.Styles.MetroCalendar}" />
+    <Style TargetType="DatePicker" BasedOn="{StaticResource MetroDatePicker}" />
+    <Style TargetType="DatePickerTextBox" BasedOn="{StaticResource MetroDatePickerTextBox}" />
+
+    <Style TargetType="controls:DayDatePicker" BasedOn="{StaticResource DayDatePickerDefault}"/>
+    <Style TargetType="controls:NumericUpDown" BasedOn="{StaticResource NumericUpDownStyleDefault}"/>
+    <Style TargetType="actb:AutoCompleteTextBox" BasedOn="{StaticResource AutoCompleteTextBoxDefault}"/>
+    
+    <Style TargetType="{x:Type MahAppsMetroControls:Badged}" BasedOn="{StaticResource BadgedDefault}"/>
+    <Style TargetType="{x:Type MahAppsMetroControls:ToggleSwitchButton}" BasedOn="{StaticResource XqToggleSwitchButtonDefault}"/>
+    <Style TargetType="{x:Type MahAppsMetroControls:ToggleSwitch}" BasedOn="{StaticResource XqToggleSwitchDefault}"/>
+
+
+
+    <!-- Global control styles -->
+    <Style TargetType="Window" 
+           BasedOn="{StaticResource GeneralControlStyle}">
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush2}" />
+        <Setter Property="Background" Value="{DynamicResource RootBgBrush}"/>
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+    </Style>
+
+    <Style TargetType="Page"
+           BasedOn="{StaticResource GeneralControlStyle}">
+    </Style>
+</ResourceDictionary>

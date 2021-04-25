@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="Manage.Presentations.Views.OrderRouteRuleEditDialogContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:convert="clr-namespace:XueQiaoFoundation.BusinessResources.Converters;assembly=XueQiaoFoundation.BusinessResources"
+             xmlns:uiconvert="clr-namespace:XueQiaoFoundation.UI.Converters;assembly=XueQiaoFoundation.UI"
+             xmlns:moduleConvert="clr-namespace:Manage.Presentations.Converters"
+             xmlns:dm="clr-namespace:Manage.Applications.DataModels;assembly=Manage.Applications"
+             mc:Ignorable="d" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             Background="{DynamicResource RootBgBrush}"
+             x:Name="ContentViewRoot">
+    <UserControl.Resources>
+        <convert:CommodityType2NameConverter x:Key="CommodityType2NameConverter"/>
+        <convert:BooleanToDisplayNameConverter x:Key="BooleanReverseToDisplayNameConverter" TrueDisplayText="否" FalseDisplayText="是"/>
+        <convert:CommodityToDisplayNameConverter x:Key="CommodityToDisplayNameConverter"/>
+        <uiconvert:EqualityToBooleanConverter x:Key="EqualityToBooleanConverter"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="EqualsToVisibleConverter" CollapsedWhenEquals="False" CollapsedWhenNotEquals="True"/>
+        <uiconvert:EqualityToVisibilityConverter x:Key="NotEqualsToVisibleConverter" CollapsedWhenEquals="True" CollapsedWhenNotEquals="False"/>
+        <moduleConvert:FundAccountDisplayNameConverter x:Key="FundAccountDisplayNameConverter"/>
+        <x:Array Type="{x:Type sys:Boolean}" x:Key="BooleanOptions">
+            <sys:Boolean>False</sys:Boolean>
+            <sys:Boolean>True</sys:Boolean>
+        </x:Array>
+    </UserControl.Resources>
+    <DockPanel Height="300">
+        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Content="确定" Margin="0,10"
+                    Command="{Binding SaveCmd}"
+                    Style="{StaticResource BordedButtonPrimary3}"/>
+            <Button Content="取消" Margin="15,10"
+                    Command="{Binding CancelCmd}"
+                    Style="{StaticResource BordedButtonStyle}"/>
+        </StackPanel>
+        <Grid Margin="10" DockPanel.Dock="Top" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Row="0" MaxWidth="200">
+                <TextBlock DockPanel.Dock="Top">
+                    <Run FontSize="{DynamicResource SecondaryContentFontSize}">交易所：</Run>
+                    <Run Text="{Binding RuleExchange.CnName}" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+                </TextBlock>
+                <WrapPanel Margin="0,10,0,0" DockPanel.Dock="Top">
+                    <TextBlock FontSize="{DynamicResource SecondaryContentFontSize}">商品类型：</TextBlock>
+                    <TextBlock Text="{Binding RuleCommodityType, Converter={StaticResource CommodityType2NameConverter}}"
+                                           Visibility="{Binding RuleCommodityType, Converter={StaticResource NotEqualsToVisibleConverter}, ConverterParameter={x:Static dm:OrderRouteRuleLevelType.Exchange}}"/>
+                    <TextBlock Text="*"
+                                           Visibility="{Binding RuleCommodityType, Converter={StaticResource EqualsToVisibleConverter}, ConverterParameter={x:Static dm:OrderRouteRuleLevelType.Exchange}}"/>
+                </WrapPanel>
+                <DockPanel Margin="0,10,0,0" Width="150" HorizontalAlignment="Left">
+                    <WrapPanel DockPanel.Dock="Top">
+                        <TextBlock FontSize="{DynamicResource SecondaryContentFontSize}">商品：</TextBlock>
+                        <TextBlock 
+                            Text="*" 
+                            Visibility="{Binding RuleLevelType,
+                                Converter={StaticResource NotEqualsToVisibleConverter},
+                                ConverterParameter={x:Static dm:OrderRouteRuleLevelType.Commodity}}"/>
+                    </WrapPanel>
+                    <ItemsControl DockPanel.Dock="Bottom"
+                        ItemsSource="{Binding RuleCommodities}"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource BorderBrush2}"
+                        Margin="0,4,0,0"
+                        Visibility="{Binding RuleLevelType, Converter={StaticResource EqualsToVisibleConverter}, ConverterParameter={x:Static dm:OrderRouteRuleLevelType.Commodity}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" Margin="4" IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type dm:OrderRouteRuleCommoditySelectModel}">
+                                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                      Margin="0,4"
+                                                      ToolTip="{Binding Commodity, Converter={StaticResource CommodityToDisplayNameConverter}}"
+                                                      Content="{Binding Commodity, Converter={StaticResource CommodityToDisplayNameConverter}}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.Template>
+                            <ControlTemplate>
+                                <Border Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ScrollViewer Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                    </ItemsControl>
+                </DockPanel>
+            </DockPanel>
+            <DockPanel Grid.Column="1" Width="80" Margin="10,0,0,0">
+                <TextBlock DockPanel.Dock="Top" FontSize="{DynamicResource SecondaryContentFontSize}">允许交易</TextBlock>
+                <ListBox ItemsSource="{StaticResource BooleanOptions}"
+                        SelectionMode="Single"
+                        BorderThickness="1"
+                        SelectedItem="{Binding IsForbiddenRule, Mode=TwoWay}"
+                        Margin="0,4,0,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type sys:Boolean}">
+                            <TextBlock Text="{Binding Converter={StaticResource BooleanReverseToDisplayNameConverter}}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+            <DockPanel Grid.Column="2" MinWidth="100" Margin="10,0,0,0">
+                <TextBlock DockPanel.Dock="Top" FontSize="{DynamicResource SecondaryContentFontSize}">路由至帐号：</TextBlock>
+                <ListBox ItemsSource="{Binding RouteToAccountItems}"
+                                     SelectionMode="Single"
+                                     SelectedValuePath="TradeAccountId"
+                                     SelectedValue="{Binding SelectedRouteToAccountId, Mode=TwoWay}"
+                                     BorderThickness="1"
+                                     Margin="0,4,0,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource FundAccountDisplayNameConverter}">
+                                        <Binding Path="LoginUserName"/>
+                                        <Binding Path="TradeAccountRemark"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
+</UserControl>
